@@ -6,18 +6,18 @@
   <meta name="keywords" content="">
   <meta name="description" content="Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="為什麼變數需要宣告？能不宣告直接用嗎？ 💡先講結論：沒有透過「宣告」產生出來的變數，會是一個「全域的 windows 物件底下的一個屬性」。  變數如果不透過 var、let 、const 宣告的話，會變成一個名為 windwos 物件底下的一個屬性，該屬性是一個全域屬性！範例： function fn1()&#123;     &#x2F;&#x2F; 注意，a 變數並沒有透過 var、let、const 來宣告">
+<meta name="description" content="var、let、const 三者宣告出來的變數作用域差別為何？ 💡先講結論：var 的作用域範圍在函式內( 所以又稱函式作用域 )，let、const 則屬於區塊作用域，且目前主流的宣告方式皆採用 let、const。  等等，什麼是函式作用域？什麼是區塊作用域？ 函式作用域函式作用域的意思就是，變數的生命週期在一個函式內，然後樣子看來起來像這樣： function fn()&#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="全域變數 &amp; 全域屬性">
-<meta property="og:url" content="http://example.com/2024/07/12/%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%20&%20%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7/index.html">
+<meta property="og:title" content="變數與作用域 2：變數作用域的範圍">
+<meta property="og:url" content="http://example.com/2024/07/13/%E8%AE%8A%E6%95%B8%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%AF%84%E5%9C%8D/index.html">
 <meta property="og:site_name" content="Eshiunm&#39;s Blog">
-<meta property="og:description" content="為什麼變數需要宣告？能不宣告直接用嗎？ 💡先講結論：沒有透過「宣告」產生出來的變數，會是一個「全域的 windows 物件底下的一個屬性」。  變數如果不透過 var、let 、const 宣告的話，會變成一個名為 windwos 物件底下的一個屬性，該屬性是一個全域屬性！範例： function fn1()&#123;     &#x2F;&#x2F; 注意，a 變數並沒有透過 var、let、const 來宣告">
+<meta property="og:description" content="var、let、const 三者宣告出來的變數作用域差別為何？ 💡先講結論：var 的作用域範圍在函式內( 所以又稱函式作用域 )，let、const 則屬於區塊作用域，且目前主流的宣告方式皆採用 let、const。  等等，什麼是函式作用域？什麼是區塊作用域？ 函式作用域函式作用域的意思就是，變數的生命週期在一個函式內，然後樣子看來起來像這樣： function fn()&#123;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-12T14:08:06.000Z">
-<meta property="article:modified_time" content="2024-07-13T02:15:11.298Z">
+<meta property="article:published_time" content="2024-07-13T13:17:18.000Z">
+<meta property="article:modified_time" content="2024-07-13T13:43:31.593Z">
 <meta property="article:author" content="Eshiunm">
 <meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="變數與作用域">
+<meta property="article:tag" content="變數與作用域系列">
 <meta name="twitter:card" content="summary">
 
 
@@ -91,7 +91,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(2)</small>
+                <small>(3)</small>
             
         </div>
     </li>
@@ -109,8 +109,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="2">
-<input type="hidden" id="yelog_site_word_count" value="536">
+<input type="hidden" id="yelog_site_posts_number" value="3">
+<input type="hidden" id="yelog_site_word_count" value="1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -156,7 +156,7 @@
     <div class="tag-wrapper">
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>變數與作用域</a>
+                <i class="iconfont icon-tag"></i><a>變數與作用域系列</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -176,10 +176,19 @@
         
         
         <a  class="全部文章 "
-           href="/2024/07/12/%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%20&%20%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7/"
-           data-tag="JavaScript,變數與作用域"
+           href="/2024/07/13/%E8%AE%8A%E6%95%B8%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%AF%84%E5%9C%8D/"
+           data-tag="JavaScript,變數與作用域系列"
            data-author="" >
-            <span class="post-title" title="全域變數 &amp; 全域屬性">全域變數 &amp; 全域屬性</span>
+            <span class="post-title" title="變數與作用域 2：變數作用域的範圍">變數與作用域 2：變數作用域的範圍</span>
+            <span class="post-date" title="2024-07-13 21:17:18">2024/07/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2024/07/12/%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%20&%20%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7/"
+           data-tag="JavaScript,變數與作用域系列"
+           data-author="" >
+            <span class="post-title" title="變數與作用域 1：全域變數 &amp; 全域屬性">變數與作用域 1：全域變數 &amp; 全域屬性</span>
             <span class="post-date" title="2024-07-12 22:08:06">2024/07/12</span>
         </a>
         

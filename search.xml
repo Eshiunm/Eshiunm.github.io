@@ -4,7 +4,28 @@
   
     
     <entry>
-      <title>全域變數 &amp; 全域屬性</title>
+      <title>變數與作用域 2：變數作用域的範圍</title>
+      <link href="/2024/07/13/%E8%AE%8A%E6%95%B8%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%AF%84%E5%9C%8D/"/>
+      <url>/2024/07/13/%E8%AE%8A%E6%95%B8%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%AF%84%E5%9C%8D/</url>
+      
+        <content type="html"><![CDATA[<h2 id="var、let、const-三者宣告出來的變數作用域差別為何？"><a href="#var、let、const-三者宣告出來的變數作用域差別為何？" class="headerlink" title="var、let、const 三者宣告出來的變數作用域差別為何？"></a>var、let、const 三者宣告出來的變數作用域差別為何？</h2><blockquote><p>💡<strong>先講結論</strong>：<br>var 的作用域範圍在函式內( 所以又稱函式作用域 )，let、const 則屬於區塊作用域，且目前主流的宣告方式皆採用 let、const。</p></blockquote><p>等等，什麼是函式作用域？什麼是區塊作用域？</p><h3 id="函式作用域"><a href="#函式作用域" class="headerlink" title="函式作用域"></a>函式作用域</h3><p>函式作用域的意思就是，變數的生命週期在一個函式內，然後樣子看來起來像這樣：</p><pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params"></span>)&#123;    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&#x27;小白&#x27;</span>;    <span class="hljs-comment">// myName 的生命週期僅存在此函式中</span>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);&#125;<span class="hljs-title function_">fn</span>();<span class="hljs-comment">//印出小白</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);<span class="hljs-comment">// Uncaught ReferenceError: myName is not defined</span></code></pre><h3 id="區塊作用域"><a href="#區塊作用域" class="headerlink" title="區塊作用域"></a>區塊作用域</h3><p>區塊作用域則有下列幾種類型</p><ul><li>函式：function fn() { …… } 區塊作用域是函式作用域的一種</li><li>for 迴圈：for( xxx）{ …… }</li><li>判斷式：if( expression ){ …… }</li><li>純粹的區塊：｛｝</li><li>基本上看到｛｝都可以認定為一個區塊</li></ul><h3 id="好像還看不太出來差別，用以下例子區分"><a href="#好像還看不太出來差別，用以下例子區分" class="headerlink" title="好像還看不太出來差別，用以下例子區分"></a>好像還看不太出來差別，用以下例子區分</h3><ul><li>for 迴圈</li></ul><pre><code class="hljs JS"><span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span> ; i&lt;<span class="hljs-number">10</span>; i++ )&#123;&#125;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i);<span class="hljs-comment">// 印出 10，抓得到 i 這個值！！</span><span class="hljs-keyword">for</span>( <span class="hljs-keyword">let</span> j=<span class="hljs-number">0</span> ; j&lt;<span class="hljs-number">10</span>; j++ )&#123;&#125;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(j);<span class="hljs-comment">// 印出 Uncaught ReferenceError: j is not defined</span></code></pre><ul><li>for 迴圈</li></ul><pre><code class="hljs JS"><span class="hljs-keyword">if</span>( ..... )&#123;    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&#x27;小白&#x27;</span>;&#125;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);<span class="hljs-comment">// 印出小白</span><span class="hljs-keyword">if</span>( ..... )&#123;    <span class="hljs-keyword">let</span> yourName = <span class="hljs-string">&#x27;小葵&#x27;</span>;&#125;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(yourName);<span class="hljs-comment">// 印出 Uncaught ReferenceError: yourName is not defined</span></code></pre><ul><li>純粹的區塊</li></ul><pre><code class="hljs JS">&#123;    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&#x27;小白&#x27;</span>;&#125;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);<span class="hljs-comment">// 印出小白</span>&#123;    <span class="hljs-keyword">let</span> yourName = <span class="hljs-string">&#x27;小葵&#x27;</span>;&#125;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(yourName);<span class="hljs-comment">// 印出 Uncaught ReferenceError: yourName is not defined</span></code></pre><p>從上述三個例子中可以發現，<br>區塊作用域的優點會比函式作用域的優點要來得多，<br>因為 var 所宣告的變數，除了在函式中宣告的不會變成全域變數外，其餘都會變成全域變數，<br>這在幾百行幾千行中是非常難以除錯的，因此 let、const 宣告詞才會成為主流。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> 變數與作用域系列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>變數與作用域 1：全域變數 &amp; 全域屬性</title>
       <link href="/2024/07/12/%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%20&amp;%20%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7/"/>
       <url>/2024/07/12/%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%20&amp;%20%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7/</url>
       
@@ -16,7 +37,7 @@
             
             <tag> JavaScript </tag>
             
-            <tag> 變數與作用域 </tag>
+            <tag> 變數與作用域系列 </tag>
             
         </tags>
       

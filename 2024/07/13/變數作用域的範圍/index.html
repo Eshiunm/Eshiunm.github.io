@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hello World | Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hello World | Eshiunm&#39;s Blog">
+  <title>變數與作用域 2：變數作用域的範圍 | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
+  <meta name="description" content="變數與作用域 2：變數作用域的範圍 | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="var、let、const 三者宣告出來的變數作用域差別為何？ 💡先講結論：var 的作用域範圍在函式內( 所以又稱函式作用域 )，let、const 則屬於區塊作用域，且目前主流的宣告方式皆採用 let、const。  等等，什麼是函式作用域？什麼是區塊作用域？ 函式作用域函式作用域的意思就是，變數的生命週期在一個函式內，然後樣子看來起來像這樣： function fn()&#123;">
 <meta property="og:type" content="article">
@@ -219,24 +219,33 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-變數作用域的範圍" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hello World</h1>
+        <h1 class="article-title">變數與作用域 2：變數作用域的範圍</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">JavaScript</a>
+            
+            <a class="color4">變數與作用域系列</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-12 22:06:24'>2024-07-12 22:06</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-07-13 21:43:31'>2024-07-13 21:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:75</span>
+        <span>字數:474</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -266,7 +275,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#var%E3%80%81let%E3%80%81const-%E4%B8%89%E8%80%85%E5%AE%A3%E5%91%8A%E5%87%BA%E4%BE%86%E7%9A%84%E8%AE%8A%E6%95%B8%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%B7%AE%E5%88%A5%E7%82%BA%E4%BD%95%EF%BC%9F"><span class="toc-text">var、let、const 三者宣告出來的變數作用域差別為何？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">函式作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">區塊作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E5%83%8F%E9%82%84%E7%9C%8B%E4%B8%8D%E5%A4%AA%E5%87%BA%E4%BE%86%E5%B7%AE%E5%88%A5%EF%BC%8C%E7%94%A8%E4%BB%A5%E4%B8%8B%E4%BE%8B%E5%AD%90%E5%8D%80%E5%88%86"><span class="toc-text">好像還看不太出來差別，用以下例子區分</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -282,19 +291,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span></code></pre>
+        <h2 id="var、let、const-三者宣告出來的變數作用域差別為何？"><a href="#var、let、const-三者宣告出來的變數作用域差別為何？" class="headerlink" title="var、let、const 三者宣告出來的變數作用域差別為何？"></a>var、let、const 三者宣告出來的變數作用域差別為何？</h2><blockquote>
+<p>💡<strong>先講結論</strong>：<br>var 的作用域範圍在函式內( 所以又稱函式作用域 )，let、const 則屬於區塊作用域，且目前主流的宣告方式皆採用 let、const。</p>
+</blockquote>
+<p>等等，什麼是函式作用域？什麼是區塊作用域？</p>
+<h3 id="函式作用域"><a href="#函式作用域" class="headerlink" title="函式作用域"></a>函式作用域</h3><p>函式作用域的意思就是，變數的生命週期在一個函式內，然後樣子看來起來像這樣：</p>
+<pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params"></span>)&#123;
+    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&#x27;小白&#x27;</span>;
+    <span class="hljs-comment">// myName 的生命週期僅存在此函式中</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);
+&#125;
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="hljs bash">$ hexo server</code></pre>
+<span class="hljs-title function_">fn</span>();<span class="hljs-comment">//印出小白</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);<span class="hljs-comment">// Uncaught ReferenceError: myName is not defined</span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="hljs bash">$ hexo generate</code></pre>
+<h3 id="區塊作用域"><a href="#區塊作用域" class="headerlink" title="區塊作用域"></a>區塊作用域</h3><p>區塊作用域則有下列幾種類型</p>
+<ul>
+<li>函式：function fn() { …… } 區塊作用域是函式作用域的一種</li>
+<li>for 迴圈：for( xxx）{ …… }</li>
+<li>判斷式：if( expression ){ …… }</li>
+<li>純粹的區塊：｛｝</li>
+<li>基本上看到｛｝都可以認定為一個區塊</li>
+</ul>
+<h3 id="好像還看不太出來差別，用以下例子區分"><a href="#好像還看不太出來差別，用以下例子區分" class="headerlink" title="好像還看不太出來差別，用以下例子區分"></a>好像還看不太出來差別，用以下例子區分</h3><ul>
+<li>for 迴圈</li>
+</ul>
+<pre><code class="hljs JS"><span class="hljs-keyword">for</span>( <span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span> ; i&lt;<span class="hljs-number">10</span>; i++ )&#123;&#125;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i);<span class="hljs-comment">// 印出 10，抓得到 i 這個值！！</span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="hljs bash">$ hexo deploy</code></pre>
+<span class="hljs-keyword">for</span>( <span class="hljs-keyword">let</span> j=<span class="hljs-number">0</span> ; j&lt;<span class="hljs-number">10</span>; j++ )&#123;&#125;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(j);<span class="hljs-comment">// 印出 Uncaught ReferenceError: j is not defined</span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<ul>
+<li>for 迴圈</li>
+</ul>
+<pre><code class="hljs JS"><span class="hljs-keyword">if</span>( ..... )&#123;
+    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&#x27;小白&#x27;</span>;
+&#125;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);<span class="hljs-comment">// 印出小白</span>
+
+<span class="hljs-keyword">if</span>( ..... )&#123;
+    <span class="hljs-keyword">let</span> yourName = <span class="hljs-string">&#x27;小葵&#x27;</span>;
+&#125;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(yourName);<span class="hljs-comment">// 印出 Uncaught ReferenceError: yourName is not defined</span></code></pre>
+
+<ul>
+<li>純粹的區塊</li>
+</ul>
+<pre><code class="hljs JS">&#123;
+    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&#x27;小白&#x27;</span>;
+&#125;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);<span class="hljs-comment">// 印出小白</span>
+
+&#123;
+    <span class="hljs-keyword">let</span> yourName = <span class="hljs-string">&#x27;小葵&#x27;</span>;
+&#125;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(yourName);<span class="hljs-comment">// 印出 Uncaught ReferenceError: yourName is not defined</span></code></pre>
+
+<p>從上述三個例子中可以發現，<br>區塊作用域的優點會比函式作用域的優點要來得多，<br>因為 var 所宣告的變數，除了在函式中宣告的不會變成全域變數外，其餘都會變成全域變數，<br>這在幾百行幾千行中是非常難以除錯的，因此 let、const 宣告詞才會成為主流。</p>
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>
