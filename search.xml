@@ -4,13 +4,21 @@
   
     
     <entry>
-      <title>我的第一篇文 By Eshiunm</title>
-      <link href="/2024/07/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87-By-Eshiunm/"/>
-      <url>/2024/07/12/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87-By-Eshiunm/</url>
+      <title>全域變數 &amp; 全域屬性</title>
+      <link href="/2024/07/12/%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%20&amp;%20%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7/"/>
+      <url>/2024/07/12/%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%20&amp;%20%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7/</url>
       
-        <content type="html"><![CDATA[<h1 id="這是我的第一篇文章"><a href="#這是我的第一篇文章" class="headerlink" title="這是我的第一篇文章"></a>這是我的第一篇文章</h1><pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params"></span>)&#123;  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Hello World&quot;</span>);&#125;</code></pre>]]></content>
+        <content type="html"><![CDATA[<h2 id="為什麼變數需要宣告？能不宣告直接用嗎？"><a href="#為什麼變數需要宣告？能不宣告直接用嗎？" class="headerlink" title="為什麼變數需要宣告？能不宣告直接用嗎？"></a>為什麼變數需要宣告？能不宣告直接用嗎？</h2><blockquote><p>💡<strong>先講結論</strong>：<br>沒有透過「宣告」產生出來的變數，會是一個「全域的 windows 物件底下的一個屬性」。</p></blockquote><p>變數如果不透過 var、let 、const 宣告的話，會變成一個名為 windwos 物件底下的一個屬性，<br>該屬性是一個全域屬性！<br>範例：</p><pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn1</span>(<span class="hljs-params"></span>)&#123;    <span class="hljs-comment">// 注意，a 變數並沒有透過 var、let、const 來宣告，</span>    <span class="hljs-comment">// 卻可以被底下的 fn2() 所使用</span>    a = <span class="hljs-string">&#x27;小明&#x27;</span>;&#125;<span class="hljs-keyword">function</span> <span class="hljs-title function_">fn2</span>(<span class="hljs-params"></span>)&#123;    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a);    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(windows.<span class="hljs-property">a</span>)<span class="hljs-comment">// 實際上這個 a 變數是 winsows 物件下的一個屬性</span>&#125;<span class="hljs-title function_">fn1</span>(); <span class="hljs-comment">// 呼叫 fn1()，產生一個具全域屬性 a</span><span class="hljs-title function_">fn2</span>(); <span class="hljs-comment">// 呼叫 fn2()，印出兩次小明</span></code></pre><p>這種沒有透過「宣告」的方式所產生出來的變數，會因為是一個全域屬性的關係，容易被汙染，進而難以 debug。</p><h2 id="那變數與屬性的差異為何？"><a href="#那變數與屬性的差異為何？" class="headerlink" title="那變數與屬性的差異為何？"></a>那變數與屬性的差異為何？</h2><blockquote><p>💡<strong>先講結論</strong>：<br>差異就是只有「屬性」才可以使用 delete 運算子刪除 。</p></blockquote><p>範例：</p><pre><code class="hljs JS">a = <span class="hljs-string">&#x27;小白&#x27;</span>; <span class="hljs-comment">//因為沒有用宣告字，所以會在 windows 物件底下會新增一個屬性叫做 a</span><span class="hljs-keyword">delete</span> a; <span class="hljs-comment">// a 是一個全域屬性，可透過 delete 刪除</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(windows.<span class="hljs-property">a</span>); <span class="hljs-comment">// undefined</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// Uncaught ReferenceError: a is not defined</span></code></pre><pre><code class="hljs JS"><span class="hljs-keyword">var</span> a = <span class="hljs-string">&#x27;小白&#x27;</span>; <span class="hljs-comment">// 雖然是用「宣告的方式」，但 windows 物件底下還是會新增一個屬性叫做 a，</span>                <span class="hljs-comment">// 但透過「宣告的方式」所產生出來的屬性是無法利用 delete 運算子刪除的</span><span class="hljs-keyword">delete</span> a; <span class="hljs-comment">// 無法透過 delete 刪除</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(windows.<span class="hljs-property">a</span>); <span class="hljs-comment">//印出小白</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 印出小白</span></code></pre><p>沒使用宣告字宣告的變數 -&gt; 全域屬性，可用 delete 運算子刪除此屬性。<br>使用 var 宣告字宣告的變數 -&gt; 全域變數，無法使用 delete 運算子刪除。</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> 變數與作用域 </tag>
+            
+        </tags>
       
     </entry>
     
