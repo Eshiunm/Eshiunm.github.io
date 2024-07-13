@@ -6,15 +6,15 @@
   <meta name="keywords" content="">
   <meta name="description" content="Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="var、let、const 三者宣告出來的變數作用域差別為何？ 💡先講結論：var 的作用域範圍在函式內( 所以又稱函式作用域 )，let、const 則屬於區塊作用域，且目前主流的宣告方式皆採用 let、const。  等等，什麼是函式作用域？什麼是區塊作用域？ 函式作用域函式作用域的意思就是，變數的生命週期在一個函式內，然後樣子看來起來像這樣： function fn()&#123;">
+<meta name="description" content="什麼是提升（Hoisting）？ 💡先講結論：在 JavaScript 中先賦予變數或函式一個記憶體空間的這個機制，就稱為提升。  在這之前先來談創造階段與執行階段這兩個概念 創造階段（Creation）：瀏覽器為變數或是函式創造記憶體空間的階段。 執行階段（Execution）：瀏覽器將「值」賦予變數的階段。   先以下列程式碼為例子  var myName &#x3D; &#x27;小白&#x27;;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="變數與作用域 2：變數作用域的範圍">
-<meta property="og:url" content="http://example.com/2024/07/13/%E8%AE%8A%E6%95%B8%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%AF%84%E5%9C%8D/index.html">
+<meta property="og:title" content="變數與作用域 3：提升(Hoisting)">
+<meta property="og:url" content="http://example.com/2024/07/13/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%203%EF%BC%9A%E6%8F%90%E5%8D%87(Hoisting)/index.html">
 <meta property="og:site_name" content="Eshiunm&#39;s Blog">
-<meta property="og:description" content="var、let、const 三者宣告出來的變數作用域差別為何？ 💡先講結論：var 的作用域範圍在函式內( 所以又稱函式作用域 )，let、const 則屬於區塊作用域，且目前主流的宣告方式皆採用 let、const。  等等，什麼是函式作用域？什麼是區塊作用域？ 函式作用域函式作用域的意思就是，變數的生命週期在一個函式內，然後樣子看來起來像這樣： function fn()&#123;">
+<meta property="og:description" content="什麼是提升（Hoisting）？ 💡先講結論：在 JavaScript 中先賦予變數或函式一個記憶體空間的這個機制，就稱為提升。  在這之前先來談創造階段與執行階段這兩個概念 創造階段（Creation）：瀏覽器為變數或是函式創造記憶體空間的階段。 執行階段（Execution）：瀏覽器將「值」賦予變數的階段。   先以下列程式碼為例子  var myName &#x3D; &#x27;小白&#x27;;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-13T13:17:18.000Z">
-<meta property="article:modified_time" content="2024-07-13T13:43:31.593Z">
+<meta property="article:published_time" content="2024-07-13T13:56:14.000Z">
+<meta property="article:modified_time" content="2024-07-13T14:15:06.924Z">
 <meta property="article:author" content="Eshiunm">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="變數與作用域系列">
@@ -91,7 +91,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(3)</small>
+                <small>(4)</small>
             
         </div>
     </li>
@@ -109,8 +109,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="3">
-<input type="hidden" id="yelog_site_word_count" value="1k">
+<input type="hidden" id="yelog_site_posts_number" value="4">
+<input type="hidden" id="yelog_site_word_count" value="1.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -176,7 +176,16 @@
         
         
         <a  class="全部文章 "
-           href="/2024/07/13/%E8%AE%8A%E6%95%B8%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%AF%84%E5%9C%8D/"
+           href="/2024/07/13/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%203%EF%BC%9A%E6%8F%90%E5%8D%87(Hoisting)/"
+           data-tag="JavaScript,變數與作用域系列"
+           data-author="" >
+            <span class="post-title" title="變數與作用域 3：提升(Hoisting)">變數與作用域 3：提升(Hoisting)</span>
+            <span class="post-date" title="2024-07-13 21:56:14">2024/07/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2024/07/13/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%202%EF%BC%9A%E8%AE%8A%E6%95%B8%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E7%AF%84%E5%9C%8D/"
            data-tag="JavaScript,變數與作用域系列"
            data-author="" >
             <span class="post-title" title="變數與作用域 2：變數作用域的範圍">變數與作用域 2：變數作用域的範圍</span>
@@ -185,7 +194,7 @@
         
         
         <a  class="全部文章 "
-           href="/2024/07/12/%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%20&%20%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7/"
+           href="/2024/07/12/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%201%EF%BC%9A%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%20&%20%E5%85%A8%E5%9F%9F%E5%B1%AC%E6%80%A7/"
            data-tag="JavaScript,變數與作用域系列"
            data-author="" >
             <span class="post-title" title="變數與作用域 1：全域變數 &amp; 全域屬性">變數與作用域 1：全域變數 &amp; 全域屬性</span>
