@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>變數與作用域 4：TDZ | Eshiunm&#39;s Blog</title>
+  <title>變數與作用域 5：undefined &amp; is not defined | Eshiunm&#39;s Blog</title>
   <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
-  <meta name="description" content="變數與作用域 4：TDZ | Eshiunm&#39;s Blog">
+  <meta name="description" content="變數與作用域 5：undefined &amp; is not defined | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="undefined &amp; is not defined 兩者之間的差別？ 💡先講結論：undefined 是一個變數尚未被賦予值的狀態。「is not defined」是一個錯誤訊息，會直接中斷程式碼執行。   is not defined 的例子  console.log(myName);&#x2F;&#x2F; Uncaught ReferenceError: myName is not defined">
 <meta property="og:type" content="article">
@@ -299,9 +299,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-變數與作用域 4：TDZ" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="posts-變數與作用域-5：undefined-is-not-defined" class="article article-type-posts" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">變數與作用域 4：TDZ</h1>
+        <h1 class="article-title">變數與作用域 5：undefined &amp; is not defined</h1>
     
     <div class="article-meta">
         
@@ -332,12 +332,12 @@
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-14 09:42:36'>2024-07-14 09:24</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-07-14 10:00:40'>2024-07-14 09:52</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:184</span>
+        <span>字數:233</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -367,7 +367,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-TDZ%EF%BC%88Temporal-dead-zone%EF%BC%89%EF%BC%9F"><span class="toc-text">什麼是 TDZ（Temporal dead zone）？</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined-is-not-defined-%E5%85%A9%E8%80%85%E4%B9%8B%E9%96%93%E7%9A%84%E5%B7%AE%E5%88%A5%EF%BC%9F"><span class="toc-text">undefined &amp; is not defined 兩者之間的差別？</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -383,13 +383,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什麼是-TDZ（Temporal-dead-zone）？"><a href="#什麼是-TDZ（Temporal-dead-zone）？" class="headerlink" title="什麼是 TDZ（Temporal dead zone）？"></a>什麼是 TDZ（Temporal dead zone）？</h2><blockquote>
-<p>💡<strong>先講結論</strong>：<br>意指 let 、const 宣告變數的「前方區域」，如果試圖在此區域取得值，則會出現 ReferenceError 的提示。</p>
+        <h2 id="undefined-is-not-defined-兩者之間的差別？"><a href="#undefined-is-not-defined-兩者之間的差別？" class="headerlink" title="undefined &amp; is not defined 兩者之間的差別？"></a>undefined &amp; is not defined 兩者之間的差別？</h2><blockquote>
+<p>💡<strong>先講結論</strong>：<br>undefined 是一個變數尚未被賦予值的狀態。<br>「is not defined」是一個<font color=#FF0000>錯誤</font>訊息，會直接中斷程式碼執行。</p>
 </blockquote>
-<p>在傳統的 var 宣告中，若是先取值再宣告並不會出錯，會出現「Undefined」。<br>但是在 let、const 宣告的情況下，先取值再宣告的話，會出現「Uncaught ReferenceError：Cannot access ‘xxx’ before initialization」(依瀏覽器版本可能出現不同訊息)，<br>也就是說 let、const 無法在初始化之前就取得該變數，因此開發者會很清楚不該這麼做~</p>
-<blockquote>
-<p>let、const 一樣有「提升」的概念，只是沒辦法存取裡面的值而已！<br>而 var 是出現「undefined」，可以存到值，只是值是 undefined。</p>
-</blockquote>
+<ul>
+<li>is not defined 的例子</li>
+</ul>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);<span class="hljs-comment">// Uncaught ReferenceError: myName is not defined</span></code></pre>
+
+<ul>
+<li>undefined 的例子</li>
+</ul>
+<pre><code class="hljs JS"><span class="hljs-number">1.</span>
+  <span class="hljs-keyword">var</span> myName;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);
+
+<span class="hljs-number">2.</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);
+  <span class="hljs-keyword">var</span> myName;
+
+<span class="hljs-number">3.</span>
+  <span class="hljs-keyword">var</span> person = &#123;&#125;;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">name</span>); <span class="hljs-comment">// 印出物件中沒有的屬性也會顯示 undefined (避免程式直接中斷，算是一種保護機制)</span>
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">name</span>.<span class="hljs-property">first</span>) <span class="hljs-comment">// 但是若想取得更深層的屬性，就會跳出下面的錯誤，</span>
+  															 <span class="hljs-comment">// Uncaught TypeError: Cannot read properties of undefined (reading &#x27;first&#x27;)</span>
+  <span class="hljs-comment">/*</span>
+<span class="hljs-comment">  以下兩個例子可以檢視欲存取的屬性值在不在</span>
+<span class="hljs-comment">  1.</span>
+<span class="hljs-comment">    if(person.hasOwnProperty(&#x27;name&#x27;))&#123; // 如果有 name 這個屬性</span>
+<span class="hljs-comment">    	console.log(person.name.first);  // 才針對更深層的屬性取值</span>
+<span class="hljs-comment">    &#125;</span>
+<span class="hljs-comment">  2.</span>
+<span class="hljs-comment">    console.log(person?.name?.first); // 可選串連，會取得 undefined 的結果，不會出錯</span>
+<span class="hljs-comment">  */</span></code></pre>
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>
