@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>變數與作用域 4：TDZ</title>
+      <link href="/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%204%EF%BC%9ATDZ/"/>
+      <url>/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%204%EF%BC%9ATDZ/</url>
+      
+        <content type="html"><![CDATA[<h2 id="什麼是-TDZ（Temporal-dead-zone）？"><a href="#什麼是-TDZ（Temporal-dead-zone）？" class="headerlink" title="什麼是 TDZ（Temporal dead zone）？"></a>什麼是 TDZ（Temporal dead zone）？</h2><blockquote><p>💡<strong>先講結論</strong>：<br>意指 let 、const 宣告變數的「前方區域」，如果試圖在此區域取得值，則會出現 ReferenceError 的提示。</p></blockquote><p>在傳統的 var 宣告中，若是先取值再宣告並不會出錯，會出現「Undefined」。<br>但是在 let、const 宣告的情況下，先取值再宣告的話，會出現「Uncaught ReferenceError：Cannot access ‘xxx’ before initialization」(依瀏覽器版本可能出現不同訊息)，<br>也就是說 let、const 無法在初始化之前就取得該變數，因此開發者會很清楚不該這麼做~</p><blockquote><p>let、const 一樣有「提升」的概念，只是沒辦法存取裡面的值而已！<br>而 var 是出現「undefined」，可以存到值，只是值是 undefined。</p></blockquote>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> 變數與作用域系列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>變數與作用域 3：提升(Hoisting)</title>
       <link href="/2024/07/13/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%203%EF%BC%9A%E6%8F%90%E5%8D%87(Hoisting)/"/>
       <url>/2024/07/13/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%203%EF%BC%9A%E6%8F%90%E5%8D%87(Hoisting)/</url>

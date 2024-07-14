@@ -6,15 +6,15 @@
   <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
   <meta name="description" content="變數與作用域 1：全域變數 &amp; 全域屬性 | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="什麼是提升（Hoisting）？ 💡先講結論：在 JavaScript 中先賦予變數或函式一個記憶體空間的這個機制，就稱為提升。  在這之前先來談創造階段與執行階段這兩個概念 創造階段（Creation）：瀏覽器為變數或是函式創造記憶體空間的階段。 執行階段（Execution）：瀏覽器將「值」賦予變數的階段。   先以下列程式碼為例子  var myName &#x3D; &#x27;小白&#x27;;">
+<meta name="description" content="什麼是 TDZ（Temporal dead zone）？ 💡先講結論：意指 let 、const 宣告變數的「前方區域」，如果試圖在此區域取得值，則會出現 ReferenceError 的提示。  在傳統的 var 宣告中，若是先取值再宣告並不會出錯，會出現「Undefined」。但是在 let、const 宣告的情況下，先取值再宣告的話，會出現「Uncaught ReferenceError：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="變數與作用域 3：提升(Hoisting)">
-<meta property="og:url" content="http://example.com/2024/07/13/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%203%EF%BC%9A%E6%8F%90%E5%8D%87(Hoisting)/index.html">
+<meta property="og:title" content="變數與作用域 4：TDZ">
+<meta property="og:url" content="http://example.com/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%204%EF%BC%9ATDZ/index.html">
 <meta property="og:site_name" content="Eshiunm&#39;s Blog">
-<meta property="og:description" content="什麼是提升（Hoisting）？ 💡先講結論：在 JavaScript 中先賦予變數或函式一個記憶體空間的這個機制，就稱為提升。  在這之前先來談創造階段與執行階段這兩個概念 創造階段（Creation）：瀏覽器為變數或是函式創造記憶體空間的階段。 執行階段（Execution）：瀏覽器將「值」賦予變數的階段。   先以下列程式碼為例子  var myName &#x3D; &#x27;小白&#x27;;">
+<meta property="og:description" content="什麼是 TDZ（Temporal dead zone）？ 💡先講結論：意指 let 、const 宣告變數的「前方區域」，如果試圖在此區域取得值，則會出現 ReferenceError 的提示。  在傳統的 var 宣告中，若是先取值再宣告並不會出錯，會出現「Undefined」。但是在 let、const 宣告的情況下，先取值再宣告的話，會出現「Uncaught ReferenceError：">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-13T13:56:14.000Z">
-<meta property="article:modified_time" content="2024-07-13T14:15:06.924Z">
+<meta property="article:published_time" content="2024-07-14T01:24:38.000Z">
+<meta property="article:modified_time" content="2024-07-14T01:31:01.900Z">
 <meta property="article:author" content="Eshiunm">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="變數與作用域系列">
@@ -91,7 +91,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(4)</small>
+                <small>(5)</small>
             
         </div>
     </li>
@@ -109,8 +109,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="4">
-<input type="hidden" id="yelog_site_word_count" value="1.9k">
+<input type="hidden" id="yelog_site_posts_number" value="5">
+<input type="hidden" id="yelog_site_word_count" value="2.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -173,6 +173,15 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F%204%EF%BC%9ATDZ/"
+           data-tag="JavaScript,變數與作用域系列"
+           data-author="" >
+            <span class="post-title" title="變數與作用域 4：TDZ">變數與作用域 4：TDZ</span>
+            <span class="post-date" title="2024-07-14 09:24:38">2024/07/14</span>
+        </a>
         
         
         <a  class="全部文章 "
