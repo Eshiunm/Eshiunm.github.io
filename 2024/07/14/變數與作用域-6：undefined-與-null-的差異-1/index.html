@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Eshiunm&#39;s Blog">
+  <title>變數與作用域 6：undefined 與 null 的差異 | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
+  <meta name="description" content="變數與作用域 6：undefined 與 null 的差異 | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="基本概念在 Javascript 中有兩大型別，其中 undefined 與 null 都是屬於 Primitive value( 原始值或稱基本型別 )，而原始值是無法被更改的！，例如 Boolean 只會有 true 和 false 這兩種值，因此 null 、undefined 也是一樣。undefined 型別只有一種值，就是 undefined。null 型別只有一種值，就是 null。">
 <meta property="og:type" content="article">
@@ -58,7 +58,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -302,18 +302,83 @@
 
     </div>
     <div class="hide-list">
-        <div class="semicircle" data-title="切换全屏 快捷键 s">
+        <div class="semicircle" data-title="切換全螢幕 快捷鍵 s">
             <div class="brackets first"><</div>
             <div class="brackets">&gt;</div>
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="posts-變數與作用域-6：undefined-與-null-的差異-1" class="article article-type-posts" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">对博客的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8F%B6%E8%90%BD%E9%98%81"><span class="toc-text">关于叶落阁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">變數與作用域 6：undefined 與 null 的差異</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="前端">前端</a> > 
+            
+            <a  data-rel="前端&lt;---&gt;JavaScript">JavaScript</a> > 
+            
+            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;變數與作用域">變數與作用域</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">JavaScript</a>
+            
+            <a class="color4">變數與作用域系列</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            發佈時間 : <time class="date" title='最後更新: 2024-07-14 11:57:55'>2024-07-14 11:24</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字數:600</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            閱讀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳轉至留言區">
+            <a href="#comments">
+                評論:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined-%E7%9A%84%E5%AE%9A%E7%BE%A9"><span class="toc-text">undefined 的定義</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null-%E7%9A%84%E5%AE%9A%E7%BE%A9"><span class="toc-text">null 的定義</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%9E%E5%AE%9A%E7%BE%A9%E4%BA%86%E8%A7%A3%E5%B7%AE%E7%95%B0"><span class="toc-text">從定義了解差異</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83%E4%BE%86%E7%90%86%E8%A7%A3%E5%B7%AE%E7%95%B0"><span class="toc-text">使用情境來理解差異</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%BC%B5%E5%9C%96%E7%90%86%E8%A7%A3%E5%B7%AE%E7%95%B0"><span class="toc-text">一張圖理解差異</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined-%E5%8F%AF%E4%BB%A5%E7%95%B6%E4%BD%9C%E8%AE%8A%E6%95%B8%E5%90%8D%E7%A8%B1%E6%88%96%E5%8F%83%E6%95%B8%E4%BD%BF%E7%94%A8"><span class="toc-text">undefined 可以當作變數名稱或參數使用</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -326,33 +391,91 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="对博客的理解"><a href="#对博客的理解" class="headerlink" title="对博客的理解"></a>对博客的理解</h2><p>喜欢写Blog的人，会经历三个阶段。</p>
-<blockquote>
-<p>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</p>
-</blockquote>
-<blockquote>
-<p>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</p>
-</blockquote>
-<blockquote>
-<p>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
-</blockquote>
-<p>我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。</p>
-<p>通过博客，我们可以记录自己的生活和成长的轨迹。它不像 Twitter 那样碎片化，也不像 Facebook 那样关系化，它是私人的空间。</p>
-<h2 id="关于叶落阁"><a href="#关于叶落阁" class="headerlink" title="关于叶落阁"></a>关于叶落阁</h2><p><strong>叶落阁</strong> 是阁主（杨玉杰）的个人站。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题 <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
-<p><code>3-hexo</code> 主题使用交流可以加 Q群: <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e8cf083cc097141eaf323396f1766809b8e90ff00c67bb441898f672892f6904"><img data-ignore border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="3-hexo使用交流" title="3-hexo使用交流"></a></p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad&#x2F;手机等移动端适配</li>
-<li>页面全局快捷键 <a target="_blank" rel="noopener" href='http://yelog.org/2017/03/24/3-hexo-shortcuts/'>3-hexo快捷键说明</a></li>
-</ul>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>在 Javascript 中有兩大型別，其中 <font color=#0000FF>undefined</font> 與 <font color=#0000FF>null</font> 都是屬於 <font color=#FF0000>Primitive value</font>( 原始值或稱基本型別 )，<br>而<strong>原始值是無法被更改的！</strong>，<br>例如 Boolean 只會有 true 和 false 這兩種值，因此 null 、undefined 也是一樣。<br>undefined 型別只有一種值，就是 <font color=#0000FF>undefined</font>。<br>null 型別只有一種值，就是 <font color=#0000FF>null</font>。</p>
+<h3 id="undefined-的定義"><a href="#undefined-的定義" class="headerlink" title="undefined 的定義"></a>undefined 的定義</h3><p><font color=#0000FF>undefined</font> 表示一個變數已經被宣告，但是該變數的值尚未定義。<br>『undefined means a variable has been declared but has not yet been assigned a value 。』<br>例：</p>
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> test;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(test); <span class="hljs-comment">//shows undefined</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> test); <span class="hljs-comment">//shows undefined</span></code></pre>
 
-        </article>
-        
-        
+<h3 id="null-的定義"><a href="#null-的定義" class="headerlink" title="null 的定義"></a>null 的定義</h3><p><font color=#0000FF>null</font> 是一個值，可以被賦予到一個變數上，來表示該變數目前的值是空值。<br>『null is an assignment value. It can be assigned to a variable as a representation of no value』</p>
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> test = <span class="hljs-literal">null</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(test); <span class="hljs-comment">//shows undefined</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> test); <span class="hljs-comment">//shows object</span>
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">  注意：</span>
+<span class="hljs-comment">  變數目前的值是空值不等於變數目前的值為 0，</span>
+<span class="hljs-comment">  空值 ≠ 0。</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+<h3 id="從定義了解差異"><a href="#從定義了解差異" class="headerlink" title="從定義了解差異"></a>從定義了解差異</h3><p>從前面兩個程式碼的例子中可以發現，<font color=#0000FF>undefined</font> 和 <font color=#0000FF>null</font> 是兩種不同的型別</p>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">null</span> === <span class="hljs-literal">undefined</span>) <span class="hljs-comment">// false (not the same type)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span>) <span class="hljs-comment">// true (but the &quot;same value&quot;)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">null</span> === <span class="hljs-literal">null</span>) <span class="hljs-comment">// true (both type and value are the same)</span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>undefined</th>
+<th>null</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>定義</td>
+<td>表示某變數已經被宣告，但該變數的值<font color=#FF0000>尚未定義</font></td>
+<td>變數的值<font color=#FF0000>已經定義</font>，值是 null，表示變數目前的值是空值</td>
+</tr>
+</tbody></table>
+<h2 id="使用情境來理解差異"><a href="#使用情境來理解差異" class="headerlink" title="使用情境來理解差異"></a>使用情境來理解差異</h2><ul>
+<li><strong><font color=#ffa500>name is undefined</font></strong></li>
+</ul>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name); <span class="hljs-comment">// name is undefined</span>
+<span class="hljs-keyword">var</span> name;</code></pre>
+
+<p>You: What is name?<br>JavaScript: name? What’s a name? I don’t know what you’re talking about. You haven’t ever mentioned any name before. Are you seeing some other scripting language on the client-side?</p>
+<ul>
+<li><strong><font color=#ffa500>name &#x3D; null</font></strong></li>
+</ul>
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> name = <span class="hljs-literal">null</span>;</code></pre>
+
+<p>You: What is name?<br>JavaScript: I don’t</p>
+<ul>
+<li><strong><font color=#ffa500>name &#x3D; false</font></strong></li>
+</ul>
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> name = <span class="hljs-literal">false</span>;</code></pre>
+
+<p>You: What is name?<br>JavaScript: Boolean false.</p>
+<ul>
+<li><strong><font color=#ffa500>name &#x3D; “”</font></strong></li>
+</ul>
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> name = <span class="hljs-string">&quot;&quot;</span>;</code></pre>
+
+<p>You: What is name?<br>JavaScript: Empty string.</p>
+<h2 id="一張圖理解差異"><a href="#一張圖理解差異" class="headerlink" title="一張圖理解差異"></a>一張圖理解差異</h2><p><img src="/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/image.png"></p>
+<h2 id="undefined-可以當作變數名稱或參數使用"><a href="#undefined-可以當作變數名稱或參數使用" class="headerlink" title="undefined 可以當作變數名稱或參數使用"></a>undefined 可以當作變數名稱或參數使用</h2><p>驚不驚喜，意不意外～我們常說不能拿保留字當作變數，沒想到 undefined 居然打破這個限制！！！在非全域作用範圍下， undefined 允許被當成變數名稱，而且變數的值是可以被修改的。</p>
+<pre><code class="hljs JS"><span class="hljs-comment">// 當作變數名稱</span>
+(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
+  <span class="hljs-keyword">var</span> <span class="hljs-literal">undefined</span> = <span class="hljs-string">&#x27;foo&#x27;</span>;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`值為<span class="hljs-subst">$&#123;<span class="hljs-literal">undefined</span>&#125;</span>，型別為<span class="hljs-subst">$&#123;<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>&#125;</span>`</span>); <span class="hljs-comment">// 顯示：值為foo，型別為string</span>
+&#125;)()
+
+<span class="hljs-comment">// 當作參數</span>
+(<span class="hljs-keyword">function</span>(<span class="hljs-params"><span class="hljs-literal">undefined</span></span>) &#123;
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`值為<span class="hljs-subst">$&#123;<span class="hljs-literal">undefined</span>&#125;</span>，型別為<span class="hljs-subst">$&#123;<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>&#125;</span>`</span>); <span class="hljs-comment">// 顯示：值為foo，型別為string</span>
+&#125;)(<span class="hljs-string">&#x27;foo&#x27;</span>);</code></pre>
+
+      
+       <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>
+    </div>
+</article>
+
+
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -374,6 +497,13 @@
 </script>
 
 
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -382,11 +512,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切換全螢幕 快捷鍵 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切換全螢幕 快捷鍵 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 </body>

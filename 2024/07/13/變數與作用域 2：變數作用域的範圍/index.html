@@ -6,19 +6,21 @@
   <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
   <meta name="description" content="變數與作用域 2：變數作用域的範圍 | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="undefined &amp; is not defined 兩者之間的差別？ 💡先講結論：undefined 是一個變數尚未被賦予值的狀態。「is not defined」是一個錯誤訊息，會直接中斷程式碼執行。   is not defined 的例子  console.log(myName);&#x2F;&#x2F; Uncaught ReferenceError: myName is not defined">
+<meta name="description" content="基本概念在 Javascript 中有兩大型別，其中 undefined 與 null 都是屬於 Primitive value( 原始值或稱基本型別 )，而原始值是無法被更改的！，例如 Boolean 只會有 true 和 false 這兩種值，因此 null 、undefined 也是一樣。undefined 型別只有一種值，就是 undefined。null 型別只有一種值，就是 null。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="變數與作用域 5：undefined &amp; is not defined">
-<meta property="og:url" content="http://example.com/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-5%EF%BC%9Aundefined-is-not-defined/index.html">
+<meta property="og:title" content="變數與作用域 6：undefined 與 null 的差異">
+<meta property="og:url" content="http://example.com/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/index.html">
 <meta property="og:site_name" content="Eshiunm&#39;s Blog">
-<meta property="og:description" content="undefined &amp; is not defined 兩者之間的差別？ 💡先講結論：undefined 是一個變數尚未被賦予值的狀態。「is not defined」是一個錯誤訊息，會直接中斷程式碼執行。   is not defined 的例子  console.log(myName);&#x2F;&#x2F; Uncaught ReferenceError: myName is not defined">
+<meta property="og:description" content="基本概念在 Javascript 中有兩大型別，其中 undefined 與 null 都是屬於 Primitive value( 原始值或稱基本型別 )，而原始值是無法被更改的！，例如 Boolean 只會有 true 和 false 這兩種值，因此 null 、undefined 也是一樣。undefined 型別只有一種值，就是 undefined。null 型別只有一種值，就是 null。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-14T01:52:45.000Z">
-<meta property="article:modified_time" content="2024-07-14T02:00:40.229Z">
+<meta property="og:image" content="http://example.com/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/image.png">
+<meta property="article:published_time" content="2024-07-14T03:24:09.000Z">
+<meta property="article:modified_time" content="2024-07-14T03:57:55.252Z">
 <meta property="article:author" content="Eshiunm">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="變數與作用域系列">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/image.png">
 
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
@@ -91,7 +93,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(6)</small>
+                <small>(7)</small>
             
         </div>
     </li>
@@ -103,7 +105,7 @@
         <div data-rel="前端">
             <i class="fold iconfont icon-right"></i>
             前端
-            <small>(5)</small>
+            <small>(6)</small>
         </div>
         
             <ul class="sub hide">
@@ -113,7 +115,7 @@
         <div data-rel="前端&lt;---&gt;JavaScript">
             <i class="fold iconfont icon-right"></i>
             JavaScript
-            <small>(5)</small>
+            <small>(6)</small>
         </div>
         
             <ul class="sub hide">
@@ -123,7 +125,7 @@
         <div data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;變數與作用域">
             
             變數與作用域
-            <small>(5)</small>
+            <small>(6)</small>
         </div>
         
     </li>
@@ -162,8 +164,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="6">
-<input type="hidden" id="yelog_site_word_count" value="2.3k">
+<input type="hidden" id="yelog_site_posts_number" value="7">
+<input type="hidden" id="yelog_site_word_count" value="2.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -226,6 +228,15 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 前端 JavaScript 變數與作用域 "
+           href="/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/"
+           data-tag="JavaScript,變數與作用域系列"
+           data-author="" >
+            <span class="post-title" title="變數與作用域 6：undefined 與 null 的差異">變數與作用域 6：undefined 與 null 的差異</span>
+            <span class="post-date" title="2024-07-14 11:24:09">2024/07/14</span>
+        </a>
         
         
         <a  class="全部文章 前端 JavaScript 變數與作用域 "
