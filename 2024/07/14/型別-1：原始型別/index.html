@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hello World | Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hello World | Eshiunm&#39;s Blog">
+  <title>型別 1：原始型別 &amp; 物件型別 | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" JavaScript , 型別 ">
+  <meta name="description" content="型別 1：原始型別 &amp; 物件型別 | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="注意文章的標題是「原始型別的包裹物件」，因此接下來講的內容，都跟「原始型別」有關，但是與 null，undefined 無關。( 因為它們兩個沒有包裹物件 ) 為什麼原始型別的值可以呼叫方法？ 💡先講結論：因為 JavaScript 會自動將原始型別的值轉換成對應的「包裹物件」，進而呼叫物件中對應的方法。  在探討包裹物件之前，可以先思考一個問題，為什麼當你宣告一個 string 變數時，可以使">
 <meta property="og:type" content="article">
@@ -345,24 +345,45 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="posts-型別-1：原始型別" class="article article-type-posts" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hello World</h1>
+        <h1 class="article-title">型別 1：原始型別 &amp; 物件型別</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="前端">前端</a> > 
+            
+            <a  data-rel="前端&lt;---&gt;JavaScript">JavaScript</a> > 
+            
+            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;型別">型別</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">JavaScript</a>
+            
+            <a class="color3">型別</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-12 22:06:24'>2024-07-12 22:06</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-07-20 20:29:41'>2024-07-14 20:38</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:75</span>
+        <span>字數:536</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -392,7 +413,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript-%E7%9A%84%E5%9E%8B%E5%88%A5"><span class="toc-text">JavaScript 的型別</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5%E7%9A%84%E7%A8%AE%E9%A1%9E%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="toc-text">原始型別的種類如下：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%A9%E4%BB%B6%E5%9E%8B%E5%88%A5%EF%BC%9A"><span class="toc-text">物件型別：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%8D%80%E5%88%86%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5%E8%88%87%E7%89%A9%E4%BB%B6%E5%9E%8B%E5%88%A5%EF%BC%9F"><span class="toc-text">如何區分原始型別與物件型別？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5%E7%84%A1%E6%B3%95%E5%A2%9E%E5%8A%A0%E5%B1%AC%E6%80%A7%EF%BC%8C%E7%89%A9%E4%BB%B6%E5%9E%8B%E5%88%A5%E5%8F%AF%E4%BB%A5%E5%A2%9E%E5%8A%A0%E5%B1%AC%E6%80%A7"><span class="toc-text">原始型別無法增加屬性，物件型別可以增加屬性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%8B%E5%88%A5%E5%88%A4%E6%96%B7%E6%96%B9%E5%BC%8F"><span class="toc-text">型別判斷方式</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -408,19 +429,64 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span></code></pre>
+        <h2 id="JavaScript-的型別"><a href="#JavaScript-的型別" class="headerlink" title="JavaScript 的型別"></a>JavaScript 的型別</h2><p>在 JavaScript 的世界裡，只有兩大型別，分別是 <strong>Primitive Type（原始型別）</strong>和 <strong>Object Type（物件型別）</strong>。</p>
+<h4 id="原始型別的種類如下："><a href="#原始型別的種類如下：" class="headerlink" title="原始型別的種類如下："></a>原始型別的種類如下：</h4><ul>
+<li>Boolean</li>
+<li>Number</li>
+<li>String</li>
+<li>BigInt</li>
+<li>Symbol</li>
+<li>Null</li>
+<li>Undefined</li>
+</ul>
+<h4 id="物件型別："><a href="#物件型別：" class="headerlink" title="物件型別："></a>物件型別：</h4><ul>
+<li>Array</li>
+<li>Object</li>
+<li>Function</li>
+</ul>
+<p>除了原始型別以外，其餘都可以歸類在物件型別，例如陣列、物件、函式都屬於物件型別。</p>
+<blockquote>
+<p>JavaScript 共有 7 種 <strong>「原始型別</strong>，其餘的都屬於 <strong>「物件型別」</strong>。</p>
+</blockquote>
+<h2 id="如何區分原始型別與物件型別？"><a href="#如何區分原始型別與物件型別？" class="headerlink" title="如何區分原始型別與物件型別？"></a>如何區分原始型別與物件型別？</h2><h3 id="原始型別無法增加屬性，物件型別可以增加屬性"><a href="#原始型別無法增加屬性，物件型別可以增加屬性" class="headerlink" title="原始型別無法增加屬性，物件型別可以增加屬性"></a>原始型別無法增加屬性，物件型別可以增加屬性</h3><p>原始型別：</p>
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> string = <span class="hljs-string">&quot;我是小明&quot;</span>;
+string.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;我是字串&quot;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(string.<span class="hljs-property">name</span>); <span class="hljs-comment">// undefined，無法新增屬性</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(string); <span class="hljs-comment">// 我是小明</span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="hljs bash">$ hexo server</code></pre>
+<p>物件型別：</p>
+<pre><code class="hljs JS"><span class="hljs-comment">// 對物件新增屬性</span>
+<span class="hljs-keyword">let</span> object = &#123;
+  <span class="hljs-attr">property</span>: <span class="hljs-string">&quot;我是物件&quot;</span>,
+&#125;
+object.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;我是一個屬性&quot;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj.<span class="hljs-property">name</span>); <span class="hljs-comment">// &quot;我是一個屬性&quot;</span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="hljs bash">$ hexo generate</code></pre>
+<span class="hljs-comment">// 對陣列新增屬性（實戰中請不要對陣列這樣做)</span>
+<span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+arr.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;我是一個陣列&quot;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr.<span class="hljs-property">name</span>); <span class="hljs-comment">// &quot;我是一個陣列&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr)<span class="hljs-comment">// [1, 2, 3, name: &#x27;我是一個陣列&#x27;]</span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="hljs bash">$ hexo deploy</code></pre>
+<span class="hljs-comment">// 對函式新增屬性（實戰中請不要對函式這樣做)</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params"></span>) &#123;&#125;
+fn.<span class="hljs-property">myName</span> = <span class="hljs-string">&quot;我是一個函式&quot;</span>; <span class="hljs-comment">// 函式本身就有 name 屬性，別覆蓋它</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fn.<span class="hljs-property">myName</span>); <span class="hljs-comment">// &quot;我是一個函式&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">dir</span>(fn); <span class="hljs-comment">// 可以印出函式的結構</span></code></pre>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="型別判斷方式"><a href="#型別判斷方式" class="headerlink" title="型別判斷方式"></a>型別判斷方式</h3><p>在大多數型別中，都可以透過 <code>typeof</code> 運算子來判別，是實戰中最常見用來判斷型別的手法，例如下方的一些例子：</p>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-string">&quot;這是一句話&quot;</span>); <span class="hljs-comment">// &quot;string&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-number">123</span>); <span class="hljs-comment">// &quot;number&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">true</span>); <span class="hljs-comment">// &quot;boolean&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;sym&quot;</span>)); <span class="hljs-comment">// &quot;symbol&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-number">100n</span>); <span class="hljs-comment">// &quot;bigint&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span>); <span class="hljs-comment">// &quot;object&quot;，null 會被判斷成 Object 型別，這是一個 JS 的 Bug，然後官方也不打算改( 因為會牽一髮動全身 )</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// &quot;undefined&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> []); <span class="hljs-comment">// &quot;object&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> &#123;&#125;); <span class="hljs-comment">// &quot;object&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;&#125;); <span class="hljs-comment">// &quot;function&quot;，雖然印出 function，但還是當作物件型別看待</span></code></pre>
+
+
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>

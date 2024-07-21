@@ -6,21 +6,19 @@
   <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
   <meta name="description" content="變數與作用域 1：全域變數 &amp; 全域屬性 | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="基本概念在 Javascript 中有兩大型別，其中 undefined 與 null 都是屬於 Primitive value( 原始值或稱基本型別 )，而原始值是無法被更改的！，例如 Boolean 只會有 true 和 false 這兩種值，因此 null 、undefined 也是一樣。undefined 型別只有一種值，就是 undefined。null 型別只有一種值，就是 null。">
+<meta name="description" content="注意文章的標題是「原始型別的包裹物件」，因此接下來講的內容，都跟「原始型別」有關，但是與 null，undefined 無關。( 因為它們兩個沒有包裹物件 ) 為什麼原始型別的值可以呼叫方法？ 💡先講結論：因為 JavaScript 會自動將原始型別的值轉換成對應的「包裹物件」，進而呼叫物件中對應的方法。  在探討包裹物件之前，可以先思考一個問題，為什麼當你宣告一個 string 變數時，可以使">
 <meta property="og:type" content="article">
-<meta property="og:title" content="變數與作用域 6：undefined 與 null 的差異">
-<meta property="og:url" content="http://example.com/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/index.html">
+<meta property="og:title" content="型別 2：原始型別的包裹物件 Primitive Wrapper Objects">
+<meta property="og:url" content="http://example.com/2024/07/20/%E5%9E%8B%E5%88%A5-2%EF%BC%9A%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5%E5%8C%85%E8%A3%B9%E7%89%A9%E4%BB%B6/index.html">
 <meta property="og:site_name" content="Eshiunm&#39;s Blog">
-<meta property="og:description" content="基本概念在 Javascript 中有兩大型別，其中 undefined 與 null 都是屬於 Primitive value( 原始值或稱基本型別 )，而原始值是無法被更改的！，例如 Boolean 只會有 true 和 false 這兩種值，因此 null 、undefined 也是一樣。undefined 型別只有一種值，就是 undefined。null 型別只有一種值，就是 null。">
+<meta property="og:description" content="注意文章的標題是「原始型別的包裹物件」，因此接下來講的內容，都跟「原始型別」有關，但是與 null，undefined 無關。( 因為它們兩個沒有包裹物件 ) 為什麼原始型別的值可以呼叫方法？ 💡先講結論：因為 JavaScript 會自動將原始型別的值轉換成對應的「包裹物件」，進而呼叫物件中對應的方法。  在探討包裹物件之前，可以先思考一個問題，為什麼當你宣告一個 string 變數時，可以使">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/image.png">
-<meta property="article:published_time" content="2024-07-14T03:24:09.000Z">
-<meta property="article:modified_time" content="2024-07-14T03:57:55.252Z">
+<meta property="article:published_time" content="2024-07-20T12:30:56.000Z">
+<meta property="article:modified_time" content="2024-07-21T16:34:38.630Z">
 <meta property="article:author" content="Eshiunm">
 <meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="變數與作用域系列">
+<meta property="article:tag" content="型別">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/image.png">
 
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
@@ -93,7 +91,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(7)</small>
+                <small>(9)</small>
             
         </div>
     </li>
@@ -105,7 +103,7 @@
         <div data-rel="前端">
             <i class="fold iconfont icon-right"></i>
             前端
-            <small>(6)</small>
+            <small>(8)</small>
         </div>
         
             <ul class="sub hide">
@@ -115,7 +113,7 @@
         <div data-rel="前端&lt;---&gt;JavaScript">
             <i class="fold iconfont icon-right"></i>
             JavaScript
-            <small>(6)</small>
+            <small>(8)</small>
         </div>
         
             <ul class="sub hide">
@@ -131,6 +129,17 @@
     </li>
 
                 
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;型別">
+            
+            型別
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
             </ul>
         
     </li>
@@ -140,6 +149,10 @@
         
     </li>
 
+            
+        
+    
+        
             
         
     
@@ -164,8 +177,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="7">
-<input type="hidden" id="yelog_site_word_count" value="2.9k">
+<input type="hidden" id="yelog_site_posts_number" value="9">
+<input type="hidden" id="yelog_site_word_count" value="3.8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -215,6 +228,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>型別</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>JavaScript</a>
             </li>
         
@@ -228,6 +245,24 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 前端 JavaScript 型別 "
+           href="/2024/07/20/%E5%9E%8B%E5%88%A5-2%EF%BC%9A%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5%E5%8C%85%E8%A3%B9%E7%89%A9%E4%BB%B6/"
+           data-tag="JavaScript,型別"
+           data-author="" >
+            <span class="post-title" title="型別 2：原始型別的包裹物件 Primitive Wrapper Objects">型別 2：原始型別的包裹物件 Primitive Wrapper Objects</span>
+            <span class="post-date" title="2024-07-20 20:30:56">2024/07/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 JavaScript 型別 "
+           href="/2024/07/14/%E5%9E%8B%E5%88%A5-1%EF%BC%9A%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5/"
+           data-tag="JavaScript,型別"
+           data-author="" >
+            <span class="post-title" title="型別 1：原始型別 &amp; 物件型別">型別 1：原始型別 &amp; 物件型別</span>
+            <span class="post-date" title="2024-07-14 20:38:41">2024/07/14</span>
+        </a>
         
         
         <a  class="全部文章 前端 JavaScript 變數與作用域 "

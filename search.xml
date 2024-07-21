@@ -4,6 +4,68 @@
   
     
     <entry>
+      <title>型別 2：原始型別的包裹物件 Primitive Wrapper Objects</title>
+      <link href="/2024/07/20/%E5%9E%8B%E5%88%A5-2%EF%BC%9A%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5%E5%8C%85%E8%A3%B9%E7%89%A9%E4%BB%B6/"/>
+      <url>/2024/07/20/%E5%9E%8B%E5%88%A5-2%EF%BC%9A%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5%E5%8C%85%E8%A3%B9%E7%89%A9%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<p>注意文章的標題是「原始型別的包裹物件」，<br>因此接下來講的內容，都跟「原始型別」有關，但是與 <code>null</code>，<code>undefined</code> 無關。( 因為它們兩個沒有包裹物件 )</p><h2 id="為什麼原始型別的值可以呼叫方法？"><a href="#為什麼原始型別的值可以呼叫方法？" class="headerlink" title="為什麼原始型別的值可以呼叫方法？"></a>為什麼原始型別的值可以呼叫方法？</h2><blockquote><p>💡<strong>先講結論</strong>：<br>因為 JavaScript 會自動將原始型別的值轉換成對應的「包裹物件」，進而呼叫物件中對應的方法。</p></blockquote><p>在探討包裹物件之前，可以先思考一個問題，<br>為什麼當你宣告一個 string 變數時，可以使用如下<code>toUpperCase()</code>的方法?</p><pre><code class="hljs JS"><span class="hljs-keyword">let</span> name = <span class="hljs-string">&quot;John&quot;</span>;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name.<span class="hljs-title function_">toUpperCase</span>()); <span class="hljs-comment">// &quot;JOHN&quot;</span></code></pre><p><code>name</code> 明明是一個原始型別的變數，為什麼可以像物件呼叫方法的方式去呼叫 <code>toUpperCase()</code>？<br>這是因為當你嘗試在一個原始值上呼叫方法時，JavaScript 會自動將<code>name</code>變數轉換成對應的「包裹物件」，而這個過程稱為「裝箱」（boxing）。</p><p>裝箱的工作原理如下：</p><ol><li>創建臨時物件：JavaScript 會創建一個臨時的包裹物件，這個過程是隱式的。</li><li>呼叫對應方法：創建臨時物件後，JavaScript 會在這個臨時物件上呼叫對應的方法。</li><li>回傳結果：方法執行完畢後，回傳結果。</li><li>銷毀臨時物件：立即銷毀這個臨時創建的包裹物件，不會影響原始值。</li></ol><h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+          <category> JavaScript </category>
+          
+          <category> 型別 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> 型別 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>型別 1：原始型別 &amp; 物件型別</title>
+      <link href="/2024/07/14/%E5%9E%8B%E5%88%A5-1%EF%BC%9A%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5/"/>
+      <url>/2024/07/14/%E5%9E%8B%E5%88%A5-1%EF%BC%9A%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5/</url>
+      
+        <content type="html"><![CDATA[<h2 id="JavaScript-的型別"><a href="#JavaScript-的型別" class="headerlink" title="JavaScript 的型別"></a>JavaScript 的型別</h2><p>在 JavaScript 的世界裡，只有兩大型別，分別是 <strong>Primitive Type（原始型別）</strong>和 <strong>Object Type（物件型別）</strong>。</p><h4 id="原始型別的種類如下："><a href="#原始型別的種類如下：" class="headerlink" title="原始型別的種類如下："></a>原始型別的種類如下：</h4><ul><li>Boolean</li><li>Number</li><li>String</li><li>BigInt</li><li>Symbol</li><li>Null</li><li>Undefined</li></ul><h4 id="物件型別："><a href="#物件型別：" class="headerlink" title="物件型別："></a>物件型別：</h4><ul><li>Array</li><li>Object</li><li>Function</li></ul><p>除了原始型別以外，其餘都可以歸類在物件型別，例如陣列、物件、函式都屬於物件型別。</p><blockquote><p>JavaScript 共有 7 種 <strong>「原始型別</strong>，其餘的都屬於 <strong>「物件型別」</strong>。</p></blockquote><h2 id="如何區分原始型別與物件型別？"><a href="#如何區分原始型別與物件型別？" class="headerlink" title="如何區分原始型別與物件型別？"></a>如何區分原始型別與物件型別？</h2><h3 id="原始型別無法增加屬性，物件型別可以增加屬性"><a href="#原始型別無法增加屬性，物件型別可以增加屬性" class="headerlink" title="原始型別無法增加屬性，物件型別可以增加屬性"></a>原始型別無法增加屬性，物件型別可以增加屬性</h3><p>原始型別：</p><pre><code class="hljs JS"><span class="hljs-keyword">let</span> string = <span class="hljs-string">&quot;我是小明&quot;</span>;string.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;我是字串&quot;</span>;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(string.<span class="hljs-property">name</span>); <span class="hljs-comment">// undefined，無法新增屬性</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(string); <span class="hljs-comment">// 我是小明</span></code></pre><p>物件型別：</p><pre><code class="hljs JS"><span class="hljs-comment">// 對物件新增屬性</span><span class="hljs-keyword">let</span> object = &#123;  <span class="hljs-attr">property</span>: <span class="hljs-string">&quot;我是物件&quot;</span>,&#125;object.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;我是一個屬性&quot;</span>;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj.<span class="hljs-property">name</span>); <span class="hljs-comment">// &quot;我是一個屬性&quot;</span><span class="hljs-comment">// 對陣列新增屬性（實戰中請不要對陣列這樣做)</span><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];arr.<span class="hljs-property">name</span> = <span class="hljs-string">&quot;我是一個陣列&quot;</span>;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr.<span class="hljs-property">name</span>); <span class="hljs-comment">// &quot;我是一個陣列&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr)<span class="hljs-comment">// [1, 2, 3, name: &#x27;我是一個陣列&#x27;]</span><span class="hljs-comment">// 對函式新增屬性（實戰中請不要對函式這樣做)</span><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params"></span>) &#123;&#125;fn.<span class="hljs-property">myName</span> = <span class="hljs-string">&quot;我是一個函式&quot;</span>; <span class="hljs-comment">// 函式本身就有 name 屬性，別覆蓋它</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(fn.<span class="hljs-property">myName</span>); <span class="hljs-comment">// &quot;我是一個函式&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">dir</span>(fn); <span class="hljs-comment">// 可以印出函式的結構</span></code></pre><h3 id="型別判斷方式"><a href="#型別判斷方式" class="headerlink" title="型別判斷方式"></a>型別判斷方式</h3><p>在大多數型別中，都可以透過 <code>typeof</code> 運算子來判別，是實戰中最常見用來判斷型別的手法，例如下方的一些例子：</p><pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-string">&quot;這是一句話&quot;</span>); <span class="hljs-comment">// &quot;string&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-number">123</span>); <span class="hljs-comment">// &quot;number&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">true</span>); <span class="hljs-comment">// &quot;boolean&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;sym&quot;</span>)); <span class="hljs-comment">// &quot;symbol&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-number">100n</span>); <span class="hljs-comment">// &quot;bigint&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span>); <span class="hljs-comment">// &quot;object&quot;，null 會被判斷成 Object 型別，這是一個 JS 的 Bug，然後官方也不打算改( 因為會牽一髮動全身 )</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// &quot;undefined&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> []); <span class="hljs-comment">// &quot;object&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> &#123;&#125;); <span class="hljs-comment">// &quot;object&quot;</span><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;&#125;); <span class="hljs-comment">// &quot;function&quot;，雖然印出 function，但還是當作物件型別看待</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+          <category> JavaScript </category>
+          
+          <category> 型別 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JavaScript </tag>
+            
+            <tag> 型別 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>變數與作用域 6：undefined 與 null 的差異</title>
       <link href="/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/"/>
       <url>/2024/07/14/%E8%AE%8A%E6%95%B8%E8%88%87%E4%BD%9C%E7%94%A8%E5%9F%9F-6%EF%BC%9Aundefined-%E8%88%87-null-%E7%9A%84%E5%B7%AE%E7%95%B0-1/</url>
