@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>變數與作用域 1：全域變數 &amp; 全域屬性 | Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
-  <meta name="description" content="變數與作用域 1：全域變數 &amp; 全域屬性 | Eshiunm&#39;s Blog">
+  <title>型別 3：型別比較 | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" JavaScript , 型別 ">
+  <meta name="description" content="型別 3：型別比較 | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="描述map() 方法會將陣列中的所有元素，依序地傳入一次至 callback function 中，並以此 callback function 的回傳值來建構一個新的陣列。 如何使用使用 map() 方法時要傳入一個 callback function，該 function 可傳入三個參數：  currentValue (必要)原陣列目前迭代挑到的元素。 index (選擇性)原陣列目前迭代挑到的">
 <meta property="og:type" content="article">
@@ -387,9 +387,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-變數與作用域 1：全域變數 &amp; 全域屬性" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-型別-3：型別比較" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">變數與作用域 1：全域變數 &amp; 全域屬性</h1>
+        <h1 class="article-title">型別 3：型別比較</h1>
     
     <div class="article-meta">
         
@@ -403,7 +403,7 @@
             
             <a  data-rel="前端&lt;---&gt;JavaScript">JavaScript</a> > 
             
-            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;變數與作用域">變數與作用域</a>
+            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;型別">型別</a>
             
         </span>
         
@@ -413,19 +413,19 @@
             
             <a class="color1">JavaScript</a>
             
-            <a class="color4">變數與作用域系列</a>
+            <a class="color3">型別</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-14 09:41:30'>2024-07-12 22:08</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-07-24 21:56:40'>2024-07-23 13:53</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:461</span>
+        <span>字數:1.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -455,7 +455,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E8%AE%8A%E6%95%B8%E9%9C%80%E8%A6%81%E5%AE%A3%E5%91%8A%EF%BC%9F%E8%83%BD%E4%B8%8D%E5%AE%A3%E5%91%8A%E7%9B%B4%E6%8E%A5%E7%94%A8%E5%97%8E%EF%BC%9F"><span class="toc-text">為什麼變數需要宣告？能不宣告直接用嗎？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%A3%E8%AE%8A%E6%95%B8%E8%88%87%E5%B1%AC%E6%80%A7%E7%9A%84%E5%B7%AE%E7%95%B0%E7%82%BA%E4%BD%95%EF%BC%9F"><span class="toc-text">那變數與屬性的差異為何？</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9A%B4%E6%A0%BC%E6%AF%94%E8%BC%83%E7%9A%84%E8%A6%8F%E5%89%87"><span class="toc-text">嚴格比較的規則</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%AC%E9%AC%86%E6%AF%94%E8%BC%83%E7%9A%84%E8%A6%8F%E5%89%87"><span class="toc-text">寬鬆比較的規則</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Number%E3%80%81String%E3%80%81Boolean-%E5%9E%8B%E5%88%A5%E7%9A%84%E5%AF%AC%E9%AC%86%E6%AF%94%E8%BC%83%E8%A6%8F%E5%89%87"><span class="toc-text">Number、String、Boolean 型別的寬鬆比較規則</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null%E3%80%81Undefined-%E5%9E%8B%E5%88%A5%E7%9A%84%E5%AF%AC%E9%AC%86%E6%AF%94%E8%BC%83%E8%A6%8F%E5%89%87"><span class="toc-text">Null、Undefined 型別的寬鬆比較規則</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E4%BB%B6%E8%88%87%E9%9D%9E%E7%89%A9%E4%BB%B6%E7%9A%84%E5%AF%AC%E9%AC%86%E6%AF%94%E8%BC%83%E8%A6%8F%E5%89%87"><span class="toc-text">物件與非物件的寬鬆比較規則</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -471,43 +471,83 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="為什麼變數需要宣告？能不宣告直接用嗎？"><a href="#為什麼變數需要宣告？能不宣告直接用嗎？" class="headerlink" title="為什麼變數需要宣告？能不宣告直接用嗎？"></a>為什麼變數需要宣告？能不宣告直接用嗎？</h2><blockquote>
-<p>💡<strong>先講結論</strong>：<br>沒有透過「宣告」產生出來的變數，會是一個「全域的 windows 物件底下的一個屬性」。</p>
-</blockquote>
-<p>變數如果不透過 var、let 、const 宣告的話，會變成一個名為 windwos 物件底下的一個屬性，<br>該屬性是一個全域屬性！<br>範例：</p>
-<pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn1</span>(<span class="hljs-params"></span>)&#123;
-    <span class="hljs-comment">// 注意，a 變數並沒有透過 var、let、const 來宣告，</span>
-    <span class="hljs-comment">// 卻可以被底下的 fn2() 所使用</span>
-    a = <span class="hljs-string">&#x27;小明&#x27;</span>;
-&#125;
+        <p>在 JavaScript 中，有兩種型別比較，分別是<strong>寬鬆比較</strong>和<strong>嚴格比較</strong>。</p>
+<h2 id="嚴格比較的規則"><a href="#嚴格比較的規則" class="headerlink" title="嚴格比較的規則"></a>嚴格比較的規則</h2><p><strong>嚴格比較的規則：比較的兩個運算元，必須要有相同的「型別」和相同的「值」，才會回傳 true。</strong></p>
+<p>不過也有部分屬於例外，以下是一些容易被混淆的案例：</p>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">NaN</span> === <span class="hljs-title class_">NaN</span>);                     <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(+<span class="hljs-number">0</span> === -<span class="hljs-number">0</span>);                       <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">undefined</span> === <span class="hljs-literal">null</span>);              <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(&#123;&#125; === &#123;&#125;);                       <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Number</span>(<span class="hljs-number">1</span>) === <span class="hljs-keyword">new</span> <span class="hljs-title class_">Number</span>(<span class="hljs-number">1</span>)); <span class="hljs-comment">// false</span></code></pre>
 
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">fn2</span>(<span class="hljs-params"></span>)&#123;
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a);
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(windows.<span class="hljs-property">a</span>)<span class="hljs-comment">// 實際上這個 a 變數是 winsows 物件下的一個屬性</span>
-&#125;
+<ul>
+<li><strong>NaN &#x3D;&#x3D;&#x3D; NaN</strong>：NaN (Not A Number) 在嚴格比較時，會不等於任何值，因此與 NaN 比較時，一樣會獲得 false 的結果；如果要判斷是否為 NaN，可改用 isNaN() 這個方法。</li>
+<li><strong>+0 &#x3D;&#x3D;&#x3D; -0</strong>：正 0 跟負 0 都會被視為 0，因此在嚴格比較時，會獲得 true 的結果。</li>
+<li><strong>undefined &#x3D;&#x3D;&#x3D; null</strong>：雖然這兩個有點像，但兩者根本是不同的型別，所以嚴格比較時，會獲得 false 的結果。</li>
+<li>{} &#x3D;&#x3D;&#x3D; {}：物件在比較時是比較兩者的「參考位址」，所以兩個物件就算其結構完全一致，也會得到 false 的結果。</li>
+<li>new Number(1) &#x3D;&#x3D;&#x3D; new Number(1)：當使用 new 運算子建立原型時，實際上所建立的型別是物件型別，因此兩個物件相比，都會得到 false 的結果。</li>
+</ul>
+<h2 id="寬鬆比較的規則"><a href="#寬鬆比較的規則" class="headerlink" title="寬鬆比較的規則"></a>寬鬆比較的規則</h2><p><strong>寬鬆比較的規則複雜一點，不同型別的比對規則都不太一樣。</strong></p>
+<h3 id="Number、String、Boolean-型別的寬鬆比較規則"><a href="#Number、String、Boolean-型別的寬鬆比較規則" class="headerlink" title="Number、String、Boolean 型別的寬鬆比較規則"></a><span style="color:white; background-color: #2a2936; padding: 5px">Number、String、Boolean 型別的寬鬆比較規則</span></h3><p>數值、字串、布林這三者之間，在進行寬鬆比較的時候，<u>如果運算元並非相同型別，則會統一轉型為 <code>Number</code> 進行比對</u> 。<br>因此在比對的時候，可以假想將兩個比較值都套上 <code>Number()</code>，<br>例如：Number(‘1’) &#x3D; 1、Number(true) &#x3D; 1、Number(false) &#x3D; 0，<br>來看一些基本範例：</p>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;1&#x27;</span> == <span class="hljs-number">1</span>);       <span class="hljs-comment">// true，相當於 Number(&#x27;1&#x27;) == 1 =&gt; true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;1&#x27;</span> == <span class="hljs-literal">true</span>);    <span class="hljs-comment">// true，相當於 Number(&#x27;1&#x27;) == Number(true) =&gt; true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;0&#x27;</span> == <span class="hljs-literal">false</span>);   <span class="hljs-comment">// true，相當於 Number(&#x27;0&#x27;) == Number(false) =&gt; true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;2&#x27;</span> == <span class="hljs-literal">true</span>);   <span class="hljs-comment">// false，因為 Number(&#x27;2&#x27;) = 2，但是 Number(true) = 1，所以不相等</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">false</span> == <span class="hljs-number">0</span>);     <span class="hljs-comment">// true，相當於 Number(false) == 0 =&gt; true</span></code></pre>
 
-<span class="hljs-title function_">fn1</span>(); <span class="hljs-comment">// 呼叫 fn1()，產生一個具全域屬性 a</span>
-<span class="hljs-title function_">fn2</span>(); <span class="hljs-comment">// 呼叫 fn2()，印出兩次小明</span></code></pre>
+<ul>
+<li>‘1’ &#x3D;&#x3D; 1：因為 ‘1’ 會轉型別為數值 1，所以比對結果為 true。</li>
+<li>‘1’ &#x3D;&#x3D; true：因為 ‘1’ 會轉型別為數值 1、true 會轉型別為數值 1，所以比對結果為 true。</li>
+<li>‘0’ &#x3D;&#x3D; false：因為 ‘0’ 會轉型別為數值 0、false 會轉型別為數值 0，所以比對結果為 true。</li>
+<li>‘2’ &#x3D;&#x3D; true：因為 ‘2’ 會轉型別為數值 2，true 會轉型別為數值 1，所以比對結果為 false。</li>
+<li>false &#x3D;&#x3D; 0：因為 false 會轉型別數值 0，所以比對結果為 true。</li>
+</ul>
+<p><strong><u>記得當你遇到數值、字串、布林這三個型別在進行比較時，會轉型成「數值」型別，再進行比較。</u></strong></p>
+<h3 id="Null、Undefined-型別的寬鬆比較規則"><a href="#Null、Undefined-型別的寬鬆比較規則" class="headerlink" title="Null、Undefined 型別的寬鬆比較規則"></a><span style="color:white; background-color: #2a2936; padding: 5px">Null、Undefined 型別的寬鬆比較規則</span></h3><p>null 及 undefined 時常會與 false 搞混，但在寬鬆比較時，它們幾乎是不會轉型，<br>就以下範例來說，無論是與數值 0、與空字串、布林值 false，進行比較的時候，最終所獲得的結果都是 false。</p>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">null</span> == <span class="hljs-number">0</span>);           <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">null</span> == <span class="hljs-string">&#x27;&#x27;</span>);          <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">null</span> == <span class="hljs-literal">false</span>);       <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">undefined</span> == <span class="hljs-number">0</span>);      <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">undefined</span> == <span class="hljs-string">&#x27;&#x27;</span>);     <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">undefined</span> == <span class="hljs-literal">false</span>);  <span class="hljs-comment">// false</span></code></pre>
 
-<p>這種沒有透過「宣告」的方式所產生出來的變數，會因為是一個全域屬性的關係，容易被汙染，進而難以 debug。</p>
-<h2 id="那變數與屬性的差異為何？"><a href="#那變數與屬性的差異為何？" class="headerlink" title="那變數與屬性的差異為何？"></a>那變數與屬性的差異為何？</h2><blockquote>
-<p>💡<strong>先講結論</strong>：<br>差異就是只有「屬性」才可以使用 delete 運算子刪除 。</p>
-</blockquote>
-<p>範例：</p>
-<pre><code class="hljs JS">a = <span class="hljs-string">&#x27;小白&#x27;</span>; <span class="hljs-comment">//因為沒有用宣告字，所以會在 windows 物件底下會新增一個屬性叫做 a</span>
-<span class="hljs-keyword">delete</span> a; <span class="hljs-comment">// a 是一個全域屬性，可透過 delete 刪除</span>
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(windows.<span class="hljs-property">a</span>); <span class="hljs-comment">// undefined</span>
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// Uncaught ReferenceError: a is not defined</span></code></pre>
+<p>有什麼口訣或技巧可以記嗎？<br><strong>當 null 與 undefined 只有在這兩者互相比較的時候結果為 true，其餘均為 false！！！</strong></p>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span>);       <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">null</span> == <span class="hljs-literal">null</span>);            <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-literal">undefined</span> == <span class="hljs-literal">undefined</span>);  <span class="hljs-comment">// true</span></code></pre>
 
-<pre><code class="hljs JS"><span class="hljs-keyword">var</span> a = <span class="hljs-string">&#x27;小白&#x27;</span>; <span class="hljs-comment">// 雖然是用「宣告的方式」，但 windows 物件底下還是會新增一個屬性叫做 a，</span>
-                <span class="hljs-comment">// 但透過「宣告的方式」所產生出來的屬性是無法利用 delete 運算子刪除的</span>
+<h3 id="物件與非物件的寬鬆比較規則"><a href="#物件與非物件的寬鬆比較規則" class="headerlink" title="物件與非物件的寬鬆比較規則"></a><span style="color:white; background-color: #2a2936; padding: 5px">物件與非物件的寬鬆比較規則</span></h3><p>當物件與物件進行寬鬆比較時，會以「記憶體位址」來進行比較，所以得到的結果皆為 false。<br>不過當物件與其他原始型別進行寬鬆比較時，會產生不同的結果，這邊有一個很重要的概念是：「物件型別與其他型別進行比較時，會透過<u>包裹物件</u>將物件轉換成相同的型別後再進行比較」。</p>
+<p>雖然都是提及物件，但是待會會用陣列當作範例。</p>
+<ol>
+<li><strong>陣列與數值型別進行比較</strong><br>當數值 10 與陣列 [10] 進行比較時，因為陣列屬於物件型別，因此會透過數值的 Number 包裹物件進行轉換，Number([10]) &#x3D; 10，轉換後的結果一樣為 10，所以比對結果為 true。</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-number">10</span>] == <span class="hljs-number">10</span>);    <span class="hljs-comment">// true</span></code></pre>
 
-<span class="hljs-keyword">delete</span> a; <span class="hljs-comment">// 無法透過 delete 刪除</span>
+<ol start="2">
+<li><strong>陣列與字串型別進行比較</strong><br>當陣列遇到字串型別時，會透過 String 包裹物件進行轉換，因此 [‘A’] 會轉為 ‘A’、[‘a’,’b’] 會轉為 ‘a,b’</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-string">&#x27;A&#x27;</span>] == <span class="hljs-string">&#x27;A&#x27;</span>);    <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>] == <span class="hljs-string">&#x27;a,b&#x27;</span>);    <span class="hljs-comment">// true</span></code></pre>
 
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(windows.<span class="hljs-property">a</span>); <span class="hljs-comment">//印出小白</span>
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 印出小白</span></code></pre>
+<ol start="3">
+<li><strong>例外狀況：陣列與布林型別進行比較</strong><br>當布林值與陣列進行比較時，布林值會被 Number 包裹物件轉型成數值 1</li>
+</ol>
+<p>任何物件透過 Boolean 包裹物件進行轉型，都會得到 true 的結果</p>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Boolean</span>([]));                <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Boolean</span>(&#123;&#125;));                <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Boolean</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">a</span>(<span class="hljs-params"></span>)&#123;&#125;));    <span class="hljs-comment">// true</span></code></pre>
 
-<p>沒使用宣告字宣告的變數 -&gt; 全域屬性，可用 delete 運算子刪除此屬性。<br>使用 var 宣告字宣告的變數 -&gt; 全域變數，無法使用 delete 運算子刪除。</p>
+<p>但是！！！下面的比對卻會得到 false</p>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([] == <span class="hljs-literal">true</span>);                <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(&#123;&#125; == <span class="hljs-literal">true</span>);                <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">a</span>(<span class="hljs-params"></span>)&#123;&#125; == <span class="hljs-literal">true</span>);    <span class="hljs-comment">// false</span></code></pre>
+
+<p>這是因為 true 被轉型了，當布林值與陣列進行比較時，布林值會被 Number 包裹物件轉型成數值 1，所以只有 [1] 才會得到 true，其他都會得到 false</p>
+<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-number">1</span>] == <span class="hljs-literal">true</span>);             <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-number">2</span>] == <span class="hljs-literal">true</span>);             <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-number">3</span>] == <span class="hljs-literal">true</span>);             <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(&#123;&#125; == <span class="hljs-literal">true</span>);              <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">function</span> <span class="hljs-title function_">a</span>(<span class="hljs-params"></span>)&#123;&#125; == <span class="hljs-literal">true</span>);  <span class="hljs-comment">// false</span></code></pre>
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>

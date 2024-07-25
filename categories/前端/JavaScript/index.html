@@ -6,18 +6,19 @@
   <meta name="keywords" content="">
   <meta name="description" content="Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="注意文章的標題是「原始型別的包裹物件」，因此接下來講的內容，都跟「原始型別」有關，但是與 null，undefined 無關。( 因為它們兩個沒有包裹物件 ) 為什麼原始型別的值可以呼叫方法？ 💡先講結論：因為 JavaScript 會自動將原始型別的值轉換成對應的「包裹物件」，進而呼叫物件中對應的方法。  在探討包裹物件之前，可以先思考一個問題，為什麼當你宣告一個 string 變數時，可以使">
+<meta name="description" content="描述map() 方法會將陣列中的所有元素，依序地傳入一次至 callback function 中，並以此 callback function 的回傳值來建構一個新的陣列。 如何使用使用 map() 方法時要傳入一個 callback function，該 function 可傳入三個參數：  currentValue (必要)原陣列目前迭代挑到的元素。 index (選擇性)原陣列目前迭代挑到的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="型別 2：原始型別的包裹物件 Primitive Wrapper Objects">
-<meta property="og:url" content="http://example.com/2024/07/20/%E5%9E%8B%E5%88%A5-2%EF%BC%9A%E5%8E%9F%E5%A7%8B%E5%9E%8B%E5%88%A5%E5%8C%85%E8%A3%B9%E7%89%A9%E4%BB%B6/index.html">
+<meta property="og:title" content="陣列方法：map()">
+<meta property="og:url" content="http://example.com/2024/07/25/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95%EF%BC%9Amap/index.html">
 <meta property="og:site_name" content="Eshiunm&#39;s Blog">
-<meta property="og:description" content="注意文章的標題是「原始型別的包裹物件」，因此接下來講的內容，都跟「原始型別」有關，但是與 null，undefined 無關。( 因為它們兩個沒有包裹物件 ) 為什麼原始型別的值可以呼叫方法？ 💡先講結論：因為 JavaScript 會自動將原始型別的值轉換成對應的「包裹物件」，進而呼叫物件中對應的方法。  在探討包裹物件之前，可以先思考一個問題，為什麼當你宣告一個 string 變數時，可以使">
+<meta property="og:description" content="描述map() 方法會將陣列中的所有元素，依序地傳入一次至 callback function 中，並以此 callback function 的回傳值來建構一個新的陣列。 如何使用使用 map() 方法時要傳入一個 callback function，該 function 可傳入三個參數：  currentValue (必要)原陣列目前迭代挑到的元素。 index (選擇性)原陣列目前迭代挑到的">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-20T12:30:56.000Z">
-<meta property="article:modified_time" content="2024-07-21T16:34:38.630Z">
+<meta property="article:published_time" content="2024-07-25T07:32:20.000Z">
+<meta property="article:modified_time" content="2024-07-25T16:35:00.185Z">
 <meta property="article:author" content="Eshiunm">
 <meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="型別">
+<meta property="article:tag" content="陣列">
+<meta property="article:tag" content="陣列方法">
 <meta name="twitter:card" content="summary">
 
 
@@ -91,7 +92,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(9)</small>
+                <small>(11)</small>
             
         </div>
     </li>
@@ -103,7 +104,7 @@
         <div data-rel="前端">
             <i class="fold iconfont icon-right"></i>
             前端
-            <small>(8)</small>
+            <small>(10)</small>
         </div>
         
             <ul class="sub hide">
@@ -113,7 +114,7 @@
         <div data-rel="前端&lt;---&gt;JavaScript">
             <i class="fold iconfont icon-right"></i>
             JavaScript
-            <small>(8)</small>
+            <small>(10)</small>
         </div>
         
             <ul class="sub hide">
@@ -134,7 +135,18 @@
         <div data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;型別">
             
             型別
-            <small>(2)</small>
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;陣列">
+            
+            陣列
+            <small>(1)</small>
         </div>
         
     </li>
@@ -149,6 +161,10 @@
         
     </li>
 
+            
+        
+    
+        
             
         
     
@@ -177,8 +193,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="9">
-<input type="hidden" id="yelog_site_word_count" value="3.8k">
+<input type="hidden" id="yelog_site_posts_number" value="11">
+<input type="hidden" id="yelog_site_word_count" value="5.7k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -232,6 +248,14 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>陣列</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>陣列方法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>JavaScript</a>
             </li>
         
@@ -245,6 +269,24 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 前端 JavaScript 陣列 "
+           href="/2024/07/25/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95%EF%BC%9Amap/"
+           data-tag="JavaScript,陣列,陣列方法"
+           data-author="" >
+            <span class="post-title" title="陣列方法：map()">陣列方法：map()</span>
+            <span class="post-date" title="2024-07-25 15:32:20">2024/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 JavaScript 型別 "
+           href="/2024/07/23/%E5%9E%8B%E5%88%A5-3%EF%BC%9A%E5%9E%8B%E5%88%A5%E6%AF%94%E8%BC%83/"
+           data-tag="JavaScript,型別"
+           data-author="" >
+            <span class="post-title" title="型別 3：型別比較">型別 3：型別比較</span>
+            <span class="post-date" title="2024-07-23 13:53:37">2024/07/23</span>
+        </a>
         
         
         <a  class="全部文章 前端 JavaScript 型別 "
@@ -348,7 +390,7 @@
         <article class="index">
             <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%8D%9A%E5%AE%A2%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">对博客的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8F%B6%E8%90%BD%E9%98%81"><span class="toc-text">关于叶落阁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%9C%E6%96%BC%E6%88%91"><span class="toc-text">關於我</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -361,29 +403,32 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="对博客的理解"><a href="#对博客的理解" class="headerlink" title="对博客的理解"></a>对博客的理解</h2><p>喜欢写Blog的人，会经历三个阶段。</p>
-<blockquote>
-<p>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</p>
-</blockquote>
-<blockquote>
-<p>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</p>
-</blockquote>
-<blockquote>
-<p>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
-</blockquote>
-<p>我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。</p>
-<p>通过博客，我们可以记录自己的生活和成长的轨迹。它不像 Twitter 那样碎片化，也不像 Facebook 那样关系化，它是私人的空间。</p>
-<h2 id="关于叶落阁"><a href="#关于叶落阁" class="headerlink" title="关于叶落阁"></a>关于叶落阁</h2><p><strong>叶落阁</strong> 是阁主（杨玉杰）的个人站。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题 <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
-<p><code>3-hexo</code> 主题使用交流可以加 Q群: <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e8cf083cc097141eaf323396f1766809b8e90ff00c67bb441898f672892f6904"><img data-ignore border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="3-hexo使用交流" title="3-hexo使用交流"></a></p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad&#x2F;手机等移动端适配</li>
-<li>页面全局快捷键 <a target="_blank" rel="noopener" href='http://yelog.org/2017/03/24/3-hexo-shortcuts/'>3-hexo快捷键说明</a></li>
-</ul>
+            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><!-- ## 对博客的理解
+
+喜欢写 Blog 的人，会经历三个阶段。
+
+> 第一阶段，刚接触 Blog，觉得很新鲜，试着选择一个免费空间来写。
+
+> 第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。
+
+> 第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。
+
+我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。
+
+通过博客，我们可以记录自己的生活和成长的轨迹。它不像 Twitter 那样碎片化，也不像 Facebook 那样关系化，它是私人的空间。 -->
+
+<h2 id="關於我"><a href="#關於我" class="headerlink" title="關於我"></a>關於我</h2><p>目前懶得寫自介</p>
+<p>到目前为止已經寫了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
+<p>本站訪問人數：<code class="site_uv"></code>人次 ， 訪問量：<code class="site_pv"></code>次</p>
+<!-- ## 博客平台
+这个博客通过 [Hexo](https://hexo.io/) 生成，部署在 [GitHub Pages](https://pages.github.com/)主题 [3-hexo](https://github.com/yelog/hexo-theme-3-hexo) 已经在github上开源
+
+`3-hexo` 主题使用交流可以加 Q群: <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e8cf083cc097141eaf323396f1766809b8e90ff00c67bb441898f672892f6904"><img data-ignore border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="3-hexo使用交流" title="3-hexo使用交流"></a>
+
+主要功能：
+- 搜索支持文章标题、标签(#标签)、作者(@作者)
+- pad/手机等移动端适配
+- 页面全局快捷键 <a target="_blank" rel="noopener" href='http://yelog.org/2017/03/24/3-hexo-shortcuts/'>3-hexo快捷键说明</a> -->
 
         </article>
         
