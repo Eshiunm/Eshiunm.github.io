@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>變數與作用域 4：TDZ | Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
-  <meta name="description" content="變數與作用域 4：TDZ | Eshiunm&#39;s Blog">
+  <title>陣列方法：filter() | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" JavaScript , 陣列 , 陣列方法 ">
+  <meta name="description" content="陣列方法：filter() | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="描述filter() 方法會將陣列中的所有元素，依序地傳入一次至 callback function 中，並將回傳值為 Truthy 的元素建構成一個新的陣列，也就是篩選出符合條件的元素出來，並將這些元素塞進一個新的陣列裡。 如何使用使用 filter() 方法時要傳入一個 callback function，該 function 可傳入三個參數：  currentValue (必要) ：原陣列目">
 <meta property="og:type" content="article">
@@ -405,9 +405,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-變數與作用域 4：TDZ" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-陣列方法：filter" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">變數與作用域 4：TDZ</h1>
+        <h1 class="article-title">陣列方法：filter()</h1>
     
     <div class="article-meta">
         
@@ -421,7 +421,7 @@
             
             <a  data-rel="前端&lt;---&gt;JavaScript">JavaScript</a> > 
             
-            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;變數與作用域">變數與作用域</a>
+            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;陣列">陣列</a>
             
         </span>
         
@@ -431,19 +431,21 @@
             
             <a class="color1">JavaScript</a>
             
-            <a class="color4">變數與作用域系列</a>
+            <a class="color3">陣列</a>
+            
+            <a class="color5">陣列方法</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-14 09:42:36'>2024-07-14 09:24</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-07-27 14:50:29'>2024-07-27 14:17</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:184</span>
+        <span>字數:340</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -473,7 +475,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-TDZ%EF%BC%88Temporal-dead-zone%EF%BC%89%EF%BC%9F"><span class="toc-text">什麼是 TDZ（Temporal dead zone）？</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B"><span class="toc-text">範例</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -489,13 +491,57 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什麼是-TDZ（Temporal-dead-zone）？"><a href="#什麼是-TDZ（Temporal-dead-zone）？" class="headerlink" title="什麼是 TDZ（Temporal dead zone）？"></a>什麼是 TDZ（Temporal dead zone）？</h2><blockquote>
-<p>💡<strong>先講結論</strong>：<br>意指 let 、const 宣告變數的「前方區域」，如果試圖在此區域取得值，則會出現 ReferenceError 的提示。</p>
-</blockquote>
-<p>在傳統的 var 宣告中，若是先取值再宣告並不會出錯，會出現「Undefined」。<br>但是在 let、const 宣告的情況下，先取值再宣告的話，會出現「Uncaught ReferenceError：Cannot access ‘xxx’ before initialization」(依瀏覽器版本可能出現不同訊息)，<br>也就是說 let、const 無法在初始化之前就取得該變數，因此開發者會很清楚不該這麼做~</p>
-<blockquote>
-<p>let、const 一樣有「提升」的概念，只是沒辦法存取裡面的值而已！<br>而 var 是出現「undefined」，可以存到值，只是值是 undefined。</p>
-</blockquote>
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><code>filter()</code> 方法會將陣列中的所有元素，依序地傳入一次至 callback function 中，並將回傳值為 Truthy 的元素建構成一個新的陣列，也就是篩選出符合條件的元素出來，並將這些元素塞進一個新的陣列裡。</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>使用 <code>filter()</code> 方法時要傳入一個 callback function，該 function 可傳入三個參數：</p>
+<ol>
+<li><strong>currentValue (必要)</strong> ：原陣列目前迭代挑到的元素。</li>
+<li><strong>index (選擇性)</strong> ：原陣列目前迭代挑到的元素的索引。</li>
+<li><strong>array (選擇性)</strong> ：原陣列本身。</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> newArr = arr.<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">currentValue, index, array</span>) =&gt;</span> &#123;
+  <span class="hljs-comment">// do something</span>
+&#125;)</code></pre>
+
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><ol>
+<li>過濾小於 10 的數字。</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isBigEnough</span>(<span class="hljs-params">value</span>) &#123;
+  <span class="hljs-keyword">return</span> value &gt;= <span class="hljs-number">10</span>;
+&#125;
+
+<span class="hljs-keyword">let</span> filtered = [<span class="hljs-number">12</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">130</span>, <span class="hljs-number">44</span>].<span class="hljs-title function_">filter</span>(isBigEnough);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(filtered); <span class="hljs-comment">// 12, 130, 44</span></code></pre>
+
+<ol start="2">
+<li>過濾 JSON 檔中無效的項目<br>以下範例會用 filter() 把 id 屬性為非數值型別的項目過濾掉。</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-keyword">var</span> arr = [
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">15</span> &#125;,
+  &#123; <span class="hljs-attr">id</span>: -<span class="hljs-number">1</span> &#125;,
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">0</span> &#125;,
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">3</span> &#125;,
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-number">12.2</span> &#125;,
+  &#123;&#125;,
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-literal">null</span> &#125;,
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-title class_">NaN</span> &#125;,
+  &#123; <span class="hljs-attr">id</span>: <span class="hljs-string">&quot;undefined&quot;</span> &#125;,
+];
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">isNumber</span>(<span class="hljs-params">obj</span>) &#123;
+  <span class="hljs-keyword">return</span> obj !== <span class="hljs-literal">undefined</span> &amp;&amp; <span class="hljs-keyword">typeof</span> obj === <span class="hljs-string">&quot;number&quot;</span> &amp;&amp; !<span class="hljs-built_in">isNaN</span>(obj);
+&#125;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">filterByID</span>(<span class="hljs-params">item</span>) &#123;
+  <span class="hljs-keyword">if</span> (<span class="hljs-title function_">isNumber</span>(item.<span class="hljs-property">id</span>)) &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  &#125;
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+&#125;
+
+<span class="hljs-keyword">var</span> arrByID = arr.<span class="hljs-title function_">filter</span>(filterByID);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;過濾好的陣列\n&quot;</span>, arrByID);
+<span class="hljs-comment">// 過濾好的陣列</span>
+<span class="hljs-comment">// [&#123; id: 15 &#125;, &#123; id: -1 &#125;, &#123; id: 0 &#125;, &#123; id: 3 &#125;, &#123; id: 12.2 &#125;]</span></code></pre>
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>

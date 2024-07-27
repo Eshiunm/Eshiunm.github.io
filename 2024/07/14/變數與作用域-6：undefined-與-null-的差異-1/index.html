@@ -6,15 +6,15 @@
   <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
   <meta name="description" content="變數與作用域 6：undefined 與 null 的差異 | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="描述reduce() 方法會針每一個目前迭代到的陣列元素 ( 空值除外 )，去執行 callback function，而 callback function 會接受 4 個參數：  accumulator ：累加器 ( 必填 ) currentValue ：目前迭代到的元素 ( 必填 ) index ：目前迭代到的元素的索引 ( 選擇性 ) array ：陣列本身 ( 選擇性 )  又其中 ac">
+<meta name="description" content="描述filter() 方法會將陣列中的所有元素，依序地傳入一次至 callback function 中，並將回傳值為 Truthy 的元素建構成一個新的陣列，也就是篩選出符合條件的元素出來，並將這些元素塞進一個新的陣列裡。 如何使用使用 filter() 方法時要傳入一個 callback function，該 function 可傳入三個參數：  currentValue (必要) ：原陣列目">
 <meta property="og:type" content="article">
-<meta property="og:title" content="陣列方法：reduce()">
-<meta property="og:url" content="http://example.com/2024/07/26/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95%EF%BC%9Areduce/index.html">
+<meta property="og:title" content="陣列方法：filter()">
+<meta property="og:url" content="http://example.com/2024/07/27/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95%EF%BC%9Afilter/index.html">
 <meta property="og:site_name" content="Eshiunm&#39;s Blog">
-<meta property="og:description" content="描述reduce() 方法會針每一個目前迭代到的陣列元素 ( 空值除外 )，去執行 callback function，而 callback function 會接受 4 個參數：  accumulator ：累加器 ( 必填 ) currentValue ：目前迭代到的元素 ( 必填 ) index ：目前迭代到的元素的索引 ( 選擇性 ) array ：陣列本身 ( 選擇性 )  又其中 ac">
+<meta property="og:description" content="描述filter() 方法會將陣列中的所有元素，依序地傳入一次至 callback function 中，並將回傳值為 Truthy 的元素建構成一個新的陣列，也就是篩選出符合條件的元素出來，並將這些元素塞進一個新的陣列裡。 如何使用使用 filter() 方法時要傳入一個 callback function，該 function 可傳入三個參數：  currentValue (必要) ：原陣列目">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-26T07:42:36.000Z">
-<meta property="article:modified_time" content="2024-07-27T06:04:26.377Z">
+<meta property="article:published_time" content="2024-07-27T06:17:42.000Z">
+<meta property="article:modified_time" content="2024-07-27T06:50:29.475Z">
 <meta property="article:author" content="Eshiunm">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="陣列">
@@ -92,7 +92,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(12)</small>
+                <small>(13)</small>
             
         </div>
     </li>
@@ -104,7 +104,7 @@
         <div data-rel="前端">
             <i class="fold iconfont icon-right"></i>
             前端
-            <small>(11)</small>
+            <small>(12)</small>
         </div>
         
             <ul class="sub hide">
@@ -114,7 +114,7 @@
         <div data-rel="前端&lt;---&gt;JavaScript">
             <i class="fold iconfont icon-right"></i>
             JavaScript
-            <small>(11)</small>
+            <small>(12)</small>
         </div>
         
             <ul class="sub hide">
@@ -146,7 +146,7 @@
         <div data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;陣列">
             
             陣列
-            <small>(2)</small>
+            <small>(3)</small>
         </div>
         
     </li>
@@ -193,8 +193,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="12">
-<input type="hidden" id="yelog_site_word_count" value="6.5k">
+<input type="hidden" id="yelog_site_posts_number" value="13">
+<input type="hidden" id="yelog_site_word_count" value="6.8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -269,6 +269,15 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 前端 JavaScript 陣列 "
+           href="/2024/07/27/%E9%99%A3%E5%88%97%E6%96%B9%E6%B3%95%EF%BC%9Afilter/"
+           data-tag="JavaScript,陣列,陣列方法"
+           data-author="" >
+            <span class="post-title" title="陣列方法：filter()">陣列方法：filter()</span>
+            <span class="post-date" title="2024-07-27 14:17:42">2024/07/27</span>
+        </a>
         
         
         <a  class="全部文章 前端 JavaScript 陣列 "
