@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>陣列方法：map() | Eshiunm&#39;s Blog</title>
+  <title>陣列方法：every() | Eshiunm&#39;s Blog</title>
   <meta name="keywords" content=" JavaScript , 陣列 , 陣列方法 ">
-  <meta name="description" content="陣列方法：map() | Eshiunm&#39;s Blog">
+  <meta name="description" content="陣列方法：every() | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="描述every() 方法會判斷所有元素是否都符合條件，在判斷過程中只要 callback function 回傳 false 就會停止遍歷，否則代表全部元素都符合條件，回傳 true。 如何使用使用 every() 方法時要傳入一個 callback function，該 function 可傳入三個參數：  currentValue (必要) ：原陣列目前迭代挑到的元素。 index (選擇性)">
 <meta property="og:type" content="article">
@@ -423,9 +423,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-陣列方法：map" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-陣列方法：every" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">陣列方法：map()</h1>
+        <h1 class="article-title">陣列方法：every()</h1>
     
     <div class="article-meta">
         
@@ -458,12 +458,12 @@
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-27 13:19:38'>2024-07-25 15:32</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-07-28 05:42:29'>2024-07-28 05:23</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:197</span>
+        <span>字數:239</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -509,30 +509,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><code>map()</code> 方法會將陣列中的所有元素，依序地傳入一次至 callback function 中，每一次的傳入都會 return 一個新的元素，並以此 callback function return 的所有新元素建構一個新的陣列。</p>
-<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>使用 <code>map()</code> 方法時要傳入一個 callback function，該 function 可傳入三個參數：</p>
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><code>every()</code> 方法會判斷所有元素是否都符合條件，在判斷過程中只要 callback function 回傳 <code>false</code> 就會停止遍歷，否則代表全部元素都符合條件，回傳 <code>true</code>。</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>使用 <code>every()</code> 方法時要傳入一個 callback function，該 function 可傳入三個參數：</p>
 <ol>
 <li><strong>currentValue (必要)</strong> ：原陣列目前迭代挑到的元素。</li>
 <li><strong>index (選擇性)</strong> ：原陣列目前迭代挑到的元素的索引。</li>
 <li><strong>array (選擇性)</strong> ：原陣列本身。</li>
 </ol>
-<pre><code class="hljs JS"><span class="hljs-keyword">let</span> newArr = arr.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">currentValue, index, array</span>) =&gt;</span> &#123;
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> newArr = arr.<span class="hljs-title function_">every</span>(<span class="hljs-function">(<span class="hljs-params">currentValue, index, array</span>) =&gt;</span> &#123;
   <span class="hljs-comment">// do something</span>
 &#125;)</code></pre>
 
 <h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><ol>
-<li>回傳元素的平方</li>
+<li>檢查陣列中的元素是否都大於 10</li>
 </ol>
-<pre><code class="hljs JS"><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
-<span class="hljs-keyword">let</span> newArr = arr.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item * item);
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(newArr); <span class="hljs-comment">// [1, 4, 9, 16, 25]</span></code></pre>
+<pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isBigEnough</span>(<span class="hljs-params">element, index, array</span>) &#123;
+  <span class="hljs-keyword">return</span> element &gt;= <span class="hljs-number">10</span>;
+&#125;
+[<span class="hljs-number">12</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">130</span>, <span class="hljs-number">44</span>].<span class="hljs-title function_">every</span>(isBigEnough); <span class="hljs-comment">// false</span>
+[<span class="hljs-number">12</span>, <span class="hljs-number">54</span>, <span class="hljs-number">18</span>, <span class="hljs-number">130</span>, <span class="hljs-number">44</span>].<span class="hljs-title function_">every</span>(isBigEnough); <span class="hljs-comment">// true</span></code></pre>
 
 <ol start="2">
-<li>將元素開根號</li>
+<li>判斷一個陣列中的元素是否為另一個陣列的子集</li>
 </ol>
-<pre><code class="hljs JS"><span class="hljs-keyword">var</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">9</span>];
-<span class="hljs-keyword">var</span> roots = numbers.<span class="hljs-title function_">map</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-property">sqrt</span>);
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(roots); <span class="hljs-comment">// [1, 2, 3]</span></code></pre>
+<pre><code class="hljs JS"><span class="hljs-keyword">const</span> <span class="hljs-title function_">isSubset</span> = (<span class="hljs-params">array1, array2</span>) =&gt;
+  array2.<span class="hljs-title function_">every</span>(<span class="hljs-function">(<span class="hljs-params">element</span>) =&gt;</span> array1.<span class="hljs-title function_">includes</span>(element));
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">isSubset</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">6</span>])); <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">isSubset</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span>])); <span class="hljs-comment">// false</span></code></pre>
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>
