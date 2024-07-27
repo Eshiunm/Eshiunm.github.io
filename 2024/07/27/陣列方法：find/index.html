@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>變數與作用域 5：undefined &amp; is not defined | Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
-  <meta name="description" content="變數與作用域 5：undefined &amp; is not defined | Eshiunm&#39;s Blog">
+  <title>陣列方法：find() | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" JavaScript , 陣列 , 陣列方法 ">
+  <meta name="description" content="陣列方法：find() | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="描述find() 方法會回傳第一個滿足條件的元素 ( 只回傳一個元素 )，否則會回傳 undefined。 如何使用使用 find() 方法時要傳入一個 callback function，該 function 可傳入三個參數：  currentValue (必要) ：原陣列目前迭代挑到的元素。 index (選擇性) ：原陣列目前迭代挑到的元素的索引。 array (選擇性) ：原陣列本身。">
 <meta property="og:type" content="article">
@@ -414,9 +414,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="posts-變數與作用域-5：undefined-is-not-defined" class="article article-type-posts" itemscope itemprop="blogPost">
+        <article id="post-陣列方法：find" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">變數與作用域 5：undefined &amp; is not defined</h1>
+        <h1 class="article-title">陣列方法：find()</h1>
     
     <div class="article-meta">
         
@@ -430,7 +430,7 @@
             
             <a  data-rel="前端&lt;---&gt;JavaScript">JavaScript</a> > 
             
-            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;變數與作用域">變數與作用域</a>
+            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;陣列">陣列</a>
             
         </span>
         
@@ -440,19 +440,21 @@
             
             <a class="color1">JavaScript</a>
             
-            <a class="color4">變數與作用域系列</a>
+            <a class="color3">陣列</a>
+            
+            <a class="color5">陣列方法</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-14 10:00:40'>2024-07-14 09:52</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-07-27 22:58:24'>2024-07-27 22:40</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:233</span>
+        <span>字數:239</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -482,7 +484,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined-is-not-defined-%E5%85%A9%E8%80%85%E4%B9%8B%E9%96%93%E7%9A%84%E5%B7%AE%E5%88%A5%EF%BC%9F"><span class="toc-text">undefined &amp; is not defined 兩者之間的差別？</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B"><span class="toc-text">範例</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -498,39 +500,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="undefined-is-not-defined-兩者之間的差別？"><a href="#undefined-is-not-defined-兩者之間的差別？" class="headerlink" title="undefined &amp; is not defined 兩者之間的差別？"></a>undefined &amp; is not defined 兩者之間的差別？</h2><blockquote>
-<p>💡<strong>先講結論</strong>：<br>undefined 是一個變數尚未被賦予值的狀態。<br>「is not defined」是一個<font color=#FF0000>錯誤</font>訊息，會直接中斷程式碼執行。</p>
-</blockquote>
-<ul>
-<li>is not defined 的例子</li>
-</ul>
-<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);<span class="hljs-comment">// Uncaught ReferenceError: myName is not defined</span></code></pre>
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><code>find()</code> 方法會回傳第一個滿足條件的元素 ( 只回傳一個元素 )，否則會回傳 <code>undefined</code>。</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>使用 <code>find()</code> 方法時要傳入一個 callback function，該 function 可傳入三個參數：</p>
+<ol>
+<li><strong>currentValue (必要)</strong> ：原陣列目前迭代挑到的元素。</li>
+<li><strong>index (選擇性)</strong> ：原陣列目前迭代挑到的元素的索引。</li>
+<li><strong>array (選擇性)</strong> ：原陣列本身。</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> newArr = arr.<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">currentValue, index, array</span>) =&gt;</span> &#123;
+  <span class="hljs-comment">// do something</span>
+&#125;)</code></pre>
 
-<ul>
-<li>undefined 的例子</li>
-</ul>
-<pre><code class="hljs JS"><span class="hljs-number">1.</span>
-  <span class="hljs-keyword">var</span> myName;
-  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><ol>
+<li>在陣列中查找某個符合條件的物件元素。</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-keyword">let</span> inventory = [
+  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;apples&quot;</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">2</span> &#125;,
+  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;bananas&quot;</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">0</span> &#125;,
+  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;cherries&quot;</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">5</span> &#125;,
+];
 
-<span class="hljs-number">2.</span>
-  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName);
-  <span class="hljs-keyword">var</span> myName;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">isCherries</span>(<span class="hljs-params">fruit</span>) &#123;
+  <span class="hljs-keyword">return</span> fruit.<span class="hljs-property">name</span> === <span class="hljs-string">&quot;cherries&quot;</span>;
+&#125;
 
-<span class="hljs-number">3.</span>
-  <span class="hljs-keyword">var</span> person = &#123;&#125;;
-  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">name</span>); <span class="hljs-comment">// 印出物件中沒有的屬性也會顯示 undefined (避免程式直接中斷，算是一種保護機制)</span>
-  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">name</span>.<span class="hljs-property">first</span>) <span class="hljs-comment">// 但是若想取得更深層的屬性，就會跳出下面的錯誤，</span>
-  															 <span class="hljs-comment">// Uncaught TypeError: Cannot read properties of undefined (reading &#x27;first&#x27;)</span>
-  <span class="hljs-comment">/*</span>
-<span class="hljs-comment">  以下兩個例子可以檢視欲存取的屬性值在不在</span>
-<span class="hljs-comment">  1.</span>
-<span class="hljs-comment">    if(person.hasOwnProperty(&#x27;name&#x27;))&#123; // 如果有 name 這個屬性</span>
-<span class="hljs-comment">    	console.log(person.name.first);  // 才針對更深層的屬性取值</span>
-<span class="hljs-comment">    &#125;</span>
-<span class="hljs-comment">  2.</span>
-<span class="hljs-comment">    console.log(person?.name?.first); // 可選串連，會取得 undefined 的結果，不會出錯</span>
-<span class="hljs-comment">  */</span></code></pre>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(inventory.<span class="hljs-title function_">find</span>(isCherries));
+<span class="hljs-comment">// &#123; name: &#x27;cherries&#x27;, quantity: 5 &#125;</span></code></pre>
+
+<ol start="2">
+<li>在陣列中找質數</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isPrime</span>(<span class="hljs-params">element, index, array</span>) &#123;
+  <span class="hljs-keyword">var</span> start = <span class="hljs-number">2</span>;
+  <span class="hljs-keyword">while</span> (start &lt;= <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">sqrt</span>(element)) &#123;
+    <span class="hljs-keyword">if</span> (element % start++ &lt; <span class="hljs-number">1</span>) &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    &#125;
+  &#125;
+  <span class="hljs-keyword">return</span> element &gt; <span class="hljs-number">1</span>;
+&#125;
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">12</span>].<span class="hljs-title function_">find</span>(isPrime)); <span class="hljs-comment">// undefined, not found</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">12</span>].<span class="hljs-title function_">find</span>(isPrime)); <span class="hljs-comment">// 5</span></code></pre>
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>
