@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>變數與作用域 1：全域變數 &amp; 全域屬性 | Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
-  <meta name="description" content="變數與作用域 1：全域變數 &amp; 全域屬性 | Eshiunm&#39;s Blog">
+  <title>陣列方法：reduce() | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" JavaScript , 陣列 , 陣列方法 ">
+  <meta name="description" content="陣列方法：reduce() | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="描述reduce() 方法會針每一個目前迭代到的陣列元素 ( 空值除外 )，去執行 callback function，而 callback function 會接受 4 個參數：  accumulator ：累加器 ( 必填 ) currentValue ：目前迭代到的元素 ( 必填 ) index ：目前迭代到的元素的索引 ( 選擇性 ) array ：陣列本身 ( 選擇性 )  又其中 ac">
 <meta property="og:type" content="article">
@@ -396,9 +396,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-變數與作用域 1：全域變數 &amp; 全域屬性" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-陣列方法：reduce" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">變數與作用域 1：全域變數 &amp; 全域屬性</h1>
+        <h1 class="article-title">陣列方法：reduce()</h1>
     
     <div class="article-meta">
         
@@ -412,7 +412,7 @@
             
             <a  data-rel="前端&lt;---&gt;JavaScript">JavaScript</a> > 
             
-            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;變數與作用域">變數與作用域</a>
+            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;陣列">陣列</a>
             
         </span>
         
@@ -422,19 +422,21 @@
             
             <a class="color1">JavaScript</a>
             
-            <a class="color4">變數與作用域系列</a>
+            <a class="color3">陣列</a>
+            
+            <a class="color5">陣列方法</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-14 09:41:30'>2024-07-12 22:08</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-07-27 14:04:26'>2024-07-26 15:42</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:461</span>
+        <span>字數:720</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -464,7 +466,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E8%AE%8A%E6%95%B8%E9%9C%80%E8%A6%81%E5%AE%A3%E5%91%8A%EF%BC%9F%E8%83%BD%E4%B8%8D%E5%AE%A3%E5%91%8A%E7%9B%B4%E6%8E%A5%E7%94%A8%E5%97%8E%EF%BC%9F"><span class="toc-text">為什麼變數需要宣告？能不宣告直接用嗎？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%A3%E8%AE%8A%E6%95%B8%E8%88%87%E5%B1%AC%E6%80%A7%E7%9A%84%E5%B7%AE%E7%95%B0%E7%82%BA%E4%BD%95%EF%BC%9F"><span class="toc-text">那變數與屬性的差異為何？</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B"><span class="toc-text">範例</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -480,43 +482,137 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="為什麼變數需要宣告？能不宣告直接用嗎？"><a href="#為什麼變數需要宣告？能不宣告直接用嗎？" class="headerlink" title="為什麼變數需要宣告？能不宣告直接用嗎？"></a>為什麼變數需要宣告？能不宣告直接用嗎？</h2><blockquote>
-<p>💡<strong>先講結論</strong>：<br>沒有透過「宣告」產生出來的變數，會是一個「全域的 windows 物件底下的一個屬性」。</p>
-</blockquote>
-<p>變數如果不透過 var、let 、const 宣告的話，會變成一個名為 windwos 物件底下的一個屬性，<br>該屬性是一個全域屬性！<br>範例：</p>
-<pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fn1</span>(<span class="hljs-params"></span>)&#123;
-    <span class="hljs-comment">// 注意，a 變數並沒有透過 var、let、const 來宣告，</span>
-    <span class="hljs-comment">// 卻可以被底下的 fn2() 所使用</span>
-    a = <span class="hljs-string">&#x27;小明&#x27;</span>;
-&#125;
+        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><code>reduce()</code> 方法會針每一個目前迭代到的陣列元素 ( 空值除外 )，去執行 callback function，而 callback function 會接受 4 個參數：</p>
+<ul>
+<li><strong>accumulator</strong> ：累加器 ( 必填 )</li>
+<li><strong>currentValue</strong> ：目前迭代到的元素 ( 必填 )</li>
+<li><strong>index</strong> ：目前迭代到的元素的索引 ( 選擇性 )</li>
+<li><strong>array</strong> ：陣列本身 ( 選擇性 )</li>
+</ul>
+<p>又其中 <code>accumulator</code> 與 <code>currentValue</code> 的初始值會有兩種不同的情況，呼叫 <code>reduce()</code> 時，有無提供 <code>initialValue</code>？（建議都要提供 <code>initialValue</code>，比較安全，可參考 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#%E6%8F%8F%E8%BF%B0">MDN Array.prototype.reduce()</a>）</p>
+<ol>
+<li><p>有提供 <code>initialValue</code>，則 <code>accumulator</code> 一開始的值會等於 <code>initialValue</code>，<code>currentValue</code> 會等於陣列中的第一個元素值。</p>
+</li>
+<li><p>未提供 <code>initialValue</code>，則 <code>accumulator</code> 一開始的值會等於陣列中的第一個元素值，<code>currentValue</code> 會等於陣列中的第二個元素值。</p>
+</li>
+</ol>
+<p>然後在每一次迭代中，callback function 執行完後都會吐一個值，此值會成為下一次迭代的 <code>accumulator</code>的值。</p>
+<p>當所有迭代都完成後，最後一次吐出來的 <code>accumulator</code> 的值，會是一個「加總」、「集合」等等。</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>使用 <code>reduce()</code> 方法時可以帶入一個 <code>initialValue</code> 以及要傳入一個 callback function，該 function 可傳入四個參數：</p>
+<ul>
+<li><strong>accumulator</strong> ：累加器 ( 必填 )</li>
+<li><strong>currentValue</strong> ：目前迭代到的元素 ( 必填 )</li>
+<li><strong>index</strong> ：目前迭代到的元素的索引 ( 選擇性 )</li>
+<li><strong>array</strong> ：陣列本身 ( 選擇性 )</li>
+</ul>
+<pre><code class="hljs JS"><span class="hljs-comment">// 傳統函式 ( 此例未提供 initialValue )</span>
+[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>].<span class="hljs-title function_">reduce</span>(
+  <span class="hljs-keyword">function</span> (<span class="hljs-params">accumulator, currentValue, currentIndex, array</span>) &#123;
+    <span class="hljs-keyword">return</span> accumulator + currentValue;
+  &#125;,
+);
 
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">fn2</span>(<span class="hljs-params"></span>)&#123;
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a);
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(windows.<span class="hljs-property">a</span>)<span class="hljs-comment">// 實際上這個 a 變數是 winsows 物件下的一個屬性</span>
-&#125;
+<span class="hljs-comment">// 箭頭函式 ( 此例有提供 initialValue， initialValue 值為 10)</span>
+[<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>].<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">accumulator, currentValue, currentIndex, array</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> accumulator + currentValue;
+&#125;, <span class="hljs-number">10</span>);</code></pre>
 
-<span class="hljs-title function_">fn1</span>(); <span class="hljs-comment">// 呼叫 fn1()，產生一個具全域屬性 a</span>
-<span class="hljs-title function_">fn2</span>(); <span class="hljs-comment">// 呼叫 fn2()，印出兩次小明</span></code></pre>
+<p>將上述的箭頭函式的例子，攤開每一次迭代的狀況，就如下表格：</p>
+<table>
+<thead>
+<tr>
+<th>callback 次數</th>
+<th>accumulator</th>
+<th>currentValue</th>
+<th>currentIndex</th>
+<th>array</th>
+<th>return value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>first</td>
+<td>10</td>
+<td>2</td>
+<td>0</td>
+<td>[2, 4, 6, 8, 10]</td>
+<td>10 + 2 &#x3D; 12</td>
+</tr>
+<tr>
+<td>second</td>
+<td>12</td>
+<td>4</td>
+<td>1</td>
+<td>[2, 4, 6, 8, 10]</td>
+<td>10 + 4 &#x3D; 14</td>
+</tr>
+<tr>
+<td>third</td>
+<td>14</td>
+<td>6</td>
+<td>2</td>
+<td>[2, 4, 6, 8, 10]</td>
+<td>14 + 6 &#x3D; 20</td>
+</tr>
+<tr>
+<td>fourth</td>
+<td>20</td>
+<td>8</td>
+<td>3</td>
+<td>[2, 4, 6, 8, 10]</td>
+<td>20 + 8 &#x3D; 28</td>
+</tr>
+<tr>
+<td>fifth</td>
+<td>28</td>
+<td>10</td>
+<td>4</td>
+<td>[2, 4, 6, 8, 10]</td>
+<td>28 + 10 &#x3D; 38</td>
+</tr>
+</tbody></table>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><ol>
+<li>加總所有陣列之元素值</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-comment">// 傳統函式</span>
+[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>].<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">accumulator, currentValue, currentIndex, array</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> accumulator + currentValue;
+&#125;, <span class="hljs-number">0</span>);
+<span class="hljs-comment">// 0 + 0 + 1 + 2 + 3 + 4 = 10，sum = 10。</span>
 
-<p>這種沒有透過「宣告」的方式所產生出來的變數，會因為是一個全域屬性的關係，容易被汙染，進而難以 debug。</p>
-<h2 id="那變數與屬性的差異為何？"><a href="#那變數與屬性的差異為何？" class="headerlink" title="那變數與屬性的差異為何？"></a>那變數與屬性的差異為何？</h2><blockquote>
-<p>💡<strong>先講結論</strong>：<br>差異就是只有「屬性」才可以使用 delete 運算子刪除 。</p>
-</blockquote>
-<p>範例：</p>
-<pre><code class="hljs JS">a = <span class="hljs-string">&#x27;小白&#x27;</span>; <span class="hljs-comment">//因為沒有用宣告字，所以會在 windows 物件底下會新增一個屬性叫做 a</span>
-<span class="hljs-keyword">delete</span> a; <span class="hljs-comment">// a 是一個全域屬性，可透過 delete 刪除</span>
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(windows.<span class="hljs-property">a</span>); <span class="hljs-comment">// undefined</span>
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// Uncaught ReferenceError: a is not defined</span></code></pre>
+<span class="hljs-comment">// 箭頭函式</span>
+[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>].<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">accumulator, currentValue, currentIndex, array</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">return</span> accumulator + currentValue;
+&#125;, <span class="hljs-number">0</span>);
+<span class="hljs-comment">// 0 + 0 + 1 + 2 + 3 + 4 = 10，sum = 10。</span></code></pre>
 
-<pre><code class="hljs JS"><span class="hljs-keyword">var</span> a = <span class="hljs-string">&#x27;小白&#x27;</span>; <span class="hljs-comment">// 雖然是用「宣告的方式」，但 windows 物件底下還是會新增一個屬性叫做 a，</span>
-                <span class="hljs-comment">// 但透過「宣告的方式」所產生出來的屬性是無法利用 delete 運算子刪除的</span>
+<ol start="2">
+<li>計算陣列中每個元素的重複次數，並以物件的形式顯示</li>
+</ol>
+<pre><code class="hljs JS"><span class="hljs-comment">// 傳統函式</span>
+<span class="hljs-keyword">let</span> names = [<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-string">&quot;Tiff&quot;</span>, <span class="hljs-string">&quot;Bruce&quot;</span>, <span class="hljs-string">&quot;Alice&quot;</span>];
 
-<span class="hljs-keyword">delete</span> a; <span class="hljs-comment">// 無法透過 delete 刪除</span>
+<span class="hljs-keyword">let</span> countedNames = names.<span class="hljs-title function_">reduce</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">allNames, name</span>) &#123;
+  <span class="hljs-keyword">if</span> (name <span class="hljs-keyword">in</span> allNames) &#123;
+    allNames[name]++;
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    allNames[name] = <span class="hljs-number">1</span>;
+  &#125;
+  <span class="hljs-keyword">return</span> allNames;
+&#125;, &#123;&#125;);
+<span class="hljs-comment">// countedNames is: &#123; &#x27;Alice&#x27;: 2, &#x27;Bob&#x27;: 1, &#x27;Tiff&#x27;: 1, &#x27;Bruce&#x27;: 1 &#125;</span>
 
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(windows.<span class="hljs-property">a</span>); <span class="hljs-comment">//印出小白</span>
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">// 印出小白</span></code></pre>
+<span class="hljs-comment">// 箭頭函式</span>
+<span class="hljs-keyword">let</span> names = [<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-string">&quot;Tiff&quot;</span>, <span class="hljs-string">&quot;Bruce&quot;</span>, <span class="hljs-string">&quot;Alice&quot;</span>];
 
-<p>沒使用宣告字宣告的變數 -&gt; 全域屬性，可用 delete 運算子刪除此屬性。<br>使用 var 宣告字宣告的變數 -&gt; 全域變數，無法使用 delete 運算子刪除。</p>
+<span class="hljs-keyword">let</span> countedNames = names.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">allNames, name</span>) =&gt;</span> &#123;
+  <span class="hljs-keyword">if</span> (name <span class="hljs-keyword">in</span> allNames) &#123;
+    allNames[name]++;
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    allNames[name] = <span class="hljs-number">1</span>;
+  &#125;
+  <span class="hljs-keyword">return</span> allNames;
+&#125;, &#123;&#125;);
+<span class="hljs-comment">// countedNames is: &#123; &#x27;Alice&#x27;: 2, &#x27;Bob&#x27;: 1, &#x27;Tiff&#x27;: 1, &#x27;Bruce&#x27;: 1 &#125;</span></code></pre>
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>
