@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>陣列方法：find() | Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content=" JavaScript , 陣列 , 陣列方法 ">
-  <meta name="description" content="陣列方法：find() | Eshiunm&#39;s Blog">
+  <title>C# 中的 static | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" C# ">
+  <meta name="description" content="C# 中的 static | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="一些 static 的觀念(尚未整理的筆記)static 怎麼用？static 是一個 C# 中的修飾字，主要用在「類別」上，但是是用在類別的哪裡？可以用在類別本身，也可以用在類別中的成員。 當 static 用在類別身上時當一個類別在 C# 中被宣告為靜態類別時，有一些特性和限制：  無法實例化：靜態類別不能被實例化，這意味著不能使用 new 關鍵字創建該類別的物件。 成員只能是靜態成員：靜態類">
 <meta property="og:type" content="article">
@@ -524,9 +524,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-陣列方法：find" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-C-中的-static" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">陣列方法：find()</h1>
+        <h1 class="article-title">C# 中的 static</h1>
     
     <div class="article-meta">
         
@@ -536,11 +536,11 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="前端">前端</a> > 
+            <a  data-rel="後端">後端</a> > 
             
-            <a  data-rel="前端&lt;---&gt;JavaScript">JavaScript</a> > 
+            <a  data-rel="後端&lt;---&gt;C#">C#</a> > 
             
-            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;陣列">陣列</a>
+            <a  data-rel="後端&lt;---&gt;C#&lt;---&gt;型別">型別</a>
             
         </span>
         
@@ -548,23 +548,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color1">JavaScript</a>
-            
-            <a class="color3">陣列</a>
-            
-            <a class="color5">陣列方法</a>
+            <a class="color3">C#</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-28 05:33:04'>2024-07-27 22:40</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-08-08 01:33:10'>2024-08-07 19:56</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:250</span>
+        <span>字數:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -594,7 +590,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B"><span class="toc-text">範例</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B-static-%E7%9A%84%E8%A7%80%E5%BF%B5-%E5%B0%9A%E6%9C%AA%E6%95%B4%E7%90%86%E7%9A%84%E7%AD%86%E8%A8%98"><span class="toc-text">一些 static 的觀念(尚未整理的筆記)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#static-%E6%80%8E%E9%BA%BC%E7%94%A8%EF%BC%9F"><span class="toc-text">static 怎麼用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%95%B6-static-%E7%94%A8%E5%9C%A8%E9%A1%9E%E5%88%A5%E8%BA%AB%E4%B8%8A%E6%99%82"><span class="toc-text">當 static 用在類別身上時</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%95%B6-static-%E7%94%A8%E5%9C%A8%E9%A1%9E%E5%88%A5%E4%B8%AD%E7%9A%84%E6%88%90%E5%93%A1%E6%99%82"><span class="toc-text">當 static 用在類別中的成員時</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -610,48 +606,137 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><code>find()</code> 方法會回傳第一個滿足條件的元素 ( 只回傳一個元素 )，否則會回傳 <code>undefined</code>。</p>
-<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>使用 <code>find()</code> 方法時要傳入一個 callback function，該 function 可傳入三個參數：</p>
+        <h1 id="一些-static-的觀念-尚未整理的筆記"><a href="#一些-static-的觀念-尚未整理的筆記" class="headerlink" title="一些 static 的觀念(尚未整理的筆記)"></a>一些 static 的觀念(尚未整理的筆記)</h1><h2 id="static-怎麼用？"><a href="#static-怎麼用？" class="headerlink" title="static 怎麼用？"></a>static 怎麼用？</h2><p><code>static</code> 是一個 C# 中的修飾字，主要用在「類別」上，但是是用在類別的哪裡？<br>可以用在類別本身，也可以用在類別中的成員。</p>
+<h2 id="當-static-用在類別身上時"><a href="#當-static-用在類別身上時" class="headerlink" title="當 static 用在類別身上時"></a>當 static 用在類別身上時</h2><p>當一個類別在 C# 中被宣告為靜態類別時，有一些特性和限制：</p>
 <ol>
-<li><strong>currentValue (必要)</strong> ：原陣列目前迭代挑到的元素。</li>
-<li><strong>index (選擇性)</strong> ：原陣列目前迭代挑到的元素的索引。</li>
-<li><strong>array (選擇性)</strong> ：原陣列本身。</li>
+<li>無法實例化：靜態類別不能被實例化，這意味著不能使用 <code>new</code> 關鍵字創建該類別的物件。</li>
+<li>成員只能是靜態成員：靜態類別只能包含靜態成員，如靜態方法、靜態屬性，不能包含非靜態成員。</li>
+<li>本身有密封性（Sealed）：這意味著不能被繼承。</li>
+<li>不能有非靜態建構函式：但可以有靜態建構函式。</li>
+<li>不能實作介面：由於靜態類別不能被實例化，所以它不能實作任何介面。</li>
+<li>直接透過類別名稱存取：靜態類別的成員可以直接透過類別名稱來存取，不需要實例化。</li>
+<li>生命週期：靜態類別的成員在應用程式域的整個生命週期內都存活。</li>
 </ol>
-<pre><code class="hljs JS"><span class="hljs-keyword">let</span> newArr = arr.<span class="hljs-title function_">find</span>(<span class="hljs-function">(<span class="hljs-params">currentValue, index, array</span>) =&gt;</span> &#123;
-  <span class="hljs-comment">// do something</span>
-&#125;)</code></pre>
+<p>以下是一個靜態類別的例子：</p>
+<pre><code class="hljs c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MathUtilities</span>
+&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">readonly</span> <span class="hljs-built_in">double</span> PI = <span class="hljs-number">3.14159</span>;
 
-<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><ol>
-<li>在陣列中查找某個符合條件的物件元素。</li>
-</ol>
-<pre><code class="hljs JS"><span class="hljs-keyword">let</span> inventory = [
-  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;apples&quot;</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">2</span> &#125;,
-  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;bananas&quot;</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">0</span> &#125;,
-  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;cherries&quot;</span>, <span class="hljs-attr">quantity</span>: <span class="hljs-number">5</span> &#125;,
-];
-
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">isCherries</span>(<span class="hljs-params">fruit</span>) &#123;
-  <span class="hljs-keyword">return</span> fruit.<span class="hljs-property">name</span> === <span class="hljs-string">&quot;cherries&quot;</span>;
-&#125;
-
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(inventory.<span class="hljs-title function_">find</span>(isCherries));
-<span class="hljs-comment">// &#123; name: &#x27;cherries&#x27;, quantity: 5 &#125;</span></code></pre>
-
-<ol start="2">
-<li>在陣列中找質數</li>
-</ol>
-<pre><code class="hljs JS"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isPrime</span>(<span class="hljs-params">element, index, array</span>) &#123;
-  <span class="hljs-keyword">var</span> start = <span class="hljs-number">2</span>;
-  <span class="hljs-keyword">while</span> (start &lt;= <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">sqrt</span>(element)) &#123;
-    <span class="hljs-keyword">if</span> (element % start++ &lt; <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">/* start 變數會在判斷完後才 + 1 */</span>
-      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">double</span> <span class="hljs-title">CalculateCircleArea</span>(<span class="hljs-params"><span class="hljs-built_in">double</span> radius</span>)</span>
+    &#123;
+        <span class="hljs-keyword">return</span> PI * radius * radius;
     &#125;
-  &#125;
-  <span class="hljs-keyword">return</span> element &gt; <span class="hljs-number">1</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> <span class="hljs-title">Add</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> a, <span class="hljs-built_in">int</span> b</span>)</span>
+    &#123;
+        <span class="hljs-keyword">return</span> a + b;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-title">MathUtilities</span>()</span>
+    &#123;
+        <span class="hljs-comment">// 靜態建構函式，在類別第一次被使用時會執行</span>
+        Console.WriteLine(<span class="hljs-string">&quot;MathUtilities initialized&quot;</span>);
+    &#125;
 &#125;
 
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">12</span>].<span class="hljs-title function_">find</span>(isPrime)); <span class="hljs-comment">// undefined, not found</span>
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">12</span>].<span class="hljs-title function_">find</span>(isPrime)); <span class="hljs-comment">// 5</span></code></pre>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+&#123;
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] args</span>)</span>
+    &#123;
+      <span class="hljs-comment">// 使用靜態類別，不用 new 出來，直接使用</span>
+      <span class="hljs-built_in">double</span> area = MathUtilities.CalculateCircleArea(<span class="hljs-number">5</span>);
+
+      <span class="hljs-built_in">int</span> sum = MathUtilities.Add(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>);
+
+      Console.WriteLine(<span class="hljs-string">$&quot;Circle Area: <span class="hljs-subst">&#123;area&#125;</span>&quot;</span>);
+      Console.WriteLine(<span class="hljs-string">$&quot;Sum: <span class="hljs-subst">&#123;sum&#125;</span>&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">  輸出結果：</span>
+<span class="hljs-comment">  MathUtilities initialized</span>
+<span class="hljs-comment">  Circle Area: 78.53975</span>
+<span class="hljs-comment">  Sum: 7</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+<h2 id="當-static-用在類別中的成員時"><a href="#當-static-用在類別中的成員時" class="headerlink" title="當 static 用在類別中的成員時"></a>當 static 用在類別中的成員時</h2><p>當一個非靜態類別中包含靜態成員時，有一些特別的情況要考慮：</p>
+<ol>
+<li>類別中含有靜態成員跟非靜態成員：<br>靜態成員屬於類別本身，而非靜態成員則屬於實例化後的物件。</li>
+<li>靜態成員的存取：<br>靜態成員可以直接通過類別名稱存取，不需要創建類別的實例。<br>非靜態成員則需要實例化後才可以存取。</li>
+<li>記憶體管理：<br>靜態成員在應用程式啟動時就會被分配到記憶體，並在整個應用程式生命週期中存在。<br>非靜態成員只有在實例化後，成為物件時才分配記憶體，並隨著物件被銷毀而釋放。</li>
+<li>靜態成員會被共享：<br>靜態成員會在所有實例化後的物件之間被共享，可以用來存儲或處理需要共用的數據。</li>
+<li>初始化順序：<br>靜態成員在類別第一次被使用時就會初始化。<br>如果類別有靜態構造函數(建構子)，它會在任何靜態成員被存取之前，或任何實例被創造之前執行。</li>
+<li>在實例中可以被存取：<br>非靜態方法可以直接存取靜態成員，但靜態方法不能直接存取非靜態成員。</li>
+</ol>
+<p>以下是一個靜態成員的例子：</p>
+<pre><code class="hljs C#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Counter</span>
+&#123;
+    <span class="hljs-comment">// 靜態成員</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> totalCount = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">int</span> TotalInstances =&gt; totalCount;
+
+    <span class="hljs-comment">// 實例成員</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> ID &#123; <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; &#125;
+
+    <span class="hljs-comment">// 靜態構造函數</span>
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-title">Counter</span>()</span>
+    &#123;
+        Console.WriteLine(<span class="hljs-string">&quot;Static constructor called&quot;</span>);
+    &#125;
+
+    <span class="hljs-comment">// 實例構造函數</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Counter</span>()</span>
+    &#123;
+        ID = ++totalCount;
+        Console.WriteLine(<span class="hljs-string">$&quot;Instance <span class="hljs-subst">&#123;ID&#125;</span> created&quot;</span>);
+    &#125;
+
+    <span class="hljs-comment">// 靜態方法</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ResetCount</span>()</span>
+    &#123;
+        totalCount = <span class="hljs-number">0</span>;
+    &#125;
+
+    <span class="hljs-comment">// 實例方法</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">DisplayInfo</span>()</span>
+    &#123;
+        Console.WriteLine(<span class="hljs-string">$&quot;This is instance <span class="hljs-subst">&#123;ID&#125;</span> out of <span class="hljs-subst">&#123;totalCount&#125;</span> total instances&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+&#123;
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] args</span>)</span>
+    &#123;
+        <span class="hljs-comment">// 靜態建構子會先被呼叫後，才執行靜態成員，這邊呼叫到的是「TotalInstances」這個靜態屬性</span>
+        Console.WriteLine(<span class="hljs-string">$&quot;Total instances before creating any: <span class="hljs-subst">&#123;Counter.TotalInstances&#125;</span>&quot;</span>);
+
+        Counter c1 = <span class="hljs-keyword">new</span> Counter();
+        Counter c2 = <span class="hljs-keyword">new</span> Counter();
+
+        c1.DisplayInfo();
+        c2.DisplayInfo();
+
+        Console.WriteLine(<span class="hljs-string">$&quot;Total instances: <span class="hljs-subst">&#123;Counter.TotalInstances&#125;</span>&quot;</span>);
+
+        Counter.ResetCount();
+        Console.WriteLine(<span class="hljs-string">$&quot;After reset, total instances: <span class="hljs-subst">&#123;Counter.TotalInstances&#125;</span>&quot;</span>);
+    &#125;
+&#125;
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">  輸出結果：</span>
+<span class="hljs-comment">  Static constructor called</span>
+<span class="hljs-comment">  Total instances before creating any: 0</span>
+<span class="hljs-comment">  Instance 1 created</span>
+<span class="hljs-comment">  Instance 2 created</span>
+<span class="hljs-comment">  This is instance 1 out of 2 total instances</span>
+<span class="hljs-comment">  This is instance 2 out of 2 total instances</span>
+<span class="hljs-comment">  Total instances: 2</span>
+<span class="hljs-comment">  After reset, total instances: 0</span>
+<span class="hljs-comment">*/</span></code></pre>
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>
