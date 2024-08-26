@@ -4,6 +4,85 @@
   
     
     <entry>
+      <title>SQL SELECT DISTINCT</title>
+      <link href="/2024/08/26/SQL-SELECT-DISTINCT/"/>
+      <url>/2024/08/26/SQL-SELECT-DISTINCT/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> 後端 </category>
+          
+          <category> SQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SQL Select</title>
+      <link href="/2024/08/26/SQL-Select-%E7%94%A8%E6%B3%95/"/>
+      <url>/2024/08/26/SQL-Select-%E7%94%A8%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Select-基本語法"><a href="#Select-基本語法" class="headerlink" title="Select 基本語法"></a>Select 基本語法</h2><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> [column1, column2, ...]<span class="hljs-keyword">FROM</span> table_name</code></pre><h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><h3 id="1-挑選特定的欄位"><a href="#1-挑選特定的欄位" class="headerlink" title="1. 挑選特定的欄位"></a>1. 挑選特定的欄位</h3><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> CustomerName,City <span class="hljs-keyword">FROM</span> Customers;<span class="hljs-comment">-- 從 「Customers」這張表，挑選出「CustomerName」、「City」這兩個欄位</span></code></pre><h3 id="2-選取所有的欄位"><a href="#2-選取所有的欄位" class="headerlink" title="2. 選取所有的欄位"></a>2. 選取所有的欄位</h3><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Customers;<span class="hljs-comment">-- 從 「Customers」這張表，挑選出所有欄位</span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 後端 </category>
+          
+          <category> SQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> SQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>什麼是「瀑布式」開發？</title>
+      <link href="/2024/08/13/%E4%BB%80%E9%BA%BC%E6%98%AF%E3%80%8C%E7%80%91%E5%B8%83%E5%BC%8F%E3%80%8D%E9%96%8B%E7%99%BC%EF%BC%9F/"/>
+      <url>/2024/08/13/%E4%BB%80%E9%BA%BC%E6%98%AF%E3%80%8C%E7%80%91%E5%B8%83%E5%BC%8F%E3%80%8D%E9%96%8B%E7%99%BC%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<h2 id="提到瀑布式開發"><a href="#提到瀑布式開發" class="headerlink" title="提到瀑布式開發"></a>提到瀑布式開發</h2><p>有時候我們會比喻寫程式就像在蓋房子，而蓋房子會經歷過哪些流程呢？</p><p>首先我們會有一份設計書，這份設計書上面可能會詳細記載說，你會需要哪些水泥，你需要哪些鋼筋，你的工法要怎麼做，房子要怎麼蓋，要找多少工人，然後最後再計算出一個成本，等你的設計書都完成後，我們就照這個設計書，按部就班地把它蓋起來，最後蓋成了一棟房子。</p><p>而這整個過程有些人就會覺得說，這其實還蠻像在寫程式的，怎麼說呢？<br>例如說我們寫程式最常做的事情，第一個就是我們會接到需求，然後分析它，分析完以後，我們需要開哪些 Table、開哪些資料庫，需要幾位工程師？一步一步地把這個程式系統寫起來，這樣的流程通常會稱為瀑布式開發。</p><p>就像這個圖一樣，可以看到它基本上會有這 6 個流程<br><img src="/2024/08/13/%E4%BB%80%E9%BA%BC%E6%98%AF%E3%80%8C%E7%80%91%E5%B8%83%E5%BC%8F%E3%80%8D%E9%96%8B%E7%99%BC%EF%BC%9F/WaterfallModel.jpg"></p><ol><li>接到需求</li><li>分析需求</li><li>設計整個程式的架構</li><li>寫程式</li><li>測試完成</li><li>最後是維護的部分</li></ol><p>你會覺得系統都沒問題了，就可以把系統上線，上線之後你可能會得到一些回饋，然後去做修改，再進行後續的維護這樣，</p><p>不免俗地就是會提到這張圖</p><p>其實我們會講瀑布式開發</p><p>很多都是因為這張圖的關係</p><p>怎麼說呢</p><p>我們在做一個瀑布式開發的時候</p><p>它有一個非常重要的特色</p><p>就是它會事先把全部所需的需求</p><p>分析 設計規格全部規劃好</p><p>規劃好後才開始下去寫程式</p><p>在這個分析過程當中</p><p>最常出現就是這張甘特圖</p><p>它其實在每個階段的時候</p><p>都會一開始就規劃好</p><p>我這個階段需要花多少時間</p><p>需求收集兩週</p><p>分析兩週</p><p>設計兩週</p><p>開始寫程式可能一到兩週</p><p>然後最後測試</p><p>依序這樣畫下來</p><p>總共花了 10 週上網</p><p>這樣流程下來就很像瀑布</p><p>然後接下來想跟大家互動一下</p><p>因為我們在講瀑布式開發的時候</p><p>不免俗地就是會提到這個叫做</p><p>系統開發流程的生命週期</p><p>其實它每個階段</p><p>都跟瀑布式開發是非常接近的</p><p>一樣要有需求 有分析</p><p>有開發 有測試 有維護</p><p>所以今天想做個調查</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 開發模式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 開發模式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C# 中的 static</title>
       <link href="/2024/08/07/C-%E4%B8%AD%E7%9A%84-static/"/>
       <url>/2024/08/07/C-%E4%B8%AD%E7%9A%84-static/</url>

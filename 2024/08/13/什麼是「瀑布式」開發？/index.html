@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>變數與作用域 3：提升(Hoisting) | Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content=" JavaScript , 變數與作用域系列 ">
-  <meta name="description" content="變數與作用域 3：提升(Hoisting) | Eshiunm&#39;s Blog">
+  <title>什麼是「瀑布式」開發？ | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" 開發模式 ">
+  <meta name="description" content="什麼是「瀑布式」開發？ | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL SELECT DISTINCT">
@@ -587,9 +587,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-變數與作用域 3：提升(Hoisting)" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-什麼是「瀑布式」開發？" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">變數與作用域 3：提升(Hoisting)</h1>
+        <h1 class="article-title">什麼是「瀑布式」開發？</h1>
     
     <div class="article-meta">
         
@@ -599,11 +599,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="前端">前端</a> > 
-            
-            <a  data-rel="前端&lt;---&gt;JavaScript">JavaScript</a> > 
-            
-            <a  data-rel="前端&lt;---&gt;JavaScript&lt;---&gt;變數與作用域">變數與作用域</a>
+            <a  data-rel="開發模式">開發模式</a>
             
         </span>
         
@@ -611,21 +607,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color1">JavaScript</a>
-            
-            <a class="color4">變數與作用域系列</a>
+            <a class="color5">開發模式</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            發佈時間 : <time class="date" title='最後更新: 2024-07-14 09:42:32'>2024-07-13 21:56</time>
+            發佈時間 : <time class="date" title='最後更新: 2024-08-13 16:49:42'>2024-08-13 14:49</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字數:912</span>
+        <span>字數:675</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -655,7 +649,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E6%8F%90%E5%8D%87%EF%BC%88Hoisting%EF%BC%89%EF%BC%9F"><span class="toc-text">什麼是提升（Hoisting）？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E9%80%99%E4%B9%8B%E5%89%8D%E5%85%88%E4%BE%86%E8%AB%87%E5%89%B5%E9%80%A0%E9%9A%8E%E6%AE%B5%E8%88%87%E5%9F%B7%E8%A1%8C%E9%9A%8E%E6%AE%B5%E9%80%99%E5%85%A9%E5%80%8B%E6%A6%82%E5%BF%B5"><span class="toc-text">在這之前先來談創造階段與執行階段這兩個概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E5%BC%8F%E7%9A%84%E5%89%B5%E9%80%A0%E9%9A%8E%E6%AE%B5%E8%88%87%E5%9F%B7%E8%A1%8C%E9%9A%8E%E6%AE%B5%EF%BC%8C%E8%88%87%E8%AE%8A%E6%95%B8%E7%9B%B8%E6%AF%94%E5%A4%9A%E4%BA%86%E5%85%A9%E5%80%8B%E5%8E%9F%E5%89%87%EF%BC%9A"><span class="toc-text">函式的創造階段與執行階段，與變數相比多了兩個原則：</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%88%B0%E7%80%91%E5%B8%83%E5%BC%8F%E9%96%8B%E7%99%BC"><span class="toc-text">提到瀑布式開發</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -671,104 +665,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="什麼是提升（Hoisting）？"><a href="#什麼是提升（Hoisting）？" class="headerlink" title="什麼是提升（Hoisting）？"></a>什麼是提升（Hoisting）？</h2><blockquote>
-<p>💡<strong>先講結論</strong>：<br>在 JavaScript 中先賦予變數或函式一個記憶體空間的這個機制，就稱為<strong>提升</strong>。</p>
-</blockquote>
-<h3 id="在這之前先來談創造階段與執行階段這兩個概念"><a href="#在這之前先來談創造階段與執行階段這兩個概念" class="headerlink" title="在這之前先來談創造階段與執行階段這兩個概念"></a>在這之前先來談創造階段與執行階段這兩個概念</h3><ul>
-<li>創造階段（Creation）：瀏覽器為變數或是函式創造記憶體空間的階段。</li>
-<li>執行階段（Execution）：瀏覽器將「值」賦予變數的階段。</li>
-</ul>
+        <h2 id="提到瀑布式開發"><a href="#提到瀑布式開發" class="headerlink" title="提到瀑布式開發"></a>提到瀑布式開發</h2><p>有時候我們會比喻寫程式就像在蓋房子，而蓋房子會經歷過哪些流程呢？</p>
+<p>首先我們會有一份設計書，這份設計書上面可能會詳細記載說，你會需要哪些水泥，你需要哪些鋼筋，你的工法要怎麼做，房子要怎麼蓋，要找多少工人，然後最後再計算出一個成本，等你的設計書都完成後，我們就照這個設計書，按部就班地把它蓋起來，最後蓋成了一棟房子。</p>
+<p>而這整個過程有些人就會覺得說，這其實還蠻像在寫程式的，怎麼說呢？<br>例如說我們寫程式最常做的事情，第一個就是我們會接到需求，然後分析它，分析完以後，我們需要開哪些 Table、開哪些資料庫，需要幾位工程師？一步一步地把這個程式系統寫起來，這樣的流程通常會稱為瀑布式開發。</p>
+<p>就像這個圖一樣，可以看到它基本上會有這 6 個流程<br><img src="/2024/08/13/%E4%BB%80%E9%BA%BC%E6%98%AF%E3%80%8C%E7%80%91%E5%B8%83%E5%BC%8F%E3%80%8D%E9%96%8B%E7%99%BC%EF%BC%9F/WaterfallModel.jpg"></p>
 <ol>
-<li>先以下列程式碼為例子</li>
+<li>接到需求</li>
+<li>分析需求</li>
+<li>設計整個程式的架構</li>
+<li>寫程式</li>
+<li>測試完成</li>
+<li>最後是維護的部分</li>
 </ol>
-<pre><code class="hljs JS"><span class="hljs-keyword">var</span> myName = <span class="hljs-string">&#x27;小白&#x27;</span>;
-<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName); <span class="hljs-comment">//印出小白</span>
-
-<span class="hljs-comment">/*</span>
-<span class="hljs-comment">    解釋上述程式碼的 創造階段 與 執行階段</span>
-<span class="hljs-comment">    1. 創造階段：myName 變數「提升」，獲得一個記憶體空間，其值是 undefined</span>
-<span class="hljs-comment">    2. 執行階段：myName 變數被賦予值，其值是&#x27;小白&#x27;，console.log(myName) 會將 myName 變數中的值取出來後印出來</span>
-<span class="hljs-comment">*/</span></code></pre>
-
-<ol start="2">
-<li>修改一下順序</li>
-</ol>
-<pre><code class="hljs JS"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName); <span class="hljs-comment">// console.log 會印出 undefined，而不是 Uncaught ReferenceError: myName is not defined 的錯誤。</span>
-<span class="hljs-comment">/*</span>
-<span class="hljs-comment">  為什麼不會印出錯誤？myName 變數不是後面才宣告嗎？原因是因為 myName 變數「提升」了！</span>
-<span class="hljs-comment">  在印出來之前，myName 變數已經有了記憶體空間，只是還沒被賦予值，因此是 undefined。</span>
-<span class="hljs-comment">*/</span>
-
-<span class="hljs-keyword">var</span> myName = <span class="hljs-string">&#x27;小白&#x27;</span>;
-
-<span class="hljs-comment">/*</span>
-<span class="hljs-comment">  1. 創造階段：myName 變數「提升」，獲得一個記憶體空間，其值是 undefined</span>
-<span class="hljs-comment">  2. 執行階段：console.log(myName) 將 myName 變數中的值印出來 ( 先印出 undefined )</span>
-<span class="hljs-comment">              然後 myName 變數才被賦予 &#x27;小白&#x27; 這個值。</span>
-<span class="hljs-comment">*/</span></code></pre>
-
-<blockquote>
-<p>有了提升的概念之後，在來要討論的是，函式提升與變數提升的不同處。</p>
-</blockquote>
-<h2 id="函式的創造階段與執行階段，與變數相比多了兩個原則："><a href="#函式的創造階段與執行階段，與變數相比多了兩個原則：" class="headerlink" title="函式的創造階段與執行階段，與變數相比多了兩個原則："></a>函式的創造階段與執行階段，與變數相比多了兩個原則：</h2><ul>
-<li>函式在創造階段就已經有完整的記憶體空間</li>
-<li><strong>函式陳述式</strong>優先函式表達式與變數宣告</li>
-</ul>
-<ol>
-<li>舉例</li>
-</ol>
-<pre><code class="hljs JS"><span class="hljs-title function_">callName</span>();
-<span class="hljs-comment">/*</span>
-<span class="hljs-comment">  callName 函式在比較下面，理論上應該是沒辦法成功執行 callName()，</span>
-<span class="hljs-comment">  但是因為「提升」的機制，使得 callName 函式優先獲得記憶體空間，因此你要在哪裡呼叫都可以</span>
-<span class="hljs-comment">*/</span>
-
-<span class="hljs-comment">// 下行函式的宣告方式叫做「函式陳述式」</span>
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">callName</span>(<span class="hljs-params"></span>)&#123;
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;我是小明&#x27;</span>);
-&#125;
-<span class="hljs-comment">/*</span>
-<span class="hljs-comment">    解釋上述程式碼的創造階段與執行階段</span>
-<span class="hljs-comment">    1. 創造階段：callName 函式陳述式優先「提升」，獲得一個記憶體空間</span>
-<span class="hljs-comment">    2. 執行階段：呼叫了 callName() 函式，印出&#x27;我是小明&#x27;</span>
-<span class="hljs-comment">*/</span></code></pre>
-
-<ol start="2">
-<li>函式陳述式 v.s 函式表達式 ⇒ 兩者之間的差異在於「提升的方式」不同</li>
-</ol>
-<pre><code class="hljs JS"><span class="hljs-comment">//函式陳述式</span>
-<span class="hljs-keyword">function</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params"></span>)&#123;
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;這是函式陳述式&#x27;</span>);
-&#125;
-
-<span class="hljs-comment">//函式表達式</span>
-<span class="hljs-keyword">var</span> fn = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
-    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;這是函式表達式&#x27;</span>);
-&#125;
-
-<span class="hljs-title function_">fn</span>();<span class="hljs-comment">//呼叫 fn 函式，會印出 &#x27;這是函式陳述式&#x27; 還是 &#x27;這是函式表達式呢&#x27;？</span>
-
-<span class="hljs-comment">/*</span>
-<span class="hljs-comment">    這邊開始解釋「函式陳述式」與「函式表達式」的不同處，</span>
-<span class="hljs-comment">    以上述程式碼為例，列出創造階段與執行階段</span>
-<span class="hljs-comment"></span>
-<span class="hljs-comment">    1. 創造階段：</span>
-<span class="hljs-comment">        function fn()&#123; //函式陳述式優先提升</span>
-<span class="hljs-comment">          console.log(&#x27;這是函式陳述式&#x27;);</span>
-<span class="hljs-comment">        &#125;</span>
-<span class="hljs-comment">        var fn; //fn 變數提升</span>
-<span class="hljs-comment"></span>
-<span class="hljs-comment">    2. 執行階段：</span>
-<span class="hljs-comment">        fn = function()&#123; // fn 被賦予值</span>
-<span class="hljs-comment">          console.log(&#x27;這是函式表達式&#x27;);</span>
-<span class="hljs-comment">        &#125;</span>
-<span class="hljs-comment">        fn(); //呼叫 fn 函式，最終印出&#x27;這是函式表達式&#x27;！！</span>
-<span class="hljs-comment"></span>
-<span class="hljs-comment">    不同之處在於函式表達式會在執行階段才將值(整個function) assign 給 fn 變數，</span>
-<span class="hljs-comment">    進而覆蓋了在創造階段出現的函式陳述式，所以才會印出&#x27;函式表達式&#x27;。</span>
-<span class="hljs-comment">*/</span></code></pre>
-
-<p>第一次理解 Hoisting 時有點小吃力，<br>不過大腦是一個神奇的東西，隨著時間拉長再回頭看，就知道這是什麼了。</p>
+<p>你會覺得系統都沒問題了，就可以把系統上線，上線之後你可能會得到一些回饋，然後去做修改，再進行後續的維護這樣，</p>
+<p>不免俗地就是會提到這張圖</p>
+<p>其實我們會講瀑布式開發</p>
+<p>很多都是因為這張圖的關係</p>
+<p>怎麼說呢</p>
+<p>我們在做一個瀑布式開發的時候</p>
+<p>它有一個非常重要的特色</p>
+<p>就是它會事先把全部所需的需求</p>
+<p>分析 設計規格全部規劃好</p>
+<p>規劃好後才開始下去寫程式</p>
+<p>在這個分析過程當中</p>
+<p>最常出現就是這張甘特圖</p>
+<p>它其實在每個階段的時候</p>
+<p>都會一開始就規劃好</p>
+<p>我這個階段需要花多少時間</p>
+<p>需求收集兩週</p>
+<p>分析兩週</p>
+<p>設計兩週</p>
+<p>開始寫程式可能一到兩週</p>
+<p>然後最後測試</p>
+<p>依序這樣畫下來</p>
+<p>總共花了 10 週上網</p>
+<p>這樣流程下來就很像瀑布</p>
+<p>然後接下來想跟大家互動一下</p>
+<p>因為我們在講瀑布式開發的時候</p>
+<p>不免俗地就是會提到這個叫做</p>
+<p>系統開發流程的生命週期</p>
+<p>其實它每個階段</p>
+<p>都跟瀑布式開發是非常接近的</p>
+<p>一樣要有需求 有分析</p>
+<p>有開發 有測試 有維護</p>
+<p>所以今天想做個調查</p>
 
       
        <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>
