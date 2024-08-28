@@ -2,18 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Eshiunm&#39;s Blog</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Eshiunm&#39;s Blog">
+  <title>SQL Where clause | Eshiunm&#39;s Blog</title>
+  <meta name="keywords" content=" MSSQL , SQL ">
+  <meta name="description" content="SQL Where clause | Eshiunm&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="使用目的用來篩選和過濾出符合條件的資料，篩選特定的記錄、篩選數值範圍、或是根據文字模式來篩選資料。 SELECT DISTINCT 基本語法SELECT [column1, column2, ...] FROM table_name WHERE condition;  範例1. EqualSELECT * FROM Customers WHERE CustomerID &#x3D; 1;  SELECT *">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL SELECT DISTINCT">
-<meta property="og:url" content="http://example.com/2024/08/26/SQL-SELECT-DISTINCT/index.html">
+<meta property="og:title" content="SQL Where clause">
+<meta property="og:url" content="http://example.com/2024/08/28/SQL-Where-clause/index.html">
 <meta property="og:site_name" content="Eshiunm&#39;s Blog">
+<meta property="og:description" content="使用目的用來篩選和過濾出符合條件的資料，篩選特定的記錄、篩選數值範圍、或是根據文字模式來篩選資料。 SELECT DISTINCT 基本語法SELECT [column1, column2, ...] FROM table_name WHERE condition;  範例1. EqualSELECT * FROM Customers WHERE CustomerID &#x3D; 1;  SELECT *">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-26T07:55:22.000Z">
-<meta property="article:modified_time" content="2024-08-26T07:56:25.840Z">
+<meta property="article:published_time" content="2024-08-28T15:21:40.000Z">
+<meta property="article:modified_time" content="2024-08-28T15:40:49.334Z">
 <meta property="article:author" content="Eshiunm">
+<meta property="article:tag" content="MSSQL">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
 
@@ -53,7 +56,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -88,7 +91,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(21)</small>
+                <small>(22)</small>
             
         </div>
     </li>
@@ -167,7 +170,7 @@
         <div data-rel="後端">
             <i class="fold iconfont icon-right"></i>
             後端
-            <small>(3)</small>
+            <small>(4)</small>
         </div>
         
             <ul class="sub hide">
@@ -200,10 +203,10 @@
                 
                     
     <li>
-        <div data-rel="後端&lt;---&gt;SQL">
+        <div data-rel="後端&lt;---&gt;MSSQL">
             
-            SQL
-            <small>(2)</small>
+            MSSQL
+            <small>(3)</small>
         </div>
         
     </li>
@@ -287,8 +290,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="21">
-<input type="hidden" id="yelog_site_word_count" value="15.6k">
+<input type="hidden" id="yelog_site_posts_number" value="22">
+<input type="hidden" id="yelog_site_word_count" value="16.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -362,6 +365,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MSSQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>OOP</a>
             </li>
         
@@ -381,18 +388,27 @@
     <nav id="title-list-nav">
         
         
-        <a  class="全部文章 後端 SQL "
+        <a  class="全部文章 後端 MSSQL "
+           href="/2024/08/28/SQL-Where-clause/"
+           data-tag="MSSQL,SQL"
+           data-author="" >
+            <span class="post-title" title="SQL Where clause">SQL Where clause</span>
+            <span class="post-date" title="2024-08-28 23:21:40">2024/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 後端 MSSQL "
            href="/2024/08/26/SQL-SELECT-DISTINCT/"
-           data-tag="SQL"
+           data-tag="MSSQL,SQL"
            data-author="" >
             <span class="post-title" title="SQL SELECT DISTINCT">SQL SELECT DISTINCT</span>
             <span class="post-date" title="2024-08-26 15:55:22">2024/08/26</span>
         </a>
         
         
-        <a  class="全部文章 後端 SQL "
+        <a  class="全部文章 後端 MSSQL "
            href="/2024/08/26/SQL-Select-%E7%94%A8%E6%B3%95/"
-           data-tag="SQL"
+           data-tag="MSSQL,SQL"
            data-author="" >
             <span class="post-title" title="SQL Select">SQL Select</span>
             <span class="post-date" title="2024-08-26 15:31:20">2024/08/26</span>
@@ -579,18 +595,81 @@
 
     </div>
     <div class="hide-list">
-        <div class="semicircle" data-title="切换全屏 快捷键 s">
+        <div class="semicircle" data-title="切換全螢幕 快捷鍵 s">
             <div class="brackets first"><</div>
             <div class="brackets">&gt;</div>
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-SQL-Where-clause" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%9C%E6%96%BC%E6%88%91"><span class="toc-text">關於我</span></a></li></ol></li></ol>
+        <h1 class="article-title">SQL Where clause</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="後端">後端</a> > 
+            
+            <a  data-rel="後端&lt;---&gt;MSSQL">MSSQL</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">MSSQL</a>
+            
+            <a class="color4">SQL</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            發佈時間 : <time class="date" title='最後更新: 2024-08-28 23:40:49'>2024-08-28 23:21</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字數:306</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            閱讀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳轉至留言區">
+            <a href="#comments">
+                評論:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%9B%AE%E7%9A%84"><span class="toc-text">使用目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SELECT-DISTINCT-%E5%9F%BA%E6%9C%AC%E8%AA%9E%E6%B3%95"><span class="toc-text">SELECT DISTINCT 基本語法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B"><span class="toc-text">範例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Equal"><span class="toc-text">1. Equal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Greater-than"><span class="toc-text">2. Greater than</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Less-than"><span class="toc-text">3. Less than</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Greater-than-or-equal"><span class="toc-text">4. Greater than or equal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Less-than-or-equal"><span class="toc-text">5. Less than or equal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Not-equal"><span class="toc-text">6. Not equal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Between"><span class="toc-text">7. Between</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Like"><span class="toc-text">8. Like</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Not-like"><span class="toc-text">9. Not like</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-IN"><span class="toc-text">10. IN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-NOT-IN"><span class="toc-text">11. NOT IN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-IS-NULL"><span class="toc-text">12. IS NULL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-IS-NOT-NULL"><span class="toc-text">13. IS NOT NULL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-AND"><span class="toc-text">14. AND</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-OR"><span class="toc-text">15. OR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-NOT"><span class="toc-text">16. NOT</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -603,36 +682,74 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><!-- ## 对博客的理解
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用目的"><a href="#使用目的" class="headerlink" title="使用目的"></a>使用目的</h2><p>用來篩選和過濾出符合條件的資料，<br>篩選特定的記錄、篩選數值範圍、或是根據文字模式來篩選資料。</p>
+<h2 id="SELECT-DISTINCT-基本語法"><a href="#SELECT-DISTINCT-基本語法" class="headerlink" title="SELECT DISTINCT 基本語法"></a>SELECT DISTINCT 基本語法</h2><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> [column1, column2, ...]
+<span class="hljs-keyword">FROM</span> table_name
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">condition</span>;</code></pre>
 
-喜欢写 Blog 的人，会经历三个阶段。
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><h3 id="1-Equal"><a href="#1-Equal" class="headerlink" title="1. Equal"></a>1. Equal</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Customers
+<span class="hljs-keyword">WHERE</span> CustomerID <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
 
-> 第一阶段，刚接触 Blog，觉得很新鲜，试着选择一个免费空间来写。
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Customers
+<span class="hljs-keyword">WHERE</span> Country <span class="hljs-operator">=</span> &quot;Kaohsiung&quot;;</code></pre>
 
-> 第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。
+<h3 id="2-Greater-than"><a href="#2-Greater-than" class="headerlink" title="2. Greater than"></a>2. Greater than</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-operator">&gt;</span> <span class="hljs-number">30</span>;</code></pre>
 
-> 第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。
+<h3 id="3-Less-than"><a href="#3-Less-than" class="headerlink" title="3. Less than"></a>3. Less than</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-operator">&lt;</span> <span class="hljs-number">30</span>;</code></pre>
 
-我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。
+<h3 id="4-Greater-than-or-equal"><a href="#4-Greater-than-or-equal" class="headerlink" title="4. Greater than or equal"></a>4. Greater than or equal</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-operator">&gt;=</span> <span class="hljs-number">30</span>;</code></pre>
 
-通过博客，我们可以记录自己的生活和成长的轨迹。它不像 Twitter 那样碎片化，也不像 Facebook 那样关系化，它是私人的空间。 -->
+<h3 id="5-Less-than-or-equal"><a href="#5-Less-than-or-equal" class="headerlink" title="5. Less than or equal"></a>5. Less than or equal</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-operator">&lt;=</span> <span class="hljs-number">30</span>;</code></pre>
 
-<h2 id="關於我"><a href="#關於我" class="headerlink" title="關於我"></a>關於我</h2><p>目前懶得寫自介</p>
-<p>到目前为止已經寫了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站訪問人數：<code class="site_uv"></code>人次 ， 訪問量：<code class="site_pv"></code>次</p>
-<!-- ## 博客平台
-这个博客通过 [Hexo](https://hexo.io/) 生成，部署在 [GitHub Pages](https://pages.github.com/)主题 [3-hexo](https://github.com/yelog/hexo-theme-3-hexo) 已经在github上开源
+<h3 id="6-Not-equal"><a href="#6-Not-equal" class="headerlink" title="6. Not equal"></a>6. Not equal</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-operator">&lt;&gt;</span> <span class="hljs-number">30</span>;</code></pre>
 
-`3-hexo` 主题使用交流可以加 Q群: <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e8cf083cc097141eaf323396f1766809b8e90ff00c67bb441898f672892f6904"><img data-ignore border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="3-hexo使用交流" title="3-hexo使用交流"></a>
+<h3 id="7-Between"><a href="#7-Between" class="headerlink" title="7. Between"></a>7. Between</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-keyword">BETWEEN</span> <span class="hljs-number">30</span> <span class="hljs-keyword">AND</span> <span class="hljs-number">60</span>;</code></pre>
 
-主要功能：
-- 搜索支持文章标题、标签(#标签)、作者(@作者)
-- pad/手机等移动端适配
-- 页面全局快捷键 <a target="_blank" rel="noopener" href='http://yelog.org/2017/03/24/3-hexo-shortcuts/'>3-hexo快捷键说明</a> -->
+<h3 id="8-Like"><a href="#8-Like" class="headerlink" title="8. Like"></a>8. Like</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> ProductName <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;C%&#x27;</span>; <span class="hljs-comment">-- 找出產品名稱開頭為 C</span></code></pre>
 
-        </article>
-        
-        
+<h3 id="9-Not-like"><a href="#9-Not-like" class="headerlink" title="9. Not like"></a>9. Not like</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> ProductName <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;C%&#x27;</span>; <span class="hljs-comment">-- 找出產品名稱開頭不為 C</span></code></pre>
+
+<h3 id="10-IN"><a href="#10-IN" class="headerlink" title="10. IN"></a>10. IN</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Country <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;Taiwan&#x27;</span>, <span class="hljs-string">&#x27;Japan&#x27;</span>); <span class="hljs-comment">-- 找出產品的國家為台灣或日本</span></code></pre>
+
+<h3 id="11-NOT-IN"><a href="#11-NOT-IN" class="headerlink" title="11. NOT IN"></a>11. NOT IN</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Country <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;Taiwan&#x27;</span>, <span class="hljs-string">&#x27;Japan&#x27;</span>); <span class="hljs-comment">-- 找出產品的國家不為台灣或日本</span></code></pre>
+
+<h3 id="12-IS-NULL"><a href="#12-IS-NULL" class="headerlink" title="12. IS NULL"></a>12. IS NULL</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NULL</span>; <span class="hljs-comment">-- 找出產品價格為 NULL</span></code></pre>
+
+<h3 id="13-IS-NOT-NULL"><a href="#13-IS-NOT-NULL" class="headerlink" title="13. IS NOT NULL"></a>13. IS NOT NULL</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>; <span class="hljs-comment">-- 找出產品價格不為 NULL</span></code></pre>
+
+<h3 id="14-AND"><a href="#14-AND" class="headerlink" title="14. AND"></a>14. AND</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-operator">&gt;</span> <span class="hljs-number">30</span> <span class="hljs-keyword">AND</span> Country <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Taiwan&#x27;</span>;</code></pre>
+
+<h3 id="15-OR"><a href="#15-OR" class="headerlink" title="15. OR"></a>15. OR</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> Price <span class="hljs-operator">&gt;</span> <span class="hljs-number">30</span> <span class="hljs-keyword">OR</span> Country <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Taiwan&#x27;</span>;</code></pre>
+
+<h3 id="16-NOT"><a href="#16-NOT" class="headerlink" title="16. NOT"></a>16. NOT</h3><pre><code class="hljs SQL"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> Products
+<span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">NOT</span> Country <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;Taiwan&#x27;</span>;</code></pre>
+
+      
+       <hr><span style="color: gray;"> 轉載請註明來源，歡迎指出任何錯誤，可以在下面評論區評論。 </span>
+    </div>
+</article>
+
+
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -654,6 +771,13 @@
 </script>
 
 
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -662,11 +786,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切換全螢幕 快捷鍵 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切換全螢幕 快捷鍵 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 </body>
