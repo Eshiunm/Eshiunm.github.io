@@ -1,0 +1,110 @@
+---
+title: useState
+sidebar_position: 1
+---
+
+# useState
+
+`useState` 是 React 其中一個 Hook。<br />
+透過 `useState`，它能夠讓 function component 擁有和管理自己的狀態（state）。
+
+## useState 的使用方式
+
+1. 從 React 函式庫引入 `useState` Hook
+
+```jsx
+import { useState } from "react";
+```
+
+2. 使用解構賦值獲取 `state` 、`setState`這兩個重要的元素
+
+```jsx
+function ExampleComponent() {
+  const [state, setState] = useState(initialValue);
+
+  // 其他程式碼...
+}
+```
+
+- `state`: 狀態值
+- `setState`: 用來更新狀態值的函式
+- `initialValue`: 狀態初始值
+
+用起來會像這樣：
+
+```jsx
+import { useState } from 'react';
+
+function MyComponent() {
+  const [age, setAge] = useState(28);
+  const [name, setName] = useState('Taylor');
+  const [todos, setTodos] = useState(() => createTodos());
+  // ...
+```
+
+### 基本運作原理
+
+### 基本範例
+
+#### 1. 計數器
+
+```jsx
+import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>你點擊了 {count} 次</p>
+      <button onClick={() => setCount(count + 1)}>加 1</button>
+    </div>
+  );
+}
+```
+
+- [範例連結](https://codesandbox.io/p/sandbox/eager-goldberg-862vy4?file=%2Fsrc%2FApp.js)
+
+## useState 的運作原理
+
+`useState` 的運作原理其實相當精妙，它背後依賴於 JavaScript 的閉包（closure）特性來保存狀態。
+
+當我們使用 `useState` 時，會解構出兩個東西，一個是**狀態值**，另一個是**更新狀態的函數**。
+
+使用時看起來長這樣：
+
+```JavaScript
+const [state, setState] = useState(initialValue);
+
+// state: 狀態值
+// setState: 更新狀態的函數
+// initialValue: 狀態初始值
+```
+
+當 React 執行了上面程式碼時，有幾件事情會發生：
+
+1. **檢查是否為首次渲染**
+
+   - 如果是首次渲染：React 會使用你提供的 `initialValue` 作為 `state` 的初始值。
+   - 如果不是首次渲染：React 會使用上一次渲染時的狀態值。
+
+2. React 會設定 `state` 的狀態值、`setState` 設定為更新狀態的函數。
+3. 當我們呼叫 `setState` 時，React 會重新渲染元件，並將新的狀態值反應在元件上。
+4. 完成狀態更新。
+
+假設你寫了：
+
+```jsx
+const [count, setCount] = useState(0);
+```
+
+React 會做以下事情：
+
+1. **檢查是否為首次渲染**
+
+   - 如果是首次渲染：`state` 的初始值為 `0`。
+   - 如果不是首次渲染：React 會使用上一次渲染時的狀態值。
+
+2. React 會設定 `count` 為狀態變數、設定`setCount` 為更新 `count` 狀態的函數。
+3. 當我們呼叫 `setState` 時，React 會重新渲染元件，並將新的狀態值反應在元件上。
+4. 完成狀態更新。

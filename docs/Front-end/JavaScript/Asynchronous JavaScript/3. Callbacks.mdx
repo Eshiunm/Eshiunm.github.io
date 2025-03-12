@@ -1,9 +1,159 @@
 ---
-title: 3. Callbacks
+title: 3. Callback functions
 sidebar_position: 3
 ---
 
-# 回調函式 Callbacks
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-JavaScript 這個語言最初是設計給瀏覽器使用的腳本語言，專門用來處理使用者互動和網路請求等非同步事件。<br />
-由於 JavaScript 是單執行緒語言，若使用同步的處理方式會導致頁面卡頓，因此需要一種能在某事件需要等待時還能繼續執行的機制 —— 回調函式誕生了。
+# 回調函式 Callback functions
+
+JavaScript 最早採用處理非同步問題的方法是**回調函式（Callback functions）**。
+
+JavaScript 這個語言最初是設計給瀏覽器使用的腳本語言，專門用來處理 **使用者與網頁互動** 或 **網路請求** 等非同步事件。
+
+由於 JavaScript 是單執行緒語言，若使用同步的處理方式會導致頁面卡頓，<br />
+因此需要一種 **當某指令需要等待時，程式還能繼續執行的方法**，於是回調函式誕生了。
+
+## 回調函式的概念
+
+以生活化的例子來說的話，回調函式就像是「預約一個服務」，預約完服務後時機點到了就執行該服務。
+
+想像你去修手機，但修理需要幾天的時間，因此你不會一直在店裡等待，而是留下**電話號碼**，並告訴店員「手機修好了**打電話通知我**」。「告訴店員打電話通知我這件事」就是跟店員「預約一個服務」，當手機修好了，店員就會執行這個服務，也就是打電話。
+
+「電話號碼」就是**回調函式本身**；而「打電話通知我」這個動作就是**呼叫回調函式**。
+
+在程式中，你會將回調函式作為「參數」，傳遞給一個處理特定任務的函式，並對處理特定任務的函式說：「當你完成特定任務後，執行回調函式」。<br />
+
+如下例：
+
+```javascript
+const 回調函式 = function () {
+  console.log("我是回調函式");
+};
+
+function 特定任務函式(資料, 回調函式) {
+  console.log("我是特定任務函式");
+  console.log("我正在處理特定任務...");
+  console.log(`${資料} 處理完成`);
+  回調函式(); // 執行回調函式
+}
+
+// 呼叫特定任務函式，並將回調函式作為參數傳入
+特定任務函式(123, 回調函式);
+
+// 程式本身其他程式碼可以繼續執行...
+```
+
+這樣程式就不需要停下來等待，而是可以繼續執行其他工作，待特定任務完成後，作為參數傳遞的回調函式才會被執行。
+
+回調函式稱為「Callback function」，這個名稱本身就有很高的描述性，「Call」是呼叫，「Back」表示回來，合起來就是「會回來呼叫」的函式。你把它交付出去，並在適當的時機讓它被呼叫執行。
+
+<details>
+  <summary>將修手機的例子翻譯成程式碼 </summary>
+
+```javascript
+// 這是維修店的「修手機」函式
+function 修理手機(手機, 客戶電話號碼) {
+  console.log("開始修理手機");
+
+  // 假設修理需要時間，這裡用 setTimeout 模擬
+  setTimeout(function () {
+    // 手機修好了
+    console.log("手機修好了");
+
+    // 打電話通知客戶（執行回調函式）
+    客戶電話號碼("您的手機已修好，請來取件");
+  }, 3000); // 假設修理只需要 3 秒鐘
+
+  // 注意：這行會立即執行，不會等待 3 秒
+  console.log("您的手機已送修，您可以先離開");
+}
+
+// 顧客來修手機
+修理手機("壞掉的iPhone", function (訊息) {
+  // 這是回調函式，相當於「客戶電話號碼」
+  console.log("收到通知：" + 訊息);
+  console.log("我現在回到店裡取手機");
+});
+
+// 顧客離開後做其他事
+console.log("去逛街、吃飯...");
+```
+
+執行結果：
+
+```
+開始修理手機
+您的手機已送修，您可以先離開
+去逛街、吃飯...
+（3秒後...）
+手機修好了
+收到通知：您的手機已修好，請來取件
+我現在回到店裡取手機
+```
+
+</details>
+
+## 常見的回調函式例子
+
+在 JavaScript 程式設計中，回調函式無處不在，這邊列出幾個常會遇到的回調函式例子：
+
+### 1. 計時器函式
+
+<Tabs>
+  <TabItem value="setTimeout" label="setTimeout">
+    ```javascript
+    // 延遲顯示的回調函式
+    const delayDisplay = function () {
+      console.log("這段文字會在 3 秒後顯示");
+    };
+
+    // 將 delayDisplay 作為參數傳給 setTimeout，並在 3 秒後執行
+    setTimeout(delayDisplay, 3000);
+
+    console.log("這段文字會立即顯示");
+    ```
+
+  </TabItem>
+  <TabItem value="setInterval" label="setInterval">
+    ```javascript
+    // 重複執行的回調函式
+    const repeatDisplay = function () {
+      console.log("這段文字每 2 秒顯示一次");
+    };
+
+    // 每 2 秒執行一次回調函式
+    const intervalId = setInterval(repeatDisplay, 2000);
+
+    // 10 秒後停止重複執行
+    setTimeout(function () {
+      clearInterval(intervalId); // 停止重複執行
+      console.log("停止重複執行");
+    }, 10000);
+
+    ```
+
+  </TabItem>
+</Tabs>
+
+### 2. 事件監聽器
+
+```javascript
+// 點擊按鈕後執行回調函式
+document.getElementById("myButton").addEventListener("click", function (event) {
+  console.log("按鈕被點擊了！");
+  console.log("點擊的座標是：", event.clientX, event.clientY);
+});
+
+// 監聽視窗大小改變
+window.addEventListener("resize", function () {
+  console.log("視窗大小變更為：", window.innerWidth, "x", window.innerHeight);
+});
+
+// 表單提交
+document.getElementById("myForm").addEventListener("submit", function (event) {
+  event.preventDefault(); // 防止表單預設提交行為
+  console.log("表單已提交");
+});
+```
