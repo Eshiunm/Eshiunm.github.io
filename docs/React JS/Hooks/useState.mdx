@@ -1,0 +1,118 @@
+---
+title: useState
+sidebar_position: 1
+---
+
+import Highlight from "@site/src/components/Highlight";
+
+# useState
+
+Function Component 每一次重新渲染（re-render）時，元件內所有的變數都會被重置。這表示如果我們只用一般變數來儲存資料，當元件重新渲染時，這些變數都會回到初始值，無法保持原本的「狀態」。
+
+當遇到這樣的狀況時，就是 `useState` 登場的時刻了。<br />
+`useState` 是 React 的其中一個 Hook。它提供了方法來保存資料，不只在元件重新渲染時還能保持先前的狀態之外，當元件需要根據狀態的改變來顯示對應的樣貌時，`useState` 也可以做得到！
+
+## useState 的使用方式
+
+先簡單介紹一下 `useState` 的使用方式。
+
+<Highlight color="#25c2a0">1.</Highlight> 從 React 函式庫引入 `useState` Hook
+
+```jsx
+import { useState } from "react";
+```
+
+<Highlight color="#25c2a0">2.</Highlight> 使用解構賦值獲取 `state` 、`setState`這兩個重要的元素
+
+```jsx
+function ExampleComponent() {
+  const [state, setState] = useState(initialValue);
+
+  // 其他程式碼...
+}
+```
+
+- `state`：代表「狀態值」，用來儲存元件的狀態。
+- `setState`: 用來更新狀態值的函式，使用時會觸發元件重新渲染。
+- `initialValue`: 狀態初始值，在元件首次渲染時會將值 assign 給 `state`。
+
+<Highlight color="#25c2a0">3.</Highlight> 實戰上用起來會像這樣：
+
+```jsx
+import { useState } from 'react';
+
+function MyComponent() {
+  const [age, setAge] = useState(28);
+  const [name, setName] = useState('Taylor');
+  const [todos, setTodos] = useState(() => createTodos());
+  // ...
+```
+
+**`useState` 的基本運作原理**
+
+大概知道 `useState` 的使用方式後，這邊帶一個簡單的範例，了解 `useState` 的基本運作原理。
+
+下面是一個簡單的計數器元件：[範例連結](https://codesandbox.io/p/sandbox/eager-goldberg-862vy4?file=%2Fsrc%2FApp.js)
+
+```jsx
+import { useState } from "react";
+
+function Counter() {
+  // `useState` 定義了一個狀態變數 `count`、以及一個更新狀態的函數 `setCount`，並設定 `count` 的初始值為 `0`。
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>你點擊了 {count} 次</p>
+      <button onClick={() => setCount(count + 1)}>加 1</button>
+    </div>
+  );
+}
+```
+
+計數器會如何運作：
+
+1. 當使用者點擊「加 1」的按鈕後，事件處理器會執行 `setCount(count + 1)`，將 `count` 的值 +1，並觸發元件重新渲染。
+2. React 會重新渲染元件，並將新的 `count` 值反應在元件上。
+
+## useState 的運作原理
+
+`useState` 的運作原理其實相當精妙，其運作原理的背後是依賴於 JavaScript 的閉包（closure）特性來保存狀態。
+
+當 React 執行下面的程式碼時，會有幾件事情發生：
+
+```JavaScript
+const [state, setState] = useState(initialValue);
+
+// state: 狀態值
+// setState: 更新狀態的函數
+// initialValue: 狀態初始值
+```
+
+1. **檢查是否為首次渲染**
+
+   - 如果是首次渲染：React 會使用 `initialValue` 作為 `state` 的初始值。
+   - 如果不是首次渲染：React 會使用上一次渲染時的狀態值。
+
+2. React 會設定 `state` 的狀態值、`setState` 設定為更新狀態的函數。
+3. 當我們呼叫 `setState` 時，React 會重新渲染元件，並將新的狀態值反應在元件上。
+4. 完成狀態更新。
+
+假設你寫了：
+
+```jsx
+const [count, setCount] = useState(0);
+```
+
+React 會做以下事情：
+
+1. **檢查是否為首次渲染**
+
+   - 如果是首次渲染：`state` 的初始值為 `0`。
+   - 如果不是首次渲染：React 會使用上一次渲染時的狀態值。
+
+2. React 會設定 `count` 為狀態變數、設定`setCount` 為更新 `count` 狀態的函數。
+3. 當我們呼叫 `setState` 時，React 會重新渲染元件，並將新的狀態值反應在元件上。
+4. 完成狀態更新。
+
+## 基本範例
