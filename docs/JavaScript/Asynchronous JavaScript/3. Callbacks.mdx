@@ -8,18 +8,19 @@ import TabItem from "@theme/TabItem";
 
 # 回調函式 Callback functions
 
-JavaScript 最早採用處理非同步問題的方法是**回調函式（Callback functions）**。
+JavaScript 處理非同步問題最早採用的方法是**回調函式（Callback functions）**。
 
 JavaScript 這個語言最初是設計給瀏覽器使用的腳本語言，專門用來處理 **使用者與網頁互動** 或 **網路請求** 等非同步事件。
 
-由於 JavaScript 是單執行緒語言，若使用同步的處理方式會導致頁面卡頓，<br />
-因此需要一種 **當某指令需要等待時，程式還能繼續執行的方法**，於是回調函式誕生了。
+由於 JavaScript 是單執行緒語言，若使用同步的處理方式會導致頁面卡頓，所以事實上 JavaScript 的執行方式是非同步的，因此需要一種**當某指令需要等待時，程式還能繼續執行的方法**，於是回調函式誕生了。
 
 ## 回調函式的概念
 
-以生活化的例子來說的話，回調函式就像是「預約一個服務」，預約完服務後時機點到了就執行該服務。
+以生活化的例子來說的話，回調函式就像是「預約一個服務」，並在某個時機點「執行」該服務。
 
-想像你去修手機，但修理需要幾天的時間，因此你不會一直在店裡等待，而是留下**電話號碼**，並告訴店員「手機修好了**打電話通知我**」。「告訴店員打電話通知我這件事」就是跟店員「預約一個服務」，當手機修好了，店員就會執行這個服務，也就是打電話。
+想像你去修手機，但修理需要幾天的時間，因此你不會一直在店裡等待，而是留下「**電話號碼**」，並告訴店員手機修好了「**打電話通知我**」。
+
+「告訴店員打電話通知我」這件事，就是跟店員「預約一個服務」，當手機修好後店員會執行「打電話通知我」這個服務。
 
 「電話號碼」就是**回調函式本身**；而「打電話通知我」這個動作就是**呼叫回調函式**。
 
@@ -45,52 +46,54 @@ function 特定任務函式(資料, 回調函式) {
 // 程式本身其他程式碼可以繼續執行...
 ```
 
-這樣程式就不需要停下來等待，而是可以繼續執行其他工作，待特定任務完成後，作為參數傳遞的回調函式才會被執行。
+正在在執行的「主程式」不會因為特定任務函式停下來等待，而是可以繼續執行主程式的指令，待特定任務完成後，作為參數傳遞的回調函式才會被執行。
 
-回調函式稱為「Callback function」，這個名稱本身就有很高的描述性，「Call」是呼叫，「Back」表示回來，合起來就是「會回來呼叫」的函式。你把它交付出去，並在適當的時機讓它被呼叫執行。
+回調函式稱為「Callback function」，這個名稱本身就有很高的描述性，「Call」是呼叫、「Back」表示回來，合起來就是「之後再回來呼叫」的函式。你把回調函式交付出去，並在適當的時機讓它被執行。
 
 <details>
   <summary>將修手機的例子翻譯成程式碼 </summary>
 
 ```javascript
-// 這是維修店的「修手機」函式
-function 修理手機(手機, 客戶電話號碼) {
-  console.log("開始修理手機");
+// 維修店的「修手機」函式
+const 修理手機 = (手機, 客戶電話號碼) => {
+  console.log("店家開始修理手機...");
 
   // 假設修理需要時間，這裡用 setTimeout 模擬
   setTimeout(function () {
     // 手機修好了
-    console.log("手機修好了");
+    console.log("店家將手機修好了");
 
-    // 打電話通知客戶（執行回調函式）
+    // 店家打電話通知客戶（執行回調函式）
     客戶電話號碼("您的手機已修好，請來取件");
   }, 3000); // 假設修理只需要 3 秒鐘
 
   // 注意：這行會立即執行，不會等待 3 秒
-  console.log("您的手機已送修，您可以先離開");
-}
+  console.log("您離開了店家");
+};
+
+// 電話號碼是回調函式本身
+const 客戶電話號碼 = function (訊息) {
+  console.log("您收到通知：" + 訊息);
+  console.log("您準備回店裡取手機");
+};
 
 // 顧客來修手機
-修理手機("壞掉的iPhone", function (訊息) {
-  // 這是回調函式，相當於「客戶電話號碼」
-  console.log("收到通知：" + 訊息);
-  console.log("我現在回到店裡取手機");
-});
+修理手機("壞掉的iPhone", 客戶電話號碼);
 
 // 顧客離開後做其他事
-console.log("去逛街、吃飯...");
+console.log("您去逛街、吃飯...");
 ```
 
 執行結果：
 
 ```
-開始修理手機
-您的手機已送修，您可以先離開
-去逛街、吃飯...
+開始修理手機...
+您離開了店家
+您去逛街、吃飯...
 （3秒後...）
-手機修好了
-收到通知：您的手機已修好，請來取件
-我現在回到店裡取手機
+店家將手機修好了
+您收到通知：您的手機已修好，請來取件
+您準備回店裡取手機
 ```
 
 </details>
@@ -157,3 +160,138 @@ document.getElementById("myForm").addEventListener("submit", function (event) {
   console.log("表單已提交");
 });
 ```
+
+### 3. 網路請求
+
+```javascript
+// 使用 fetch API 發送 GET 請求
+fetch("https://jsonplaceholder.typicode.com/posts/1")
+  .then(
+    // 第一個 callback function
+    response => response.json()
+  )
+  .then(
+    // 第二個 callback function
+    data => {
+      console.log(data);
+    }
+  )
+  .catch(
+    // 第三個 callback function
+    error => {
+      console.error("發生錯誤：", error);
+    }
+  );
+```
+
+## 回調函式著名的缺點：Callback Hell
+
+回調函式的使用方式雖然簡單，但是當你需要執行一連串的非同步操作時，程式會變得複雜，就會出現 **回調地獄（Callback Hell）** 的問題。
+
+回調地獄是指當你需要執行多個非同步操作時，每個操作都需要回調函式，而這些回調函式又會有回調函式，這樣的巢狀結構會讓程式碼難以閱讀、維護。
+
+<details>
+  <summary>Callback Hell 範例： </summary>
+    ```javascript
+    const Example = () => {
+      setTimeout(() => {
+        console.log("去去 bug 走");
+        setTimeout(() => {
+          console.log("去去 bug 走...");
+          setTimeout(() => {
+            console.log("去去 bug 走 !!!");
+            setTimeout(() => {
+              console.log("去去 bug 走 (／‵Д′)／~ ╧╧");
+              setTimeout(() => {
+                console.log("去去 bug 走 (╬ﾟдﾟ)▄︻┻┳═一");
+                setTimeout(, 3000);
+              }, 2500);
+            }, 2000);
+          }, 1500);
+        }, 1000);
+      }, 500);
+    };
+
+    ```
+    執行結果：
+    ```
+    去去 bug 走
+    去去 bug 走...
+    去去 bug 走 !!!
+    去去 bug 走 (／‵Д′)／~ ╧╧
+    去去 bug 走 (╬ﾟдﾟ)▄︻┻┳═一
+    去去 bug 走 ▆▅▃ 崩╰(〒皿〒)╯潰 ▃▅▇
+    去世
+    ```
+
+</details>
+
+<details>
+  <summary>將 callback function 抽出來額外命名： </summary>
+
+    ```javascript
+    const AsynchronousOperate_7 = () => {
+      console.log("去世");
+    };
+
+    const AsynchronousOperate_6 = () => {
+      console.log("去去 bug 走 ▆▅▃ 崩╰(〒皿〒)╯潰 ▃▅▇");
+      setTimeout(AsynchronousOperate_7, 3500);
+    };
+
+    const AsynchronousOperate_5 = () => {
+      console.log("去去 bug 走 (╬ﾟдﾟ)▄︻┻┳═一");
+      setTimeout(AsynchronousOperate_6, 3000);
+    };
+
+    const AsynchronousOperate_4 = () => {
+      console.log("去去 bug 走 (／‵Д′)／~ ╧╧");
+      setTimeout(AsynchronousOperate_5, 2500);
+    };
+
+    const AsynchronousOperate_3 = () => {
+      console.log("去去 bug 走 !!!");
+      setTimeout(AsynchronousOperate_4, 2000);
+    };
+
+    const AsynchronousOperate_2 = () => {
+      console.log("去去 bug 走...");
+      setTimeout(AsynchronousOperate_3, 1500);
+    };
+
+    const AsynchronousOperate_1 = () => {
+      console.log("去去 bug 走");
+      setTimeout(AsynchronousOperate_2, 1000);
+    };
+
+    const Example = () => {
+      setTimeout(AsynchronousOperate_1, 500);
+    };
+
+    Example();
+    ```
+    執行結果：
+    ```
+    去去 bug 走
+    去去 bug 走...
+    去去 bug 走 !!!
+    去去 bug 走 (／‵Д′)／~ ╧╧
+    去去 bug 走 (╬ﾟдﾟ)▄︻┻┳═一
+    去去 bug 走 ▆▅▃ 崩╰(〒皿〒)╯潰 ▃▅▇
+    去世
+    ```
+
+</details>
+
+從上面兩個範例其實可以看到，巢狀結構的 `callback function` 會讓程式碼變得難以閱讀，且不易維護。而且就算將 `callback function` 抽出來額外命名，程式碼還是變得非常冗長，除錯也沒有好到哪裡，簡單來說就是一個不優雅的處理非同步操作的方法。
+
+## 解決回調地獄的方法
+
+為了解決回調地獄的問題，JavaScript 社群提出了許多解決方案，例如：
+
+1. **Promise**
+2. **Async/Await**
+
+這兩種方法都是用來處理非同步操作，讓程式碼更容易閱讀和維護。
+
+下一個節我們來看看 Promise 的用法。

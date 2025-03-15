@@ -7,10 +7,13 @@ import Highlight from "@site/src/components/Highlight";
 
 # useState
 
-Function Component 每一次重新渲染（re-render）時，元件內所有的變數都會被重置。這表示如果我們只用一般變數來儲存資料，當元件重新渲染時，這些變數都會回到初始值，無法保持原本的「狀態」。
+`useState` 是 React 中最常使用的 Hook 之一，用於「保留狀態」跟「更新狀態」。
 
-當遇到這樣的狀況時，就是 `useState` 登場的時刻了。<br />
-`useState` 是 React 的其中一個 Hook。它提供了方法來保存資料，不只在元件重新渲染時還能保持先前的狀態之外，當元件需要根據狀態的改變來顯示對應的樣貌時，`useState` 也可以做得到！
+由於 Function Component 每一次重新渲染（re-render）時，元件內所有的變數都會被重置。這表示如果我們只用一般變數來儲存資料，當元件重新渲染後，這些變數都會回到初始值，無法保持使用者經過一些操作後所留下的「狀態」。
+
+例如，當使用者點擊一個按鈕，某個計數器的值會 +1，這時候就需要有一個方法來保存 +1 後的數字，並在元件重新渲染後顯示 +1 後的數字。
+
+如果你想在重新渲染後還能保留某個狀態的資料，那 `useState` 就會是一個不錯的選擇！
 
 ## useState 的使用方式
 
@@ -32,9 +35,9 @@ function ExampleComponent() {
 }
 ```
 
-- `state`：代表「狀態值」，用來儲存元件的狀態。
-- `setState`: 用來更新狀態值的函式，使用時會觸發元件重新渲染。
-- `initialValue`: 狀態初始值，在元件首次渲染時會將值 assign 給 `state`。
+- `state`：代表「狀態值」，用於儲存狀態。
+- `setState`: 用於更新狀態值的函式，使用時會觸發元件重新渲染。
+- `initialValue`: 狀態初始值，元件首次渲染時會將值 assign 給 `state`。
 
 <Highlight color="#25c2a0">3.</Highlight> 實戰上用起來會像這樣：
 
@@ -48,7 +51,7 @@ function MyComponent() {
   // ...
 ```
 
-**`useState` 的基本運作原理**
+#### 基本運作原理
 
 大概知道 `useState` 的使用方式後，這邊帶一個簡單的範例，了解 `useState` 的基本運作原理。
 
@@ -58,7 +61,7 @@ function MyComponent() {
 import { useState } from "react";
 
 function Counter() {
-  // `useState` 定義了一個狀態變數 `count`、以及一個更新狀態的函數 `setCount`，並設定 `count` 的初始值為 `0`。
+  // useState 定義了一個狀態變數 count、以及一個更新狀態的函數 setCount，且 count 的初始值為 0。
   const [count, setCount] = useState(0);
 
   return (
@@ -70,10 +73,11 @@ function Counter() {
 }
 ```
 
-計數器會如何運作：
+計數器會如何運作？
 
 1. 當使用者點擊「加 1」的按鈕後，事件處理器會執行 `setCount(count + 1)`，將 `count` 的值 +1，並觸發元件重新渲染。
 2. React 會重新渲染元件，並將新的 `count` 值反應在元件上。
+3. 渲染完成，畫面顯示 +1 後的數字。
 
 ## useState 的運作原理
 
