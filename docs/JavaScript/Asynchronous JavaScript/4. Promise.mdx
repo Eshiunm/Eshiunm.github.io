@@ -55,7 +55,7 @@ const promise = new Promise(ExecutorFunction);
 
 <Tabs>
   <TabItem value="1" label="1.立即執行的 Promise">
-    以下宣告方式，會在 Promise 被建立完成時立刻執行。
+    以下宣告方式，會在 Promise 建立完成後立刻執行。
 
     ```javascript
     console.log("程式開始");
@@ -93,21 +93,58 @@ const promise = new Promise(ExecutorFunction);
 
     </TabItem>
 
-  <TabItem value="2" label="2.封裝 Promise">
-  
+  <TabItem value="2" label="2.等待被呼叫的 Promise">
+    以下宣告方式，會在 Promise 被呼叫時才執行。
+
     ```javascript
     // 建立一個回傳 Promise 的函式
     const delayedPromise = () => {
-        return new Promise((resolve, reject) => {
-            console.log('只有在呼叫函式時才會執行');
+      return new Promise((resolve, reject) => {
+        console.log('只有在呼叫函式時才會執行');
 
-              // 做一些事情...
+        // 做一些事情...
+        console.log("執行非同步操作中...")
+        setTimeout(() => {
+          console.log("３秒後，非同步操作成功！");// or 非同步操作失敗！
+          resolve('完成');　// or reject('失敗');
+        }, 3000);
+      });
+    };
 
-              resolve('完成');
-          });
-      };
-      ```
+    console.log("程式開始");
+    console.log("呼叫 Promise 函式");
+    delayedPromise();
+    console.log("程式繼續執行...");
+    ```
+
+    執行結果：
+    ```
+    程式開始
+    呼叫 Promise 函式
+    只有在呼叫函式時才會執行
+    執行非同步操作中...
+    程式繼續執行...
+    ３秒後，非同步操作成功！
+    ```
+    如果你將上述程式碼，複製到可以執行 JavaScript 的環境，你會得到上面的執行結果。
+
+    使用情境：
+      - 當你需要重複使用同一個 Promise 邏輯
+      - 當你需要在特定條件下才執行 Promise
+        - 例如：使用者點擊按鈕時才需要執行的操作
 
     </TabItem>
 
 </Tabs>
+
+### Promise 的狀態
+
+Promise 有三種狀態：
+
+1. **Pending（進行中）**：Promise 剛被建立，並且尚未執行 Executor function。
+2. **Fulfilled（已完成）**：Promise 已經執行 Executor function，並且成功完成。
+3. **Rejected（已拒絕）**：Promise 已經執行 Executor function，但是失敗。
+
+當 Promise 的狀態從 Pending 轉變為 Fulfilled 或 Rejected 時，Promise 的狀態就**不可再變更**。
+
+### Promise 使用例子
