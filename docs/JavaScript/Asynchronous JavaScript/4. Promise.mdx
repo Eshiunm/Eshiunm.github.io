@@ -2,3 +2,112 @@
 title: 4. Promise
 sidebar_position: 4
 ---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Promise
+
+在 ES6（ECMAScript 2015）中，Promise 正式成為 JavaScript 中的一部份標準，而那次的標準化，為開發者提供了統一的處理非同步的 API，解決了早期處理非同步碎片化的問題，大大提高了程式碼的可讀性、可移植性和可擴充性。
+
+## Promise 的概念
+
+以生活化的例子來說的話，`Promise` 用起來就像是「請某人幫你做某事」，對方答應了，並且「承諾」未來會給你一個結果，不論結果是成功或失敗。
+
+想像你正在逛網拍，看到一個你很喜歡的商品，於是你手刀下訂單「**請商家出貨**」，接著收到 e-mail，信件內容提到「**商品會在三個工作天內出貨**」。
+
+「請商家出貨」就是**請某人幫你做某事**；「商品會在三個工作天內出貨」就是對方給你的**承諾**。
+
+在程式中，你可以使用 `Promise` 的機制來處理非同步操作，讓 `Promise` 來包裝這個操作，並在事情完成後回傳結果給你。
+
+## Promise 使用時機
+
+在以下情境使用 Promise 特別合適：
+
+1. 處理非同步操作：如 AJAX 請求、檔案操作、定時器等
+2. 需要照順序地執行多個非同步任務
+3. 需要並行地執行多個非同步任務並等待全部完成
+4. 需要競爭執行多個非同步任務並取得最快完成的結果
+5. 需要更優雅的錯誤處理機制
+
+## Promise 的基本用法
+
+### Promise 的宣告
+
+建立 Promise 最基本的方法，是使用 Promise 建構函式，使用 Promise 建構函式時，一定要傳入一個 function 作為參數，其中傳入的 function 是有名稱的，叫做「**Executor function**」。
+
+而 Executor function 需要再接收兩個參數，個別是 `resolve` 和 `reject`，這兩個參數都是 function。當非同步的操作結束時，可以透過 `resolve` 和 `reject` 來表示操作後的結果，若成功則使用 `resolve` function 做成功後要做的事；相反地，若失敗則使用 `reject` function 做失敗後要做的事。
+
+e.g.
+
+```javascript
+const ExecutorFunction = (resolve, reject) => {
+  // 非同步操作
+  // 非同步操成功，呼叫 resolve function
+  // 非同步操失敗，呼叫 reject function
+};
+
+// 記住，使用 Promise 建構函式時，一定要傳入一個 function 當做參數
+const promise = new Promise(ExecutorFunction);
+```
+
+宣告 Promise 的兩種方式：
+
+<Tabs>
+  <TabItem value="1" label="1.立即執行的 Promise">
+    以下宣告方式，會在 Promise 被建立完成時立刻執行。
+
+    ```javascript
+    console.log("程式開始");
+    console.log("準備建立 Promise...");
+
+    // Promise 一建立好就會立即執行
+    const immediatePromise = new Promise((resolve, reject) => {
+      console.log("Promise 建立好了。")
+      console.log('立即執行 Promise！');
+
+      // 做一些事情...
+      console.log("執行非同步操作中...")
+      setTimeout(() => {
+        console.log("３秒後，非同步操作成功！");// or 非同步操作失敗！
+        resolve('完成');　// or reject('失敗');
+      }, 3000);
+
+    });
+    console.log("程式繼續執行...");
+    ```
+    執行結果：
+    ```
+    程式開始
+    準備建立 Promise...
+    Promise 建立好了。
+    立即執行 Promise！
+    執行非同步操作中...
+    程式繼續執行...
+    ３秒後，非同步操作成功！
+    ```
+    如果你將上述程式碼，複製到可以執行 JavaScript 的環境，你會得到上面的執行結果。
+
+    但是什麼時候會需要用到立即執行 Promise 的情境呢？
+    - 當這個 Promise 只需要執行一次。例如：當頁面載入時需要獲取的資料。
+
+    </TabItem>
+
+  <TabItem value="2" label="2.封裝 Promise">
+  
+    ```javascript
+    // 建立一個回傳 Promise 的函式
+    const delayedPromise = () => {
+        return new Promise((resolve, reject) => {
+            console.log('只有在呼叫函式時才會執行');
+
+              // 做一些事情...
+
+              resolve('完成');
+          });
+      };
+      ```
+
+    </TabItem>
+
+</Tabs>
