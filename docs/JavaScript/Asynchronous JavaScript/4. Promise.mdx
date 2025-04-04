@@ -12,48 +12,62 @@ import TabItem from "@theme/TabItem";
 
 ## Promise 的概念
 
-以生活化的例子來說的話，`Promise` 語法用起來會像是「請某人幫你做某事」，對方答應了，並且「承諾」未來會給你一個結果，不論結果是成功或失敗。
+以生活化例子來說的話，`Promise` 語法用起來會像是「你請 xxx 幫你做 ooo 事」，並在告知完後繼續做你自己的事情，不會在原地等待 ooo 的結果，並且你已經「事先規劃好」如果 ooo 事情往 A 方向發展，就做往 A 方向發展要做的事；如果 ooo 事情往 B 方向發展，就做往 B 方向發展要做的事。
 
-想像你正在逛網拍，看到一個你很喜歡的商品，於是你手刀下訂單「**請商家出貨**」，接著收到 e-mail，信件內容提到「**商品會在三個工作天內出貨**」。
+- 想像你是一個開國中補習班的老闆，你打算擴大你的事業版圖，於是告知助理：「**幫我調查某國中附近的補習班數量**」，接著你就去做你自己的事了，並且你早已「事先規劃好」，會根據之後助理回報的結果，決定事情發展的方向，如果該國中附近補習班數量低於 3，你就會去開補習班；相反的如果數量高於 3，你會將這些學區加入觀察名單。
 
-「請商家出貨」就是**請某人幫你做某事**；「商品會在三個工作天內出貨」就是對方給你的**承諾**。
+- 想像你是一個前端工程師，你正在開發一個查詢某圖書館藏書的功能，當使用者輸入書名按下查詢後，你的程式碼會做這件事:「根據使用者輸入的書名，**你請瀏覽器幫你從伺服器上取得書籍的資料**」，並且在搜尋的過程當中，使用者仍然可以上下滾動網頁，瀏覽其他資訊，並且你已經事先規劃好，如果書籍搜尋成功，就跳轉到顯示書籍相關資料的頁面；如果搜尋不到該書籍，就顯示查無此書的畫面。
 
-而承諾這件事，最終會導向兩個結果：成功（Resolve）或失敗（Reject）。<br />
-`Promise` 內提供了這兩種函式`Resolve()`、`Reject()` 給開發人員，設計成功後要走什麼流程、失敗後要走什麼流程。
+使用 Promise 語法，最終會導向兩種結果：成功（Resolve）或失敗（Reject）。
 
-以這個例子來說，如果商家在三天內出貨，那就是 Resolve，走買家拿到貨的流程；如果商家沒有在三天內出貨，那就是 Reject，走買家退款的流程。
+`Promise` 內提供了這兩種函式`Resolve()`、`Reject()` 給開發人員，設計成功後要走什麼流程或做什麼事、失敗後要走什麼流程或做什麼事。
 
-在程式中，你可以使用 `Promise` 的機制來處理非同步的操作，讓 `Promise` 的語法結構將整個非同步操作包起來，並根據操作完成後的結果走**成功**或**失敗**的流程。
+在程式中，你可以使用 `Promise` 的機制來處理非同步的操作，使用 `Promise` 的語法將整個非同步操作包起來，並根據操作完成後的結果走**成功**或**失敗**的流程。
 
-## Promise 使用時機
-
-在以下情境使用 Promise 特別合適：
-
-1. 處理非同步操作：如 AJAX 請求、檔案操作、定時器等
-2. 需要照順序地執行多個非同步任務
-3. 需要並行地執行多個非同步任務並等待全部完成
-4. 需要競爭執行多個非同步任務並取得最快完成的結果
-5. 需要更優雅的錯誤處理機制
-
-## Promise 的基本用法
+## Promise 的基本語法
 
 ### Promise 的宣告
 
-建立 Promise 最基本的方法，是使用 Promise 建構函式，使用 Promise 建構函式時，一定要傳入一個 function 作為參數，其中傳入的 function 是有名稱的，叫做「**Executor function**」。
+建立 Promise 最基本的方法，是使用 Promise 建構函式。
 
-而 Executor function 需要再接收兩個參數，個別是 `resolve()` 和 `reject()`這兩個 function。當非同步的操作結束時，可以透過 `resolve()` 和 `reject()` 來處理操作後的結果，若結果成功則使用 `resolve()` 做成功後要做的事；相反地，若結果是失敗的則使用 `reject()` 做失敗後要做的事。
+使用 Promise 建構函式時，一定要傳入一個 function 作為參數，其中傳入的 function 是有名稱的，叫做「**Executor function**」。
+
+而 Executor function 需要再接收兩個參數：`resolve()` & `reject()`這兩個 function。
+
+當非同步操作結束後，可以使用 `resolve()` 和 `reject()` 來決定要走成功的流程還是失敗的流程。<br />
+若結果成功則將成功的結果丟進 `resolve()`，並透過 `.then()` 做成功要做的事；<br />
+相反地，若結果失敗，則可將失敗的訊息丟進 `reject()`，並透過 `.catch()` 做失敗後要做的事。
 
 e.g.
 
 ```javascript
+// 先設計好一個 Executor function
 const ExecutorFunction = (resolve, reject) => {
-  // 非同步操作
-  // 非同步操成功，呼叫 resolve function
-  // 非同步操失敗，呼叫 reject function
+  /* 
+    ...
+    ...
+    正在進行非同步操作....
+    ...
+    ...
+  */
+
+  if (非同步操作成功) {
+    resolve("操作成功"); // 非同步操成功，呼叫 resolve function
+  } else {
+    reject("操作失敗"); // 非同步操失敗，呼叫 reject function
+  }
 };
 
 // 記住，使用 Promise 建構函式時，一定要傳入一個 function 當做參數
-const promise = new Promise(ExecutorFunction);
+const promise = new Promise(ExecutorFunction)
+  .then(response => {
+    // 成功後要做的事
+    console.log(response);
+  })
+  .catch(error => {
+    // 失敗後要做的事
+    console.log(error);
+  });
 ```
 
 #### 宣告 Promise 的兩種方式：
@@ -74,10 +88,14 @@ const promise = new Promise(ExecutorFunction);
       // 做一些事情...
       console.log("執行非同步操作中...")
       setTimeout(() => {
-        console.log("３秒後，非同步操作成功！");// or 非同步操作失敗！
-        resolve('完成');　// or reject('失敗');
+        console.log("３秒後...");// or 非同步操作失敗！
+        resolve('非同步操作成功！');　// or reject('失敗');
       }, 3000);
 
+    }).then(response => {
+      console.log(response);
+    }).catch(error => {
+      console.log(error) // 這個例子不會執行到這裡
     });
     console.log("程式繼續執行...");
     ```
@@ -89,7 +107,8 @@ const promise = new Promise(ExecutorFunction);
     立即執行 Promise！
     執行非同步操作中...
     程式繼續執行...
-    ３秒後，非同步操作成功！
+    ３秒後...
+    非同步操作成功！
     ```
     如果你將上述程式碼，複製到可以執行 JavaScript 的環境，你會得到上面的執行結果。
 
@@ -105,7 +124,7 @@ const promise = new Promise(ExecutorFunction);
     // 建立一個回傳 Promise 的函式
     const delayedPromise = () => {
       return new Promise((resolve, reject) => {
-        console.log('只有在呼叫函式時才會執行');
+        console.log('只有在函式被呼叫時才會執行 Promise');
 
         // 做一些事情...
         console.log("執行非同步操作中...")
@@ -126,7 +145,7 @@ const promise = new Promise(ExecutorFunction);
     ```
     程式開始
     呼叫 Promise 函式
-    只有在呼叫函式時才會執行
+    只有在函式被呼叫時才會執行 Promise
     執行非同步操作中...
     程式繼續執行...
     ３秒後，非同步操作成功！
@@ -142,13 +161,53 @@ const promise = new Promise(ExecutorFunction);
 
 </Tabs>
 
+將上面提到的例子轉成 promise 呈現：
+
+<Tabs>
+  <TabItem value="1" label="開補習班的例子">
+  
+    ```javascript
+    const ExecutorFunction = (resolve, reject) => {
+      console.log("助理開始調查某國中學區附近的補習班數量");
+      console.log("助理調查中...");
+
+      setTimeout(() => {
+        console.log("助理調查完成！");
+        const numberOfTutoringClasses = 2; // 假設有 3 間補習班
+        if (numberOfTutoringClasses < 3) {
+          resolve("開設補習班");
+        } else {
+          reject("加入觀察名單");
+        }
+      }, 3000);
+    };
+
+    const promise = new Promise(ExecutorFunction);
+    ```
+
+    執行結果:
+    ```
+    助理開始調查某國中學區附近的補習班數量
+    助理調查中...
+    助理調查完成！
+    開設補習班
+    ```
+
+    </TabItem>
+
+  <TabItem value="2" label="查詢圖書館藏書的例子">
+
+  </TabItem>
+
+</Tabs>
+
 ### Promise 的狀態
 
 Promise 有三種狀態：
 
 1. **Pending（進行中）**：Promise 剛被建立，並且尚未執行 Executor function。
-2. **Fulfilled（已完成）**：Promise 已經執行 Executor function，並且成功完成。
-3. **Rejected（已拒絕）**：Promise 已經執行 Executor function，但是失敗。
+2. **Fulfilled（已完成）**：Promise 已經執行 Executor function 中的 Resolve function。
+3. **Rejected（已拒絕）**：Promise 已經執行 Executor function 中的 Reject function。
 
 當 Promise 的狀態從 Pending 轉變為 Fulfilled 或 Rejected 時，Promise 的狀態就**不可再變更**。
 
