@@ -5,10 +5,97 @@ sidebar_position: 2
 
 # JS 是如何達到 Asynchronous？
 
-理解 JavaScript 會出現 Asynchronous 的概念是為了避免「阻擋」後，再接著理解 JavaScript 是如何達到 Asynchronous。
+JavaScript 是一種單執行緒（single-threaded）的程式語言，這意味著它一次只能執行一個任務。
 
-JS 要達到 Asynchronous 這件事，是需要跟當下的「執行環境」搭配才可以達到的，拿瀏覽器這個執行環境來說的話，答案就是 Event Loop。
+這種設計雖然簡單，但在處理需要等待的操作（例如網路請求、計時器或使用者輸入）時，可能會遇到問題。<br />
+想像一下，如果你正在執行一個耗時的任務，卻無法同時回應使用者的點擊事件，程式就會「卡住」，動彈不得。<br />
+這就是為什麼 JavaScript 需要一個機制來處理這種狀況，而這個機制就是「Event Loop」。
 
-## Event Loop。
+## Event Loop
 
-待補。
+### 為什麼需要 Event Loop？
+
+- **單執行緒的限制**：由於 JavaScript 一次只能處理一個任務，長時間的同步操作會阻塞後續任務的執行。
+- **非同步的需求**：我們希望程式在等待某些操作（如 API 回應）時，能繼續處理其他任務，而不是乾等。
+- **解決方案**：Event Loop 負責協調同步與非同步任務，讓 JavaScript 在單執行緒的環境中也能高效運作。
+
+簡單來說，Event Loop 就像一個「任務調度員」，它必須確保所有任務都能在適當的時機被執行。
+
+### Event Loop 的核心組成與運作
+
+要理解 Event Loop，我們需要先認識 JavaScript 執行環境中的幾個關鍵組件，以及它們如何協作：
+1. **Web APIs（瀏覽器 API）**：
+這些是由瀏覽器提供的工具，負責處理非同步操作，例如 setTimeout（計時器）、fetch（網路請求）或 DOM 事件。它們在背景執行，不占用主執行緒。
+
+2. **Call Stack（調用堆疊）**：
+這是 JavaScript 用來追蹤函數執行的結構。當您呼叫一個函數時，它會被推入堆疊；當函數執行完畢時，它會被彈出堆疊。
+
+3. **Task Queue（任務佇列）**：
+當 Web APIs 完成一個非同步任務時（例如計時器到時），它會將對應的回呼函數放入 Task Queue，等待執行。
+
+4. **Event Loop（事件循環）**：
+Event Loop 的工作是持續監控 「Call Stack」 和 「Task Queue」，當 Call Stack 為空時，它會從 Task Queue 中取出任務塞入 Call Stack 並執行。
+
+###　Event Loop 的運作流程
+
+以下是 Event Loop 的基本運作步驟：
+
+1. 程式開始時，「同步任務」進入 Call Stack 並立即執行。
+2. 遇到非同步任務時，JavaScript 將其交給 Web APIs 處理，並繼續執行同步任務。
+3. Web APIs 完成非同步任務後，將回呼函數放入 Task Queue。
+4. Event Loop 檢查 Call Stack 是否為空；若為空，就從 Task Queue 取出第一個任務，推入 Call Stack 並執行。
+5. 這個循環不斷重複，確保非同步任務有序執行。
+
+### 用 ASCII 圖形來看運作關係
+
+```text
++----------------+         +-----------------+
+|   Call Stack   | <-----> |   Event Loop    |
++----------------+         +-----------------+
+          ^                           |
+          |                           v
++----------------+         +-----------------+
+|   Web APIs    | -------> |   Task Queue    |
++----------------+         +-----------------+
+```
+- **Call Stack**：存放當前執行的同步任務。
+- **Web APIs**：處理非同步任務，完成後將回呼放入 Task Queue。
+- **Task Queue**：儲存待執行的回呼函數。
+- **Event Loop**：在 Call Stack 為空時，將 Task Queue 中的任務推入並執行。
+
+
+### 透過範例看 Event Loop 如何運作
+
+#### 範例 1：setTimeout 的執行順序
+```javascript
+console.log("開始");
+
+setTimeout(() => {
+    console.log("計時器");
+}, 0);
+
+console.log("結束");
+```
+
+輸出結果：
+```text
+開始
+結束
+計時器
+```
+
+執行過程：
+1. `console.log("開始")`：
+這是同步任務，進入 Call Stack，執行後輸出 "開始"，然後從堆疊彈出。
+
+2. `setTimeout`：：
+這是非同步任務，JavaScript 將其交給 Web APIs，設置一個 0 毫秒的計時器。程式繼續執行下一行。
+
+3. `console.log("結束")`：
+同步任務，進入 Call Stack，執行後輸出 "結束"，然後彈出。
+
+4. `Call Stack 為空`：
+此時，計時器已到時，Web APIs 將回呼函數 `() => console.log("計時器")` 放入 Task Queue。
+
+5. `Event Loop 介入`：
+Event Loop 發現 Call Stack 為空，從 Task Queue 取出回呼函數，推入 Call Stack，執行後輸出 "計時器"。

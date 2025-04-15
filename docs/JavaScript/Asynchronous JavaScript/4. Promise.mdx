@@ -256,20 +256,20 @@ Promise.all() 接受一個「可迭代」的物件（通常是一個陣列，陣
 #### 基本語法
 
 ```javascript
-Promise.all(iterable);
+const results = Promise.all(iterable);
 ```
 
-- iterable：表示一個可迭代的物件 (例如陣列)，陣列元素通常是 Promise，但也可以是非 Promise 值（會自動轉為已解決的 Promise）。
-- return 的值：一個新的 Promise。
-- 成功（fulfilled）：當輸入的所有 Promise 都成功時，回傳的 Promise 狀態才會成功，且回傳的值是一個陣列，按輸入順序包含每個 Promise 的成功值。
-- 失敗（rejected）：只要有一個 Promise 失敗，回傳的 Promise 會立即失敗，並傳遞第一個失敗的錯誤原因（後續的 Promise 結果會被忽略）。
-- 並行執行：所有 Promise 會同時開始執行，而不是一個接一個，這是 Promise.all() 的核心優勢。
+- iterable：表示一個可迭代的物件 (通常是一個陣列)，陣列元素通常是 Promise，但也可以不是 Promise（JS 會自動轉為已解決的 Promise）。
+- Promise.all() 會回傳一個 Promise，其狀態如下：
+  - **成功（fulfilled）**：當所有 Promise 都成功時，回傳的 Promise 狀態才會成功，且回傳的值是一個陣列，按輸入順序包含每個 Promise 的成功值。
+  - **失敗（rejected）**：只要有一個 Promise 失敗，回傳的 Promise 會立即失敗，並傳遞第一個失敗的錯誤原因（後續的 Promise 結果會被忽略）。
+- 所有的 Promise 會並行執行，而不是一個接一個，這是 Promise.all() 的核心優勢。
 
-簡單範例
+#### 簡單範例
 
 ```javascript
-const promise1 = Promise.resolve(3);
-const promise2 = new Promise(resolve => setTimeout(resolve, 100, "foo"));
+const promise1 = Promise.resolve(3); // Promise.resolve 是一個靜態方法，會回傳一個已解決的 Promise
+const promise2 = new Promise(resolve => setTimeout(resolve, 3000, "foo")); // 3 秒後回傳 "foo"
 const promise3 = 42; // 非 Promise 值會被轉為 Promise.resolve(42)
 
 Promise.all([promise1, promise2, promise3])
