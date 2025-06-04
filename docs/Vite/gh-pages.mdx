@@ -1,0 +1,63 @@
+---
+title: 將 Vite 專案部署至 Github Pages
+sidebar_position: 1
+---
+
+import Highlight from "@site/src/components/Highlight";
+
+# 將 Vite 專案部署至 Github Pages
+
+1. 安裝 gh-pages 套件
+
+在專案根目錄執行以下指令：
+
+```bash
+npm install --save gh-pages
+```
+
+2. 在你的 Vite 環境中找到 `vite.config.js` 檔案，並設定 <Highlight color="#25c2a0">base</Highlight> 的屬性值：
+
+```javascript
+mport { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  // 其他設定...
+
+  // 新增一個 base 屬性，而屬性值為你想要部署的那個 Repository 名稱
+  base: "/ABCDEFG/", // 假設你的 Repository 名稱是 ABCDEFG，則值為 "/ABCDEFG/
+
+  // 其他設定...
+
+  plugins: [react()],
+})
+```
+
+3. 在 `package.json` 中新增以下腳本：
+
+```json
+"scripts": {
+  // 其他腳本...
+
+  "deploy": "npm run build && gh-pages -d dist",
+
+  // 其他腳本...
+}
+```
+
+4. 在終端機執行：
+
+```bash
+npm run deploy
+```
+
+這會將你的專案編譯並部署到 Github Pages。
+
+5. 確認你的 Github Repository 設定
+
+在你的 Github Repository 中，前往「Settings」>「Pages」，確保選擇了正確的分支（通常是 `gh-pages`）和資料夾（通常是 `/ (root)` 或 `/docs`，取決於你的專案結構）。
+
+6. 等待部署完成
+
+部署完成後，你應該能在 `https://<your-username>.github.io/<your-repo-name>/` 看到你的部署結果。
