@@ -37,15 +37,15 @@ JavaScript 是一種單執行緒（single-threaded）的程式語言，這意味
 4. **Event Loop（事件循環）**：
    Event Loop 的工作是持續監控 「Call Stack」 和 「Task Queue」，當 Call Stack 為空時，它會從 Task Queue 中取出任務塞入 Call Stack 並執行。
 
-###　 Event Loop 的運作流程
+### Event Loop 的運作流程
 
 以下是 Event Loop 的基本運作步驟：
 
-1. 程式開始時，「同步任務」進入 Call Stack 並立即執行。
-2. 遇到非同步任務時，JavaScript 將其交給 Web APIs 處理，並繼續執行同步任務。
-3. Web APIs 完成非同步任務後，將回呼函數放入 Task Queue。
-4. Event Loop 檢查 Call Stack 是否為空；若為空，就從 Task Queue 取出第一個任務，推入 Call Stack 並執行。
-5. 這個循環不斷重複，確保非同步任務有序執行。
+1. 程式開始時，同步的指令或任務會依照呼叫順序，依序地被塞入 Call Stack 中並執行。
+2. 遇到非同步任務時，JavaScript 會將其交給 Web APIs 處理，並繼續執行同步任務。
+3. Web APIs 完成非同步任務後，會將 Callback function 放入 Task Queue。
+4. Event Loop 會檢查 Call Stack 是否為空；若為空，就從 Task Queue 取出第一個任務，塞入 Call Stack 然後執行。
+5. 這個循環不斷重複，確保非同步任務都有被執行到。
 
 ### 用 ASCII 圖形來看運作關係
 
@@ -60,7 +60,7 @@ JavaScript 是一種單執行緒（single-threaded）的程式語言，這意味
 +----------------+         +-----------------+
 ```
 
-- **Call Stack**：存放當前執行的同步任務。
+- **Call Stack**：存放當前正在執行的同步任務。
 - **Web APIs**：處理非同步任務，完成後將回呼放入 Task Queue。
 - **Task Queue**：儲存待執行的回呼函數。
 - **Event Loop**：在 Call Stack 為空時，將 Task Queue 中的任務推入並執行。

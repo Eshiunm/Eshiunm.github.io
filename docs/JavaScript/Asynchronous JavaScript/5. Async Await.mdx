@@ -8,8 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # Async/Await
 
-你已經知道 Promise 是處理非同步操作的好東西。<br />
-透過 .then() 和 .catch()，我們可以優雅地管理像是網路請求、計時器或檔案讀取等等的耗時任務。例如，：
+你已經知道 Promise 是處理非同步操作的好東西，透過 .then() 和 .catch()，我們可以優雅地管理像是網路請求、計時器或檔案讀取等等的耗時任務。例如，：
 
 ```javascript
 fetch("https://api.example.com/data")
@@ -18,7 +17,7 @@ fetch("https://api.example.com/data")
     .catch(error => console.error("錯誤：", error));
 ```
 
-但是當邏輯變複雜時，Promise chain 可能會變得冗長。例如，假設你需要串聯多個 API 請求：
+但是當邏輯變複雜時，Promise chain 可能會變得冗長。例如當你需要串聯多個 API 請求時：
 
 ```javascript
 fetch("https://api.example.com/user")
@@ -29,46 +28,52 @@ fetch("https://api.example.com/user")
     //..... 持續下去
     .catch(error => console.error("錯誤：", error));
 ```
-這樣的程式碼雖然功能正確，但層層嵌套的 .then() 讓閱讀和維護變得有些吃力。<br />
+這樣的程式碼雖然可以讓功能正常，但層層嵌套的 .then() 會導致閱讀和維護變得有些吃力。<br />
 你可能會想：有沒有更直觀的方式？讓非同步程式碼看起來像同步程式碼一樣簡單？登登！ Async/Await 登場！
 
 ## Async/Await 的核心觀念
 
-Async/Await 是建立在 Promise 上的語法糖（syntactic sugar），專為讓非同步程式碼更簡潔、直觀而設計。它並不改變 Promise 的本質，而是提供了一種更自然的寫法，讓你像寫同步程式碼一樣處理非同步操作。
+Async/Await 是建立在 Promise 上的語法糖（syntactic sugar），專為讓非同步程式碼更簡潔、直觀而設計，它不改變 Promise 的本質，而是提供一種更自然的寫法，讓你像是在寫「同步執行的程式碼」一樣處理非同步操作。
 
 ### 核心觀念 1：Async 函數
 
-- 使用 `async` 關鍵字宣告一個函數，告訴 JS 這是一個「用來處理非同步操做的函數」。
+首先你要先生出一個 Async 的函數：
+
+- 我們會使用 `async` 這個關鍵字宣告一個函數，讓 JS 知道這是一個「用來處理非同步操做」的函數。
 - Async 函數會回傳一個 Promise，即使你在函數內部沒有明確地使用 Promise，JS 也會將函數的回傳值包裝成一個 Promise，不管你回傳的是什麼（字串、數字或物件），都會被包裝成 Promise。
 
 例：
 ```javascript
 async function sayHello() {
-    return "Hello!"; // "Hello!" 會自動被包裝成 Promise
+    return "Hello!"; // "Hello!" 字串會自動被 Promise 包裝起來
 }
 
-example().then(result => console.log(result)); // 印出 "Hello!"
+sayHello().then(result => console.log(result)); // 印出 "Hello!"
 ```
 
-上述 sayHello() 函數由於使用了 async 關鍵字，所以會回傳一個 Promise，既然回傳的是一個 Promise，也就可以使用 .then() 來處理結果。<br />
+由於上述 sayHello() 函數使用了 `async` 關鍵字，所以函數會回傳一個 Promise，那麼既然回傳的是一個 Promise，也就當然可以使用 `.then()` 取得函數 return 的東西。<br />
 
 ### 核心觀念 2：Await 關鍵字
 
-- `await` 只能在 Async 函數內使用，使用的效果就像是「等待」，等待一個 Promise 完成解析（resolved），當程式執行到 await 時，Async 函數會「暫停」，直到 Promise 完成解析才會繼續執行。
+- `await` 只能在 Async 函數內使用！使用起來的效果就像是「等待」，程式會等待「非同步操作完成」，當程式執行到 await 時，Async 函數會「暫停」，直到「非同步操作完成」程式才會繼續往下執行。
 
 例：
 
 ```javascript
 async function getData() {
-    const response = await fetch("https://api.example.com/data"); // 等待 fetch 完成
+    const response = await fetch("https://api.example.com/data"); // 等待 fetch 操作完成（像是取到資料亦或是取資料失敗）
     const data = await response.json(); // 等待 response.json() 完成
-    return data;
+    return data; // 最後 return data 
 }
 
 getData().then(data => console.log(data));
 ```
 
+如果沒有使用 `await`？<a href="#如果不用-await程式執行起來是怎麼樣"><b>那程式執行起來會像這樣</b></a>。
+
 ### 核心觀念 3：錯誤處理
+
+我們可以使用 try...catch... 語法來設計錯誤處理，也讓錯誤處理的寫法變得更直觀。
 
 例子：
 
@@ -84,21 +89,21 @@ getData().then(data => console.log(data));
 }
 ```
 
-這比使用 .then()、.catch() 來操作非同步結果會更直觀，因為錯誤處理就像是同步地去處理。
+這比使用 `.then()`、`.catch()` 來操作非同步結果會更直觀，因為程式碼看起來就像是同步地執行。
 
-### 總結核心
+### 總結
 
-- Async 讓函數回傳 Promise，並且標記該函數會處理走非同步操作。
-- Await 會讓程式「等待」Promise 處理完才接續往下執行，程式碼看起來像是同步執行。
-- Async/Await 結合 Promise 的概念，讓非同步操作變得簡單、易讀，同時保留 Promise 所有的靈活性。
+- Async 函數會回傳 Promise，並且標記此函數會處理走非同步操作。
+- Await 會讓程式「停下來等待」非同步操作完成，才繼續往下執行，讓程式碼看起來像是同步地執行。
+- Async/Await 是基於 Promise 本質而改造的語法糖，讓非同步操作變得更直觀、易讀，同時保留 Promise 所有的靈活性。
 
-## 動手使用 Async/Await
+## 實作 Async/Await
 
-讓我們把觀念轉化成實作，開始使用 Async/Await 並展示它的好處。
+讓我們把觀念轉化成實作，使用 Async/Await 並體會它的好處。
 
 ### 1. 基本範例
 
-假設你想模擬一個延遲的操作，如果使用 Promise 你可能會這樣寫：
+假設你想模擬一個延遲的操作，如果使用 Promise 看起來會像這樣：
 
 ```javascript
 function delay(ms) {
@@ -107,8 +112,9 @@ function delay(ms) {
 
 delay(1000).then(result => console.log(result));
 ```
+##### 因為是使用 Promise，所以要用 `.then()` 才能取得 resolve() 函數帶入的參數值。
 
-使用 Async/Await 重寫：
+#### 使用 Async/Await 重寫：
 
 ```javascript
 function delay(ms) {
@@ -116,16 +122,22 @@ function delay(ms) {
 }
 
 async function run() {
-    const result = await delay(3000);
+    let result = "讚讚";
+    result = await delay(3000);
     console.log(result); // 印出 "完成！"
 }
 
-run(); // 1秒後輸出：完成！
+run(); // 3 秒後輸出：完成！
 ```
 
-好處是程式碼變得像同步執行那樣，沒有 .then() 的嵌套，直接用變數接收結果。
+輸出結果：
+```text
+完成！
+```
 
-如果不用 `await`, 程式執行起來會變得怎麼樣？
+使用 `await` 會讓程式碼變得像同步執行，而且不用透過 `.then()` 就可以取得 `resolve()` 函數帶入的參數值。在執行過程中 result 最終會被 delay() 函數 return 的值給覆蓋，因此最後是印出 `完成！`
+
+#### 如果不用 `await`，程式執行起來是怎麼樣？
 
 ```javascript
 function delay(ms) {
@@ -133,15 +145,20 @@ function delay(ms) {
 }
 
 async function run() {
-    const result =  delay(3000).then(res => console.log("走 then 的結果：", res)); // 印出【 走 then 的結果： "完成！"】
-    console.log("沒有走 then 會印出什麼？:",result); // 印出【沒有走 then 會印出什麼？: Promise { <pending> }】
+    const result =  delay(3000).then(res => console.log("（3 秒後）走 then 印出的結果：", res)); // 『 完成！ 』
+    console.log("不走 then 會印出什麼？:",result); // 『Promise { <pending> }』
 }
 
 run();
 ```
 
-因為 `await` 會讓程式碼「等待」Promise 完成解析才繼續執行。<br />
-如果沒有 `await`，程式不會等待 delay() 執行完，也就是不會等待 Promise 完成解析，所以 result 會是一個 pending 的 Promise。<br />
+輸出結果：
+```text
+不走 then 會印出什麼？: Promise { <pending> }
+（3 秒後）走 then 印出的結果： 完成！
+```
+
+如果沒有 `await` 這個關鍵字，程式不會停下來等待 delay() 函數執行完，而是繞過它繼續往下執行，因此輸出結果的順序是先印出 `Promise { <pending> }`才印出 `完成！`<br />
 
 ### 2. 處理 API 請求
 
@@ -162,12 +179,8 @@ async function getUser(userId) {
 
 getUser(123).then(user => console.log(user));
 ```
-
-好處：
-
-- 程式碼結構清晰，像是在寫同步的 fetch -> 解析 -> 返回 流程。
-- 錯誤處理用 try...catch，直觀且熟悉。
-- 比 .then() 鏈更容易閱讀和維護。
+- 程式碼結構清晰，像是同步地執行 `fetch 指令` 
+- 使用 `try...catch` 語法設計錯誤處理，直觀易懂，相較於使用 `.then() chain` 更容易閱讀和維護。
 
 ### 3. 串聯多個非同步操作
 
