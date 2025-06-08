@@ -1,0 +1,105 @@
+---
+title: 1-2 Compiler Theory
+sidebar_position: 2
+---
+
+# 編譯器理論
+
+JavaScript 實際上是一種「編譯式」語言，跟許多傳統的程式語言不同，並非早事先就編譯好，且編譯出來的結果，也無法在各種分散式系統之間移植。
+
+但盡管如此，JavaScript 引擎也還是會進行許多與傳統語言編譯器相同的步驟，而且用著比我們普遍認為的還要更複雜得多的方式進行，
+
+在傳統的編譯式語言中，原始碼的某一塊在執行之前，通常會經歷三種步驟：
+
+1. Tokenizing（語法基本單元化）與 Lexing（語彙分析）
+2. Parsing（剖析，或語法分析）
+3. Code-Generation（產生目標程式碼）
+
+下面會針對上述三個步驟簡單說明
+
+<details>
+  <summary>Tokenizing（語法基本單元化）與 Lexing（語彙分析）</summary>
+
+  這個步驟會將一串字元（a string of characters），拆解成對當下目前的程式語言有意義的組塊，
+  這些一個個的組塊就叫做語法基本單元（tokens，或稱「語彙單元」），
+
+  舉例來說，考慮 var a = 2; 這段程式碼。
+
+  這段程式碼很有可能會被拆解為下列這些語法基本單元：var、a、=、2。
+
+  你可能會好奇，那空白會不會被視為語法基本單元？有可能會也有可能不會，這要視情況判斷空白是否有意義而定。
+
+  ---
+  Tokenizing（語法基本單元化）與 Lexing（語彙分析）之間的差異很細微，而且比較學術，
+  但它的要點在於「那些語法基本單元（tokens）是以『無狀態』的方式；或是『有狀態』的方式來識別。」
+
+  簡單的說，如果 tokenizer（語法基本單元產生器）得調用有狀態的剖析規則才能斷定 a 是一個獨立的語法單元，
+  或是其他語法單元的一部分，那麼就會是 Lexing（語彙分析）
+</details>
+
+<details>
+  <summary>Parsing（剖析，或語法分析））</summary>
+
+  接收由語法基本單元（tokens）所構成的串流（stream，或「陣列」，array），
+  並將之轉為一種樹狀結構的集合（a tree of nested elements），
+  該集合代表了程式的文法結構（grammatical structure）。
+  這種樹狀結構就稱為「AST」（abstract syntax tree，抽象語法樹）。
+
+  var a = 2; 的樹狀結構可能會以一個叫做 `VariableDeclaration` 的頂層節點（node）開始，
+  並帶有一個叫做 `Identifier` 的子節點（child node, 其值為 a），
+  而另外一個子節點則叫做 `AssignmentExpression`，它本身帶有一個叫做 `NumericLiteral` 的子節點，其值為 2。
+  
+  這段程式碼的 AST 可能會長得像這樣：
+
+  ```js
+  {
+    type: 'VariableDeclaration',
+    kind: 'var',
+    declarations: [
+      {
+        type: 'VariableDeclarator',
+        id: {
+          type: 'Identifier',
+          name: 'a'
+        },
+        init: {
+          type: 'NumericLiteral',
+          value: 2
+        }
+      }
+    ]
+  }
+  ```
+</details>
+
+<details>
+  <summary>Code-Generation（產生目標程式碼）</summary>
+
+  在這個步驟中，會接收一個 AST，並將之轉為可執行的程式碼的過程。
+
+  這階段會隨著語言、目標平台等因素的不同而有大幅度的變化。
+
+  所以，與其身陷細節之中，這裡只會簡單的帶過。
+  
+  簡單來說，會存在一種方式，可以把前面描述過的 var a = 2; 的 AST 轉為一組機器指令（a set of mechine instructions），
+  實際建立出一個叫做 a 的變數（包括保留記憶體等步驟），然後將 2 這個值儲存進 a 中。
+</details>
+
+JavaScript 引擎所進行的工作，
+遠比上面三個單純的步驟還要複雜得多，就跟其他大多數的語言編譯器一樣。
+
+舉例來說，在鈄溪與程式碼產生的過程中，當然會有最佳化執行效能的步驟，包消除多於元素等等。
+
+一方面是因為 JavaScript 引擎在時間上並沒有太多的餘裕來進行最佳化，
+因為 JavaScript 的編譯並不是在`建置`（build）階段中事先處理的，不像其他的語言。
+
+對 JavaScript 來說，在許多情況下，編譯的過程，僅僅發生在程式碼被執行之前的幾微秒（microseconds）或甚至更少。
+
+為了確保效能，JS 引擎用了許多的技巧！但這些技巧遠遠超出我們這裡所討論的`作用域`。
+
+為簡單起見，讓我們單純的假設，任何的 JavaScript 程式碼片段都必須在它被執行之前（通常是`剛好`在執行之前）編譯完成。
+
+所以 JS 編譯器會接受 var a = 2; 這個程式，並且先編譯它，然後準備好執行它，但其實通常是即刻執行。
+
+
+
