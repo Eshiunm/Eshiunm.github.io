@@ -2,3 +2,58 @@
 title: 1-3 Understanding Scope 
 sidebar_position: 3
 ---
+
+# 了解作用域
+
+我們接下來學習作用域的方式，是把整個過程想成一場對話，不過有誰會參與對話呢？
+
+## 卡司
+
+登場的角色有：
+- **Engine(引擎)**：負責編譯程序的開始到結束，當中也包含執行 JavaScript 程式。
+- **Compiler(編譯器)**：Engine 的朋友之一。處理剖析、以及程式碼產生的所有苦工。
+- **Scope(作用域)**：Engine 的另一個朋友，負責收集並維護「由所有已宣告的識別字 (declared identifiers, 即變數, variables) 所構成的一個查找清單 (Look Up List) 」，
+並且強制施加一組嚴格的規則，來規範這些變數對於目前正在執行的程式碼而言是否可以取用。
+
+為了能夠完整地理解 JavaScript 的運作方式，你得先學著從 Engine，以及 Engine 的朋友們的角度來`思考`，
+詢問它們會問的問題，並如同它們般地回答問題。
+
+## 前後往返（Back and Forth）
+
+當你看到 `var a = 2;` 這樣的程式碼時，你有可能把它想成是一個敘述句 (statement)。
+
+但 Engine 並不是這麼看待它的，事實上 Engine 會看到兩個不同的術句，
+「Compiler 會在編譯過程中處理的述句」、「Engine 會在執行過程中處理的另一個述句」。
+
+所以我們現在來分析看看 Engine 以及 Engine 的朋友們，會如何處理 `var a = 2;` 這個程式碼。
+
+Compiler 會對這個程式做的第一件事是進行 lexing（語彙分析）動作，
+將之拆解成語法基本單元（tokens），然後再將之剖析成一個 AST（抽象語法樹）。
+但是當 Compiler 到了「程式碼產生 (code generation)」的階段時，
+它對待此程式的方式，會與我們做的假設可能有些不同。
+
+一個合理的假設可能會是， Compiler 會產生可以由下面這段虛擬程式碼來總結的程式碼：
+「Allocate memory for a variable, label it `a`, then stick the value `2` into that variable.（為一個變數配置記憶體，將它標示為 a，然後將 2 這個值放到那個變數中）」，
+但遺憾的是，上面這段其實並不準確。
+
+Compiler 會進行的處理如下：
+1. 遇到 `var a` 時，Compiler 會詢問 `Scope`，看看 a 這個變數是否已經存在於那個特定的作用域集合 (Scope collection) 中。
+若是如此，Compiler 就會忽略這個宣告，繼續前進。
+否則的話 Compiler 會要求 Scope 在作用域集合中宣告一個叫做 `a` 的變數。
+2. Compiler 接著會產生之後要讓 Engine 去執行的程式碼，以處理 `a = 2` 這段指定式 (assignment)。
+Engine 執行的程式碼會先詢問 Scope 目前的作用域集合中，是否存在一個叫做 `a` 的變數可以使用？
+如果有，Engine 就會使用那個變數；如果沒有，Engine 就會往其他處找（可參閱後面章節的「巢狀作用域」）。
+
+如果 Engine 最後有找到 `a` 變數，就會將 `2` 這個值指定給它，否則 Engine 就會舉起雙手大喊:「出錯了！」。
+
+結論就是單純的一個變數指定，就觸發了兩個不同的動作：
+首先，Compiler 會在目前的作用域中宣告變數（如果之前沒有宣告過的話）；
+第二，執行時，Engine 會在 Scope 中查找該變數，然後如果有找到的話就指定值給該變數。
+
+## Compiler 說話了
+
+接下來可能會提到一些編譯器的術語，才能了解接下來的內容。
+
+當 Engine 去執行 Compiler 為了第二步驟所產生的程式碼時，
+Engine 得先去查找變數 `a` 是否存在於目前的作用域集合中，然後 Engine 進行的「查找動作」有分種類，不同的查找種類會影響到最後的結果。
+
