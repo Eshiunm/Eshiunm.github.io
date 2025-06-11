@@ -107,4 +107,32 @@ foo(2);
 
 在那個瞬間的情況下，2 這個值會被指定給參數 a，而要指定給參數 a，就會進行 LHS 的查找動作則是試著要找出那個變數的「位置」，如此才夠將某個值指定給它。
 
-另外，a 變數還有一個 RHS 查找作業，
+另外，a 變數還有一個 RHS 查找作業，也就是需要取到變數 a 的值，然後傳給 `console.log()` 函式。
+這個查找動作會在 `console.log(a);` 這行程式碼執行時發生。
+
+## Engine 與 Scope 的對話
+
+```js
+function foo(a) {
+    console.log(a);
+}
+
+foo(2);
+```
+
+讓我們將 Engine 和 Scope 處理這段程式碼的過程，想像成一場對話。
+
+- Engine：嘿 Scope。我有 foo 的一個 RHS 參考。你有聽過它？
+- Scope：喔！是的，我有。Compiler 不久前剛宣告了它，它是一個函式，來，你拿去吧。
+- Engine：謝謝你，Scope。我現在要執行 foo 函式。
+- Engine：嘿 Scope，我拿到一個 a 的 LHS 參考，有聽過它？
+- Scope：喔！是的，我有。Compiler 最近才把它宣告為 foo 的一個參數。拿去吧。
+- Engine：一如往常的樂於助人啊！謝謝你，Scope。我現在要將 2 指定給 a 了。
+- Engine：嘿 Scope，我現在要進行 console 的 RHS 查找動作，有聽過它？
+- Scope：喔！有的，我找到 Console 了，它是內建的，拿去吧！
+- Engine：太好了，查找 log(..)。好，很好，它是一個函式。
+- Engine：嘿 Scope，你能幫我處理一個對 a 的 RHS 參考嗎？我想我記得它，只是需要再次確認一下。
+- Scope：Engine 你是對的，它是同一個變數，沒變過，拿去吧。
+- Engine：謝謝你，Scope。我現在要將 a 的值傳入 log(..) 函式
+...
+
