@@ -6,3 +6,35 @@ source: https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/scope%20%26%20clo
 
 # 巢狀作用域 [📖](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/scope%20%26%20closures/ch1.md#nested-scope)
 
+Scope 是藉由識別字（identifier name, or variables）來查找變數的一組嚴格且良好的規範，
+但是通常要考慮的作用域都不只一個。
+
+就像是一個區塊（block）可以包含另一個區塊；一個函式也可以內嵌在另外一個函式內。
+
+作用域也是如此，作用域可以被另一個作用域包含。
+
+如果 Engine 在一個作用域中找不到目標變數，就會到「外層」的作用域去尋找，然後持續地找下去，直到找到或是達到最外作用域（也就是全域）為止。
+
+考慮一下程式碼：
+```js
+function foo(a){
+    console.log(a + b); 
+}
+
+var b = 2;
+foo(2); // 4
+```
+
+b 的 RHS 查找無法在函式 foo 中被解析完成，
+所以 Engine 會到外層作用域去尋找，然後找到待在全域作用域中的 b。
+
+所以如果再回到 Engine 與 Scope 的對話：
+
+- Engine：嘿 Scope。有聽過 b 嗎？我需要它的 RHS 參考。的 RHS 參考。
+- Scope：沒有欸，從沒聽過它。
+- Engine：好吧，我會到外層作用域去找找看。
+- Engine：嘿。foo 函式外面的 Scope，喔，原來是全域作用域阿 (global scope)。你有聽過 b 嗎？我需要它的 RHS 參考。
+- Global Scope：喔，b？當然有阿，拿去吧。它的值是 2。
+
+Engine 會使用巢狀作用域作用域的規則：也就是 Engine 會從目前正在執行的作用域中開始查找動作，如果沒找到目標就會往外層作用域查找，直到找到或是達到最外層作用域為止。
+這個過程會一直持續下去，直到找到目標變數或是達到最外層作用域為止。
