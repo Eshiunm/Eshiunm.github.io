@@ -4,8 +4,31 @@ sidebar_position: 5
 source: https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/scope%20%26%20closures/ch1.md#errors
 ---
 
-# 錯誤 [📖](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/scope%20%26%20closures/ch1.md#errors)
+# 錯誤 
 
+為什麼區分 LHS 和 RHS 是很重要的事情？
 
+因為在目標變數尚未被宣告的情況下，這兩種類型的查找，在行為上會有所不同。
 
+考慮以下程式碼：
+```js
+funcion foo(a){
+    console.log(a);
+    b = a;
+}
+
+foo(2);
+```
+
+當 b 的 RHS 查找動作第一次發生時，Engine 會找不到它，b 會被稱為一個「未宣告的變數」（undeclared variable），因為作用域找不到它。
+
+如果 RHS 的查找動作，無法在巢狀的作用域中找到目標變數，結果就是 Engine 會擲出一個 ReferenceError 錯誤。很重要的一點是，注意這種錯誤的種類是 ReferenceError。
+
+相較之下，如果 Engine 進行的是一個 LHS 的查找動作，當 Engine 在巢狀作用域中遲遲找不到目標變數時，
+若程式不是在「Strict Mode (嚴格模式)」中執行，那麼全域作用域就會在全域作用域中創建一個以那個變數名稱命名的新變數，
+並將其值設為 undefined，然後再交回給 Engine。
+
+『全域作用域：「沒有該變數欸，但我能幫上忙，我幫你創建一個」。』
+
+在 ES5 中新增的「Strict Mode (嚴格模式)」會禁止這種自動/隱含的全域變數創建行為。
 
